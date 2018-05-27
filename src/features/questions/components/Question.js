@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { distanceInWordsToNow } from "date-fns";
+import { Link } from "react-router-dom";
 
 const Article = styled.article`
   border-radius: 3px;
@@ -25,8 +26,10 @@ const Time = styled.time`
 const Question = props => {
   return (
     <Article>
-      <Text>{props.text}</Text>
-      <Time>{distanceInWordsToNow(props.createdAt)} ago</Time>
+      <Text>
+        <Link to={`/questions/${props.id}`}>{props.text}</Link>
+      </Text>
+      <Time>asked {distanceInWordsToNow(props.createdAt)} ago</Time>
     </Article>
   );
 };

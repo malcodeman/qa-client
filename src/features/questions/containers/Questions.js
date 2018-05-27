@@ -35,7 +35,12 @@ class Questions extends Component {
     } else {
       return this.props.questions.map(question => {
         return (
-          <Question key={question.id} text={question.content} createdAt={question.createdAt} />
+          <Question
+            key={question.id}
+            id={question.id}
+            text={question.content}
+            createdAt={question.createdAt}
+          />
         );
       });
     }
