@@ -5,14 +5,16 @@ import styled from "styled-components";
 
 const StyledForm = styled(Form)`
   background-color: #fff;
-  display: flex;
-  flex-direction: column;
 `;
 
 const FormItem = styled.div`
   display: flex;
   flex-direction: column;
   margin-bottom: 20px;
+`;
+
+const Label = styled.label`
+  font-size: 0.8rem;
 `;
 
 const Input = styled(Field)`
@@ -26,9 +28,23 @@ const Input = styled(Field)`
   margin-bottom: 2px;
 `;
 
-const ErrorMessage = styled.span`
+const TextArea = styled(Field)`
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  height: 256px;
   font-size: 0.8rem;
-  color: #b00e23;
+  resize: none;
+  font-family: sans-serif;
+  padding: 4px;
+`;
+
+const Error = styled.div`
+  font-size: 0.8rem;
+  color: #fff;
+  background-color: #b00e23;
+  display: inline-block;
+  padding: 4px;
+  margin: 4px 0;
+  align-self: flex-start;
 `;
 
 class FormikForm extends Component {
@@ -46,9 +62,13 @@ class FormikForm extends Component {
     return (
       <StyledForm>
         <FormItem>
-          <Input type="text" name="content" />
-          {touched.content &&
-            errors.content && <ErrorMessage>{errors.content}</ErrorMessage>}
+          <Label>Title</Label>
+          <Input type="text" name="title" />
+          {touched.title && errors.title && <Error>{errors.title}</Error>}
+        </FormItem>
+        <FormItem>
+          <TextArea name="body" component="textarea" />
+          {touched.body && errors.body && <Error>{errors.body}</Error>}
         </FormItem>
       </StyledForm>
     );
@@ -57,10 +77,12 @@ class FormikForm extends Component {
 
 const QuestionNewForm = withFormik({
   mapPropsToValues: props => ({
-    content: props.content || ""
+    title: props.title || "",
+    body: props.body || ""
   }),
   validationSchema: Yup.object().shape({
-    content: Yup.string().required("Question can't be empty")
+    title: Yup.string().required("Title is missing"),
+    body: Yup.string().required("Body is missing")
   }),
   handleSubmit(payload, bag) {
     bag.setSubmitting(false);
