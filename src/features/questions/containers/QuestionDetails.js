@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 
 import Header from "./Header";
 import { findQuestionById } from "../actions/questions_actions";
@@ -24,6 +25,24 @@ class QuestionDetails extends Component {
   componentDidMount = () => {
     const { id } = this.props.match.params;
     this.props.findQuestionById(id);
+    console.log(this.props);
+  };
+  renderLoading = () => {
+    return this.props.loading ? <p>Loading ...</p> : null;
+  };
+  renderQuestion = () => {
+    if (this.props.question === null) {
+      return <p>No question</p>;
+    } else {
+      return (
+        <React.Fragment>
+          <Link to={this.props.location.pathname}>
+            {this.props.question.title}
+          </Link>
+          <p>{this.props.question.body}</p>
+        </React.Fragment>
+      );
+    }
   };
   render() {
     return (
@@ -31,7 +50,8 @@ class QuestionDetails extends Component {
         <Header />
         <Content>
           <Container>
-            <p>Details</p>
+            {this.renderLoading()}
+            {this.renderQuestion()}
           </Container>
         </Content>
       </Wrapper>
@@ -41,7 +61,8 @@ class QuestionDetails extends Component {
 
 const mapStateToProps = state => {
   return {
-    question: state.questions.question
+    question: state.questions.question,
+    loading: state.questions.loading
   };
 };
 

@@ -2,6 +2,9 @@ import {
   GET_QUESTIONS_FAILURE,
   GET_QUESTIONS_REQUEST,
   GET_QUESTIONS_SUCCESS,
+  FIND_QUESTION_BY_ID_FAILURE,
+  FIND_QUESTION_BY_ID_REQUEST,
+  FIND_QUESTION_BY_ID_SUCCESS,
   CREATE_QUESTION_CLEAR,
   CREATE_QUESTION_FAILURE,
   CREATE_QUESTION_REQUEST,
@@ -12,6 +15,7 @@ import { LOGOUT_SUCCESS } from "../../auth/actions/auth_actions";
 
 const initialState = {
   questions: [],
+  question: null,
   loading: true,
   create_question_success: false,
   create_question_failure: false,
@@ -23,12 +27,24 @@ export default (state = initialState, action) => {
   switch (action.type) {
     case GET_QUESTIONS_REQUEST:
       return {
-        ...state
+        ...state,
+        loading: true
       };
     case GET_QUESTIONS_SUCCESS:
       return {
         ...state,
         questions: action.payload,
+        loading: false
+      };
+    case FIND_QUESTION_BY_ID_REQUEST:
+      return {
+        ...state,
+        loading: true
+      };
+    case FIND_QUESTION_BY_ID_SUCCESS:
+      return {
+        ...state,
+        question: action.payload,
         loading: false
       };
     case LOGOUT_SUCCESS:
