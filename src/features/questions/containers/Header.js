@@ -28,6 +28,10 @@ const Nav = styled.nav`
   padding: 0 20px;
 `;
 
+const StyledLink = styled(Link)`
+  padding: 0 10px;
+`;
+
 const Button = styled.button`
   font-size: 0.8rem;
   color: rgba(0, 0, 0, 0.8);
@@ -47,7 +51,10 @@ class Header extends Component {
       <Wrapper>
         <StyledHeader>
           <Nav>
-            <Link to="/">Q/A internal</Link>
+            <div>
+              <StyledLink to="/">Q/A internal</StyledLink>
+              <StyledLink to="/users">Users</StyledLink>
+            </div>
             <div>
               <Link to="/new-question">
                 <Button>New Question</Button>

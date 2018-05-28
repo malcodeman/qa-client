@@ -8,6 +8,7 @@ import "./index.css";
 import store from "./state/store";
 import history from "./state/history";
 import Questions from "./features/questions/containers/Questions";
+import Users from "./features/users/containers/Users";
 import QuestionDetails from "./features/questions/containers/QuestionDetails";
 import QuestionNew from "./features/questions/containers/QuestionNew";
 import Login from "./features/auth/components/Login";
@@ -35,6 +36,7 @@ ReactDOM.render(
     <Router history={history}>
       <React.Fragment>
         <PrivateRoute path="/" exact component={Questions} />
+        <PrivateRoute path="/users" component={Users} />        
         <PrivateRoute path="/questions/:id" exact component={QuestionDetails} />
         <PrivateRoute path="/new-question" exact component={QuestionNew} />
         <Route path="/login" component={Login} />

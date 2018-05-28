@@ -10,12 +10,15 @@ import {
   watchLogoutRequest
 } from "../features/auth/sagas/auth_sagas";
 
+import { watchGetUsers } from "../features/users/sagas/users_sagas";
+
 export default function* rootSaga() {
   yield all([
     watchGetQuestions(),
     watchCreateQuestionRequest(),
     watchSignupRequest(),
     watchLoginRequest(),
-    watchLogoutRequest()
+    watchLogoutRequest(),
+    watchGetUsers()
   ]);
 }
