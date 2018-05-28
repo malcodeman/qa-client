@@ -3,10 +3,7 @@ import styled from "styled-components";
 import { connect } from "react-redux";
 
 import Header from "./Header";
-import {
-  createQuestion,
-  createQuestionClear
-} from "../actions/questions_actions";
+import { findQuestionById } from "../actions/questions_actions";
 
 const Wrapper = styled.div`
   display: flex;
@@ -24,6 +21,10 @@ const Container = styled.div`
 `;
 
 class QuestionDetails extends Component {
+  componentDidMount = () => {
+    const { id } = this.props.match.params;
+    this.props.findQuestionById(id);
+  };
   render() {
     return (
       <Wrapper>
@@ -40,15 +41,13 @@ class QuestionDetails extends Component {
 
 const mapStateToProps = state => {
   return {
-    create_question_success: state.questions.create_question_success,
-    create_question_trigger: state.questions.create_question_trigger
+    question: state.questions.question
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    createQuestion: newQuestion => dispatch(createQuestion(newQuestion)),
-    createQuestionClear: () => dispatch(createQuestionClear())
+    findQuestionById: id => dispatch(findQuestionById(id))
   };
 };
 

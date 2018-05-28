@@ -2,7 +2,8 @@ import { all } from "redux-saga/effects";
 
 import {
   watchGetQuestions,
-  watchCreateQuestionRequest
+  watchCreateQuestionRequest,
+  watchFindQuestionById
 } from "../features/questions/sagas/questions_sagas";
 import {
   watchSignupRequest,
@@ -15,6 +16,7 @@ import { watchGetUsers } from "../features/users/sagas/users_sagas";
 export default function* rootSaga() {
   yield all([
     watchGetQuestions(),
+    watchFindQuestionById(),
     watchCreateQuestionRequest(),
     watchSignupRequest(),
     watchLoginRequest(),
