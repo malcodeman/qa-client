@@ -67,10 +67,15 @@ class FormikForm extends Component {
 
 const YourAnswer = withFormik({
   mapPropsToValues: props => ({
+    questionId: props.questionId || "",
     body: props.body || ""
   }),
   validationSchema: Yup.object().shape({
     body: Yup.string().required("Body is missing")
+  }),
+  mapValuesToPayload: values => ({
+    questionId: values.questionId,
+    body: values.body
   }),
   handleSubmit(payload, bag) {
     bag.setSubmitting(false);

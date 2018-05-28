@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 
 import Answer from "../components/Answer";
 import YourAnswer from "./YourAnswer";
+import { createAnswer } from "../actions/answers_actions";
 
 const Wrapper = styled.div`
   display: flex;
@@ -39,7 +40,12 @@ class Answers extends Component {
         <Content>
           <Container>
             {this.renderAnswers()}
-            <YourAnswer />
+            {this.props.question ? (
+              <YourAnswer
+                questionId={this.props.question.id}
+                createAnswer={this.props.createAnswer}
+              />
+            ) : null}
           </Container>
         </Content>
       </Wrapper>
@@ -49,8 +55,9 @@ class Answers extends Component {
 
 const mapStateToProps = state => {
   return {
-    answers: state.answers.answers
+    answers: state.answers.answers,
+    question: state.questions.question
   };
 };
 
-export default connect(mapStateToProps, null)(Answers);
+export default connect(mapStateToProps, { createAnswer })(Answers);

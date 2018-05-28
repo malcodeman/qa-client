@@ -13,11 +13,14 @@ import {
 
 import { watchGetUsers } from "../features/users/sagas/users_sagas";
 
+import {watchCreateAnswerRequest} from "../features/answers/sagas/answers_sagas";
+
 export default function* rootSaga() {
   yield all([
     watchGetQuestions(),
     watchFindQuestionById(),
     watchCreateQuestionRequest(),
+    watchCreateAnswerRequest(),
     watchSignupRequest(),
     watchLoginRequest(),
     watchLogoutRequest(),
