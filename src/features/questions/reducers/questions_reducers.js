@@ -5,6 +5,7 @@ import {
   FIND_QUESTION_BY_ID_FAILURE,
   FIND_QUESTION_BY_ID_REQUEST,
   FIND_QUESTION_BY_ID_SUCCESS,
+  FIND_QUESTION_BY_ID_UNLOAD,
   CREATE_QUESTION_CLEAR,
   CREATE_QUESTION_FAILURE,
   CREATE_QUESTION_REQUEST,
@@ -46,6 +47,11 @@ export default (state = initialState, action) => {
         ...state,
         question: action.payload,
         loading: false
+      };
+    case FIND_QUESTION_BY_ID_UNLOAD:
+      return {
+        ...state,
+        question: null
       };
     case LOGOUT_SUCCESS:
       return {

@@ -5,6 +5,7 @@ export const GET_QUESTIONS_FAILURE = "GET_QUESTIONS_FAILURE";
 export const FIND_QUESTION_BY_ID_REQUEST = "FIND_QUESTION_BY_ID_REQUEST";
 export const FIND_QUESTION_BY_ID_SUCCESS = "FIND_QUESTION_BY_ID_SUCCESS";
 export const FIND_QUESTION_BY_ID_FAILURE = "FIND_QUESTION_BY_ID_FAILURE";
+export const FIND_QUESTION_BY_ID_UNLOAD = "FIND_QUESTION_BY_ID_UNLOAD";
 
 export const CREATE_QUESTION_REQUEST = "CREATE_QUESTION_REQUEST";
 export const CREATE_QUESTION_SUCCESS = "CREATE_QUESTION_SUCCESS";
@@ -24,6 +25,12 @@ export const findQuestionById = id => {
     payload: {
       id
     }
+  };
+};
+
+export const findQuestionByIdUnload = () => {
+  return {
+    type: FIND_QUESTION_BY_ID_UNLOAD
   };
 };
 

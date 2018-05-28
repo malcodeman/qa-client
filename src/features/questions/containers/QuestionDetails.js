@@ -4,7 +4,10 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
 import Header from "./Header";
-import { findQuestionById } from "../actions/questions_actions";
+import {
+  findQuestionById,
+  findQuestionByIdUnload
+} from "../actions/questions_actions";
 
 const Wrapper = styled.div`
   display: flex;
@@ -25,7 +28,9 @@ class QuestionDetails extends Component {
   componentDidMount = () => {
     const { id } = this.props.match.params;
     this.props.findQuestionById(id);
-    console.log(this.props);
+  };
+  componentWillUnmount = () => {
+    this.props.findQuestionByIdUnload();
   };
   renderLoading = () => {
     return this.props.loading ? <p>Loading ...</p> : null;
@@ -68,7 +73,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    findQuestionById: id => dispatch(findQuestionById(id))
+    findQuestionById: id => dispatch(findQuestionById(id)),
+    findQuestionByIdUnload: () => dispatch(findQuestionByIdUnload())
   };
 };
 
