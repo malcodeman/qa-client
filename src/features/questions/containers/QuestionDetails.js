@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
+import Answers from "../../answers/containers/Answers";
 import Header from "./Header";
 import {
   findQuestionById,
@@ -57,6 +58,7 @@ class QuestionDetails extends Component {
           <Container>
             {this.renderLoading()}
             {this.renderQuestion()}
+            <Answers />
           </Container>
         </Content>
       </Wrapper>
