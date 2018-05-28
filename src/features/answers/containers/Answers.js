@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { connect } from "react-redux";
 
 import Answer from "../components/Answer";
+import YourAnswer from "./YourAnswer";
 
 const Wrapper = styled.div`
   display: flex;
@@ -13,9 +14,7 @@ const Content = styled.main`
   flex-grow: 1;
 `;
 
-const Container = styled.div`
-
-`;
+const Container = styled.div``;
 
 class Answers extends Component {
   renderAnswers = () => {
@@ -40,6 +39,7 @@ class Answers extends Component {
         <Content>
           <Container>
             {this.renderAnswers()}
+            <YourAnswer />
           </Container>
         </Content>
       </Wrapper>
