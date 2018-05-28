@@ -3,17 +3,19 @@ import styled from "styled-components";
 import { distanceInWordsToNow } from "date-fns";
 import { Link } from "react-router-dom";
 
-const Article = styled.article`
+const Wrapper = styled.div`
   border-radius: 3px;
   border: 1px solid #e6e6e6;
   background-color: #fff;
   margin-bottom: 40px;
   padding: 10px;
+  display: flex;
+  flex-direction: column;
 `;
 
-const Text = styled.p`
+const StyledLink = styled(Link)`
   font-size: 0.8rem;
-  color: rgba(0, 0, 0, 0.8);
+  color: #007aff;
   word-wrap: break-word;
 `;
 
@@ -25,12 +27,10 @@ const Time = styled.time`
 
 const Question = props => {
   return (
-    <Article>
-      <Text>
-        <Link to={`/questions/${props.id}`}>{props.text}</Link>
-      </Text>
+    <Wrapper>
+      <StyledLink to={`/questions/${props.id}`}>{props.title}</StyledLink>
       <Time>asked {distanceInWordsToNow(props.createdAt)} ago</Time>
-    </Article>
+    </Wrapper>
   );
 };
 

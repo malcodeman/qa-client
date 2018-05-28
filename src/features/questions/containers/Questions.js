@@ -38,7 +38,7 @@ class Questions extends Component {
           <Question
             key={question.id}
             id={question.id}
-            text={question.content}
+            title={question.title}
             createdAt={question.createdAt}
           />
         );
