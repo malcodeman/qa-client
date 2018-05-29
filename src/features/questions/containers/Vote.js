@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
 
-import { upvoteQuestion, downvoteQuestion } from "../actions/questions_actions";
+import { createUpvote, createDownvote } from "../actions/questions_actions";
 
 const Wrapper = styled.div`
   display: flex;
@@ -15,9 +15,9 @@ class Vote extends Component {
       const { id } = this.props.question;
       return (
         <React.Fragment>
-          <span onClick={() => this.props.upvoteQuestion(id)}>UP</span>
+          <span onClick={() => this.props.createUpvote(id)}>UP</span>
           <span>{this.props.num_answers}</span>
-          <span onClick={() => this.props.downvoteQuestion(id)}>DOWN</span>
+          <span onClick={() => this.props.createDownvote(id)}>DOWN</span>
         </React.Fragment>
       );
     }
@@ -36,8 +36,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    upvoteQuestion: id => dispatch(upvoteQuestion(id)),
-    downvoteQuestion: id => dispatch(downvoteQuestion(id))
+    createUpvote: id => dispatch(createUpvote(id)),
+    createDownvote: id => dispatch(createDownvote(id))
   };
 };
 

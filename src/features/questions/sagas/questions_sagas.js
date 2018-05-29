@@ -10,7 +10,10 @@ import {
   CREATE_QUESTION_SUCCESS,
   FIND_QUESTION_BY_ID_FAILURE,
   FIND_QUESTION_BY_ID_REQUEST,
-  FIND_QUESTION_BY_ID_SUCCESS
+  FIND_QUESTION_BY_ID_SUCCESS,
+  CREATE_UPVOTE_FAILURE,
+  CREATE_UPVOTE_REQUEST,
+  CREATE_UPVOTE_SUCCESS
 } from "../actions/questions_actions";
 
 const getQuestionsApi = () => {
@@ -23,6 +26,10 @@ const createQuestionApi = newQuestion => {
 
 const findQuestionByIdApi = id => {
   return axios.get(`/questions/${id}`);
+};
+
+const createUpvoteApi = id => {
+  return axios.post(`/questions/${id}/upvotes`, { questionId: id });
 };
 
 function* getQuestions() {
@@ -53,6 +60,16 @@ function* findQuestionById(action) {
   }
 }
 
+function* createUpvote(action) {
+  try {
+    const { id } = action.payload;
+    const data = yield call(createUpvoteApi, id);
+    yield put({ type: CREATE_UPVOTE_SUCCESS, payload: data.data });
+  } catch (error) {
+    yield put({ type: CREATE_UPVOTE_FAILURE, error });
+  }
+}
+
 export function* watchGetQuestions() {
   yield takeLatest(GET_QUESTIONS_REQUEST, getQuestions);
 }
@@ -63,4 +80,8 @@ export function* watchCreateQuestionRequest() {
 
 export function* watchFindQuestionById() {
   yield takeLatest(FIND_QUESTION_BY_ID_REQUEST, findQuestionById);
+}
+
+export function* watchUpvoteQuestion() {
+  yield takeLatest(CREATE_UPVOTE_REQUEST, createUpvote);
 }

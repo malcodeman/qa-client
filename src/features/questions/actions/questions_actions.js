@@ -7,13 +7,13 @@ export const FIND_QUESTION_BY_ID_SUCCESS = "FIND_QUESTION_BY_ID_SUCCESS";
 export const FIND_QUESTION_BY_ID_FAILURE = "FIND_QUESTION_BY_ID_FAILURE";
 export const FIND_QUESTION_BY_ID_UNLOAD = "FIND_QUESTION_BY_ID_UNLOAD";
 
-export const UPVOTE_QUESTION_REQUEST = "UPVOTE_QUESTION_REQUEST";
-export const UPVOTE_QUESTION_SUCCESS = "UPVOTE_QUESTION_SUCCESS";
-export const UPVOTE_QUESTION_FAILURE = "UPVOTE_QUESTION_FAILURE";
+export const CREATE_UPVOTE_REQUEST = "CREATE_UPVOTE_REQUEST";
+export const CREATE_UPVOTE_SUCCESS = "CREATE_UPVOTE_SUCCESS";
+export const CREATE_UPVOTE_FAILURE = "CREATE_UPVOTE_FAILURE";
 
-export const DOWNVOTE_QUESTION_REQUEST = "DOWNVOTE_QUESTION_REQUEST";
-export const DOWNVOTE_QUESTION_SUCCESS = "DOWNVOTE_QUESTION_SUCCESS";
-export const DOWNVOTE_QUESTION_FAILURE = "DOWNVOTE_QUESTION_FAILURE";
+export const CREATE_DOWNVOTE_REQUEST = "CREATE_DOWNVOTE_REQUEST";
+export const CREATE_DOWNVOTE_SUCCESS = "CREATE_DOWNVOTE_SUCCESS";
+export const CREATE_DOWNVOTE_FAILURE = "CREATE_DOWNVOTE_FAILURE";
 
 export const CREATE_QUESTION_REQUEST = "CREATE_QUESTION_REQUEST";
 export const CREATE_QUESTION_SUCCESS = "CREATE_QUESTION_SUCCESS";
@@ -36,18 +36,18 @@ export const findQuestionById = id => {
   };
 };
 
-export const upvoteQuestion = id => {
+export const createUpvote = id => {
   return {
-    type: UPVOTE_QUESTION_REQUEST,
+    type: CREATE_UPVOTE_REQUEST,
     payload: {
       id
     }
   };
 };
 
-export const downvoteQuestion = id => {
+export const createDownvote = id => {
   return {
-    type: DOWNVOTE_QUESTION_REQUEST,
+    type: CREATE_DOWNVOTE_REQUEST,
     payload: {
       id
     }
