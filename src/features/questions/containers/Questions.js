@@ -39,6 +39,9 @@ class Questions extends Component {
             key={question.id}
             id={question.id}
             title={question.title}
+            body={question.body}
+            votes={question.num_votes}
+            answers={question.num_answers}
             createdAt={question.createdAt}
           />
         );

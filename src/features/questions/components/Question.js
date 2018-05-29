@@ -10,7 +10,6 @@ const Wrapper = styled.div`
   margin-bottom: 40px;
   padding: 10px;
   display: flex;
-  flex-direction: column;
 `;
 
 const StyledLink = styled(Link)`
@@ -25,11 +24,55 @@ const Time = styled.time`
   text-transform: uppercase;
 `;
 
+const Stats = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 24px;
+`;
+
+const Number = styled.span`
+  font-size: 1rem;
+`;
+
+const Description = styled.span`
+  font-size: 0.8rem;
+  color: rgba(0, 0, 0, 0.8);
+  margin-bottom: ${props => (props.marginBottom ? "20px" : "0")};
+`;
+
+const Summary = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+`;
+
+const Excerpt = styled.p`
+  font-size: 0.8rem;
+  color: rgba(0, 0, 0, 0.8);
+`;
+
+const Footer = styled.footer`
+  display: flex;
+  justify-content: flex-end;
+`;
+
 const Question = props => {
   return (
     <Wrapper>
-      <StyledLink to={`/questions/${props.id}`}>{props.title}</StyledLink>
-      <Time>asked {distanceInWordsToNow(props.createdAt)} ago</Time>
+      <Stats>
+        <Number>{props.votes}</Number>
+        <Description marginBottom={true}>votes</Description>
+        <Number>{props.answers}</Number>
+        <Description>answers</Description>
+      </Stats>
+      <Summary>
+        <StyledLink to={`/questions/${props.id}`}>{props.title}</StyledLink>
+        <Excerpt>{props.body}</Excerpt>
+        <Footer>
+          <Time>asked {distanceInWordsToNow(props.createdAt)} ago</Time>
+        </Footer>
+      </Summary>
     </Wrapper>
   );
 };
