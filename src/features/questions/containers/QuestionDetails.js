@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
+import Vote from "./Vote";
 import Answers from "../../answers/containers/Answers";
 import Header from "./Header";
 import {
@@ -56,6 +57,7 @@ class QuestionDetails extends Component {
         <Header />
         <Content>
           <Container>
+            <Vote />
             {this.renderLoading()}
             {this.renderQuestion()}
             <Answers />

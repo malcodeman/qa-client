@@ -61,9 +61,9 @@ const Question = props => {
   return (
     <Wrapper>
       <Stats>
-        <Number>{props.votes}</Number>
+        <Number>{props.num_votes}</Number>
         <Description marginBottom={true}>votes</Description>
-        <Number>{props.answers}</Number>
+        <Number>{props.num_answers}</Number>
         <Description>answers</Description>
       </Stats>
       <Summary>
