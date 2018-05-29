@@ -9,7 +9,7 @@ const Wrapper = styled.div`
   flex-direction: column;
 `;
 
-class Vote extends Component {
+class Votes extends Component {
   renderVote = () => {
     if (this.props.question) {
       const { id } = this.props.question;
@@ -41,4 +41,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Vote);
+export default connect(mapStateToProps, mapDispatchToProps)(Votes);
