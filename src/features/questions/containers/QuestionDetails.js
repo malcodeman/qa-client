@@ -43,6 +43,7 @@ class QuestionDetails extends Component {
     } else {
       return (
         <React.Fragment>
+          <p>Answers: {this.props.num_answers}</p>
           <Link to={this.props.location.pathname}>
             {this.props.question.title}
           </Link>
@@ -71,6 +72,7 @@ class QuestionDetails extends Component {
 const mapStateToProps = state => {
   return {
     question: state.questions.question,
+    num_answers: state.answers.num_answers,
     loading: state.questions.loading
   };
 };

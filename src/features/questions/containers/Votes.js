@@ -45,6 +45,7 @@ class Votes extends Component {
   renderVote = () => {
     if (this.props.question) {
       const { id } = this.props.question;
+      const votes = this.props.upvotes - this.props.downvotes;
       return (
         <React.Fragment>
           <Triangle
@@ -53,7 +54,7 @@ class Votes extends Component {
             color={"#858c93"}
             onClick={() => this.props.createUpvote(id)}
           />
-          <span>{this.props.num_answers}</span>
+          <span>{votes}</span>
           <Triangle
             direction={"down"}
             size={"14px"}
@@ -72,7 +73,8 @@ class Votes extends Component {
 const mapStateToProps = state => {
   return {
     question: state.questions.question,
-    num_answers: state.answers.num_answers
+    upvotes: state.questions.upvotes,
+    downvotes: state.questions.downvotes
   };
 };
 

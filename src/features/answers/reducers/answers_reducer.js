@@ -12,15 +12,17 @@ const initialState = {
 export default (state = initialState, action) => {
   switch (action.type) {
     case FIND_QUESTION_BY_ID_SUCCESS:
+      const { answers } = action.payload;
       return {
         ...state,
-        answers: action.payload.answers,
-        num_answers: action.payload.num_answers
+        answers,
+        num_answers: answers.length
       };
     case CREATE_ANSWER_SUCCESS:
       return {
         ...state,
-        answers: [...state.answers, action.payload]
+        answers: [...state.answers, action.payload],
+        num_answers: state.num_answers + 1
       };
     default:
       return state;
