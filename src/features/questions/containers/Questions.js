@@ -33,7 +33,7 @@ class Questions extends Component {
     if (this.props.questions.length === 0 && this.props.loading === false) {
       return <p>No questions</p>;
     } else {
-      return this.props.questions.reverse().map(question => {
+      return this.props.questions.map(question => {
         return (
           <Question
             key={question.id}
