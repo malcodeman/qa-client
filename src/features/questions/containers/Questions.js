@@ -40,8 +40,9 @@ class Questions extends Component {
             id={question.id}
             title={question.title}
             body={question.body}
-            num_votes={question.upvotes.length - question.downvotes.length}
-            num_answers={question.answers.length}
+            votes={question.upvotes.length - question.downvotes.length}
+            answers={question.answers.length}
+            author={question.user.username}
             createdAt={question.createdAt}
           />
         );

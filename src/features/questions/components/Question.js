@@ -1,79 +1,55 @@
 import React from "react";
 import styled from "styled-components";
-import { distanceInWordsToNow } from "date-fns";
 import { Link } from "react-router-dom";
+import { distanceInWordsToNow } from "date-fns";
 
-const Wrapper = styled.div`
-  border-radius: 3px;
-  border: 1px solid #e6e6e6;
-  background-color: #fff;
-  margin-bottom: 40px;
-  padding: 10px;
-  display: flex;
+const LinkWrapper = styled(Link)`
+  display: block;
+  cursor: pointer;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 `;
 
-const StyledLink = styled(Link)`
-  font-size: 0.8rem;
-  color: #007aff;
-  word-wrap: break-word;
-`;
-
-const Time = styled.time`
-  font-size: 0.6rem;
-  color: rgba(0, 0, 0, 0.6);
-  text-transform: uppercase;
-`;
-
-const Stats = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 0 24px;
-`;
-
-const Number = styled.span`
+const Title = styled.p`
+  color: rgba(0, 0, 0, 0.8);
   font-size: 1rem;
 `;
 
-const Description = styled.span`
+const common = `
   font-size: 0.8rem;
-  color: rgba(0, 0, 0, 0.8);
-  margin-bottom: ${props => (props.marginBottom ? "20px" : "0")};
+  line-height: 1.4;
+  color: rgba(0, 0, 0, 0.6);
+  display: block;
+  @media (min-width: 576px) {
+    display: inline;
+  }
 `;
 
-const Summary = styled.div`
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
+const Votes = styled.span`
+  ${common} margin-right: 0.4rem;
 `;
 
-const Excerpt = styled.p`
-  font-size: 0.8rem;
-  color: rgba(0, 0, 0, 0.8);
+const Author = styled.span`
+  ${common} margin-right: 0.4rem;
 `;
 
-const Footer = styled.footer`
-  display: flex;
-  justify-content: flex-end;
+const Time = styled.time`
+  ${common} margin-right: 0.4rem;
+`;
+
+const Answers = styled.span`
+  ${common};
 `;
 
 const Question = props => {
   return (
-    <Wrapper>
-      <Stats>
-        <Number>{props.num_votes}</Number>
-        <Description marginBottom={true}>votes</Description>
-        <Number>{props.num_answers}</Number>
-        <Description>answers</Description>
-      </Stats>
-      <Summary>
-        <StyledLink to={`/questions/${props.id}`}>{props.title}</StyledLink>
-        <Excerpt>{props.body}</Excerpt>
-        <Footer>
-          <Time>asked {distanceInWordsToNow(props.createdAt)} ago</Time>
-        </Footer>
-      </Summary>
-    </Wrapper>
+    <LinkWrapper to={`/questions/${props.id}`}>
+      <Title>{props.title}</Title>
+      <Votes>{props.votes} votes</Votes>
+      <Author>by {props.author}</Author>
+      <Time>{distanceInWordsToNow(props.createdAt)} ago</Time>
+      <Answers>{props.answers} answers</Answers>
+    </LinkWrapper>
   );
 };
 

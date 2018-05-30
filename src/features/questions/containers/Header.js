@@ -29,7 +29,7 @@ const Nav = styled.nav`
 `;
 
 const StyledLink = styled(Link)`
-  padding: 0 10px;
+  margin-right: ${props => (props.marginRight ? "10px" : "0")};
 `;
 
 const Button = styled.button`
@@ -52,7 +52,9 @@ class Header extends Component {
         <StyledHeader>
           <Nav>
             <div>
-              <StyledLink to="/">Q/A internal</StyledLink>
+              <StyledLink to="/" marginRight={true}>
+                Q/A internal
+              </StyledLink>
               <StyledLink to="/users">Users</StyledLink>
             </div>
             <div>
