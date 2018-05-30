@@ -1,7 +1,4 @@
-import {
-  FIND_QUESTION_BY_ID_SUCCESS,
-  GET_QUESTIONS_SUCCESS
-} from "../../questions/actions/questions_actions";
+import { FIND_QUESTION_BY_ID_SUCCESS } from "../../questions/actions/questions_actions";
 import { CREATE_ANSWER_SUCCESS } from "../actions/answers_actions";
 
 const initialState = {

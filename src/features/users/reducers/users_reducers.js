@@ -1,5 +1,4 @@
 import {
-  GET_USERS_FAILURE,
   GET_USERS_REQUEST,
   GET_USERS_SUCCESS
 } from "../actions/users_actions";

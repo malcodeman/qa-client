@@ -1,7 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import { distanceInWordsToNow } from "date-fns";
-import { Link } from "react-router-dom";
 
 const Wrapper = styled.div`
   border-radius: 3px;
