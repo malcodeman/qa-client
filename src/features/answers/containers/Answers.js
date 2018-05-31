@@ -29,6 +29,7 @@ class Answers extends Component {
   renderAnswers = () => {
     if (this.props.answers) {
       return this.props.answers.map(answer => {
+        const { upvotes, downvotes } = answer;
         return (
           <Answer
             key={answer.id}
@@ -36,6 +37,7 @@ class Answers extends Component {
             body={answer.body}
             author={answer.user.username}
             createdAt={answer.createdAt}
+            votes={upvotes.length - downvotes.length}
           />
         );
       });

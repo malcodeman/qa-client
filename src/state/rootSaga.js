@@ -5,7 +5,9 @@ import {
   watchCreateQuestionRequest,
   watchFindQuestionById,
   watchUpvoteQuestion,
-  watchDownvoteQuestion
+  watchDownvoteQuestion,
+  watchDownvoteAnswer,
+  watchUpvoteAnswer
 } from "../features/questions/sagas/questions_sagas";
 import {
   watchSignupRequest,
@@ -24,6 +26,8 @@ export default function* rootSaga() {
     watchCreateQuestionRequest(),
     watchUpvoteQuestion(),
     watchDownvoteQuestion(),
+    watchUpvoteAnswer(),
+    watchDownvoteAnswer(),
     watchCreateAnswerRequest(),
     watchSignupRequest(),
     watchLoginRequest(),
