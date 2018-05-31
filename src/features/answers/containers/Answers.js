@@ -17,11 +17,17 @@ const Content = styled.main`
 
 const Container = styled.div``;
 
+const Header = styled.header`
+  font-size: 1rem;
+`;
+
 class Answers extends Component {
+  renderAnswersHeader = () => {
+    const { num_answers } = this.props;
+    if (num_answers !== 0) return <Header>{num_answers} Answers</Header>;
+  };
   renderAnswers = () => {
-    if (this.props.answers.length === 0) {
-      return <p>No answers</p>;
-    } else {
+    if (this.props.answers) {
       return this.props.answers.map(answer => {
         return (
           <Answer
@@ -40,6 +46,7 @@ class Answers extends Component {
       <Wrapper>
         <Content>
           <Container>
+            {this.renderAnswersHeader()}
             {this.renderAnswers()}
             {this.props.question ? (
               <YourAnswer
@@ -57,6 +64,7 @@ class Answers extends Component {
 const mapStateToProps = state => {
   return {
     answers: state.answers.answers,
+    num_answers: state.answers.num_answers,
     question: state.questions.question
   };
 };
