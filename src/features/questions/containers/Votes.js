@@ -7,11 +7,13 @@ import { createUpvote, createDownvote } from "../actions/questions_actions";
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
 `;
 
 const Triangle = styled.div`
   width: 0;
   height: 0;
+  cursor: pointer;
   ${props => {
     if (props.direction === "up") {
       return css`
@@ -41,6 +43,10 @@ const Triangle = styled.div`
   }};
 `;
 
+const VotesNumber = styled.span`
+  padding: 10px 0;
+`;
+
 class Votes extends Component {
   renderVote = () => {
     if (this.props.question) {
@@ -54,7 +60,7 @@ class Votes extends Component {
             color={"#858c93"}
             onClick={() => this.props.createUpvote(id)}
           />
-          <span>{votes}</span>
+          <VotesNumber>{votes}</VotesNumber>
           <Triangle
             direction={"down"}
             size={"14px"}
