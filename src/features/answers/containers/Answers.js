@@ -28,6 +28,7 @@ class Answers extends Component {
             key={answer.id}
             id={answer.id}
             body={answer.body}
+            author={answer.user.username}
             createdAt={answer.createdAt}
           />
         );

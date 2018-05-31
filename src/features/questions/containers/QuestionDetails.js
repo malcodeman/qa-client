@@ -43,6 +43,7 @@ class QuestionDetails extends Component {
     } else {
       return (
         <React.Fragment>
+          <p>by {this.props.question.user.username}</p>
           <p>Answers: {this.props.num_answers}</p>
           <Link to={this.props.location.pathname}>
             {this.props.question.title}

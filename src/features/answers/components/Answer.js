@@ -14,6 +14,7 @@ const Answer = props => {
   return (
     <Wrapper>
       <p>{props.body}</p>
+      <p>by {props.author}</p>
     </Wrapper>
   );
 };
