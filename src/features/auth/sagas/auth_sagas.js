@@ -1,7 +1,7 @@
 import { call, put, takeLatest } from "redux-saga/effects";
 import { push } from "react-router-redux";
 
-import { signup, login, logout } from "./api";
+import axios from "../../../state/axios";
 import {
   SIGNUP_REQUEST,
   SIGNUP_SUCCESS,
@@ -11,26 +11,41 @@ import {
   LOGIN_FAILURE,
   LOGOUT_REQUEST,
   LOGOUT_SUCCESS,
-  LOGOUT_FAILURE
+  LOGOUT_FAILURE,
+  FIND_ME_FAILURE,
+  FIND_ME_REQUEST,
+  FIND_ME_SUCCESS
 } from "../actions/auth_actions";
+
+const signupApi = newUser => {
+  return axios.post(`auth/signup`, newUser);
+};
+
+const loginApi = user => {
+  return axios.post(`/auth/login`, user);
+};
+
+const logoutApi = user => {
+  return axios.post(`/auth/logout`, user);
+};
+
+const findMeApi = () => {
+  return axios.get(`/users/me`);
+};
 
 function* signupUser(action) {
   try {
-    const data = yield call(signup, action.payload);
-    localStorage.setItem("token", data.data);
+    const data = yield call(signupApi, action.payload);
+    localStorage.setItem("token", data.data.token);
     yield put({ type: SIGNUP_SUCCESS, payload: data.data });
   } catch (error) {
     yield put({ type: SIGNUP_FAILURE, error });
   }
 }
 
-export function* watchSignupRequest() {
-  yield takeLatest(SIGNUP_REQUEST, signupUser);
-}
-
 function* loginUser(action) {
   try {
-    const data = yield call(login, action.payload);
+    const data = yield call(loginApi, action.payload);
     localStorage.setItem("token", data.data.token);
     yield put({ type: LOGIN_SUCCESS, payload: data.data });
   } catch (error) {
@@ -38,19 +53,36 @@ function* loginUser(action) {
   }
 }
 
-export function* watchLoginRequest() {
-  yield takeLatest(LOGIN_REQUEST, loginUser);
-}
-
 function* logoutUser(action) {
   try {
-    const data = yield call(logout, action.payload);
+    const data = yield call(logoutApi, action.payload);
     localStorage.removeItem("token");
     yield put({ type: LOGOUT_SUCCESS, payload: data.data });
     yield put(push("/login"));
   } catch (error) {
     yield put({ type: LOGOUT_FAILURE, error });
   }
+}
+
+function* findMe(action) {
+  try {
+    const data = yield call(findMeApi);
+    yield put({ type: FIND_ME_SUCCESS, payload: data.data });
+  } catch (error) {
+    yield put({ type: FIND_ME_FAILURE, error });
+  }
+}
+
+export function* watchFindMeRequest() {
+  yield takeLatest(FIND_ME_REQUEST, findMe);
+}
+
+export function* watchSignupRequest() {
+  yield takeLatest(SIGNUP_REQUEST, signupUser);
+}
+
+export function* watchLoginRequest() {
+  yield takeLatest(LOGIN_REQUEST, loginUser);
 }
 
 export function* watchLogoutRequest() {

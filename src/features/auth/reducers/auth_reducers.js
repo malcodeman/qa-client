@@ -4,11 +4,12 @@ import {
   SIGNUP_RESET,
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
-  LOGIN_RESET
+  LOGIN_RESET,
+  FIND_ME_SUCCESS
 } from "../actions/auth_actions";
 
 const initialState = {
-  user: {},
+  user: null,
   signup_success: false,
   signup_failure: false,
   login_success: false,
@@ -17,6 +18,11 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
+    case FIND_ME_SUCCESS:
+      return {
+        ...state,
+        user: action.payload
+      };
     case SIGNUP_SUCCESS:
       return {
         ...state,

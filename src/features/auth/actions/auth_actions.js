@@ -12,6 +12,16 @@ export const LOGOUT_REQUEST = "LOGOUT_REQUEST";
 export const LOGOUT_SUCCESS = "LOGOUT_SUCCESS";
 export const LOGOUT_FAILURE = "LOGOUT_FAILURE";
 
+export const FIND_ME_REQUEST = "FIND_ME_REQUEST";
+export const FIND_ME_SUCCESS = "FIND_ME_SUCCESS";
+export const FIND_ME_FAILURE = "FIND_ME_FAILURE";
+
+export const findMe = () => {
+  return {
+    type: FIND_ME_REQUEST
+  };
+};
+
 export const signup = newUser => {
   return {
     type: SIGNUP_REQUEST,
