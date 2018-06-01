@@ -50,25 +50,35 @@ const VotesNumber = styled.span`
 class Votes extends Component {
   renderVote = () => {
     if (this.props.question) {
-      const { id } = this.props.question;
       const votes = this.props.upvotes - this.props.downvotes;
-      return (
-        <React.Fragment>
-          <Triangle
-            direction={"up"}
-            size={"14px"}
-            color={"#858c93"}
-            onClick={() => this.props.createUpvote(id)}
-          />
-          <VotesNumber>{votes}</VotesNumber>
-          <Triangle
-            direction={"down"}
-            size={"14px"}
-            color={"#858c93"}
-            onClick={() => this.props.createDownvote(id)}
-          />
-        </React.Fragment>
-      );
+      if (this.props.question.userId === this.props.user.id) {
+        return (
+          <React.Fragment>
+            <Triangle direction={"up"} size={"14px"} color={"#ccc"} />
+            <VotesNumber>{votes}</VotesNumber>
+            <Triangle direction={"down"} size={"14px"} color={"#ccc"} />
+          </React.Fragment>
+        );
+      } else {
+        const { id } = this.props.question;
+        return (
+          <React.Fragment>
+            <Triangle
+              direction={"up"}
+              size={"14px"}
+              color={"#858c93"}
+              onClick={() => this.props.createUpvote(id)}
+            />
+            <VotesNumber>{votes}</VotesNumber>
+            <Triangle
+              direction={"down"}
+              size={"14px"}
+              color={"#858c93"}
+              onClick={() => this.props.createDownvote(id)}
+            />
+          </React.Fragment>
+        );
+      }
     }
   };
   render() {
@@ -78,6 +88,7 @@ class Votes extends Component {
 
 const mapStateToProps = state => {
   return {
+    user: state.auth.user,
     question: state.questions.question,
     upvotes: state.questions.upvotes,
     downvotes: state.questions.downvotes
