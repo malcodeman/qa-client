@@ -8,17 +8,17 @@ import {
   watchDownvoteQuestion,
   watchDownvoteAnswer,
   watchUpvoteAnswer
-} from "../features/questions/sagas/questions_sagas";
+} from "../../features/questions/sagas/questions_sagas";
 import {
   watchSignupRequest,
   watchLoginRequest,
   watchLogoutRequest,
   watchFindMeRequest
-} from "../features/auth/sagas/auth_sagas";
+} from "../../features/auth/sagas/auth_sagas";
 
-import { watchGetUsers } from "../features/users/sagas/users_sagas";
+import { watchGetUsers } from "../../features/users/sagas/users_sagas";
 
-import { watchCreateAnswerRequest } from "../features/answers/sagas/answers_sagas";
+import { watchCreateAnswerRequest } from "../../features/answers/sagas/answers_sagas";
 
 export default function* rootSaga() {
   yield all([

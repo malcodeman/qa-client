@@ -1,5 +1,5 @@
 import { call, put, takeLatest } from "redux-saga/effects";
-import axios from "../../../state/axios";
+import axios from "../../../core/http";
 
 import {
   GET_USERS_FAILURE,

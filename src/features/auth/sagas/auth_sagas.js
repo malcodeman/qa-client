@@ -1,7 +1,7 @@
 import { call, put, takeLatest } from "redux-saga/effects";
 import { push } from "react-router-redux";
 
-import axios from "../../../state/axios";
+import axios from "../../../core/http";
 import {
   SIGNUP_REQUEST,
   SIGNUP_SUCCESS,

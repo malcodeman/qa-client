@@ -29,8 +29,7 @@ export default (state = initialState, action) => {
   switch (action.type) {
     case GET_QUESTIONS_REQUEST:
       return {
-        ...state,
-        loading: true
+        ...state
       };
     case GET_QUESTIONS_SUCCESS:
       return {
