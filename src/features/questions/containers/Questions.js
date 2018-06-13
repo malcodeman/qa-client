@@ -40,9 +40,9 @@ class Questions extends Component {
             id={question.id}
             title={question.title}
             body={question.body}
-            votes={question.upvotes.length - question.downvotes.length}
-            answers={question.answers.length}
-            author={question.user.username}
+            votes={question.votes}
+            answers={question.answersCount}
+            author={question.author}
             createdAt={question.createdAt}
           />
         );
@@ -71,4 +71,7 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, { getQuestions })(Questions);
+export default connect(
+  mapStateToProps,
+  { getQuestions }
+)(Questions);
