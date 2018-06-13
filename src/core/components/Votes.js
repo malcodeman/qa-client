@@ -45,22 +45,41 @@ const VotesNumber = styled.span`
 `;
 
 const Votes = props => {
-  const { questionId, votes, createDownvote, createUpvote } = props;
+  const { questionId, answerId, votes, createDownvote, createUpvote } = props;
+
   return (
     <Wrapper>
-      <Triangle
-        direction={"up"}
-        size={"14px"}
-        color={"#858c93"}
-        onClick={() => createUpvote(questionId)}
-      />
+      {answerId ? (
+        <Triangle
+          direction={"up"}
+          size={"14px"}
+          color={"#858c93"}
+          onClick={() => createUpvote(questionId, answerId)}
+        />
+      ) : (
+        <Triangle
+          direction={"up"}
+          size={"14px"}
+          color={"#858c93"}
+          onClick={() => createUpvote(questionId)}
+        />
+      )}
       <VotesNumber>{votes}</VotesNumber>
-      <Triangle
-        direction={"down"}
-        size={"14px"}
-        color={"#858c93"}
-        onClick={() => createDownvote(questionId)}
-      />
+      {answerId ? (
+        <Triangle
+          direction={"down"}
+          size={"14px"}
+          color={"#858c93"}
+          onClick={() => createDownvote(questionId, answerId)}
+        />
+      ) : (
+        <Triangle
+          direction={"down"}
+          size={"14px"}
+          color={"#858c93"}
+          onClick={() => createDownvote(questionId)}
+        />
+      )}
     </Wrapper>
   );
 };

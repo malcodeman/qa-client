@@ -16,13 +16,7 @@ import {
   CREATE_UPVOTE_SUCCESS,
   CREATE_DOWNVOTE_REQUEST,
   CREATE_DOWNVOTE_SUCCESS,
-  CREATE_DOWNVOTE_FAILURE,
-  CREATE_UPVOTE_ANSWER_REQUEST,
-  CREATE_DOWNVOTE_ANSWER_REQUEST,
-  CREATE_DOWNVOTE_ANSWER_SUCCESS,
-  CREATE_DOWNVOTE_ANSWER_FAILURE,
-  CREATE_UPVOTE_ANSWER_SUCCESS,
-  CREATE_UPVOTE_ANSWER_FAILURE
+  CREATE_DOWNVOTE_FAILURE
 } from "../actions/questions_actions";
 
 const getQuestionsApi = () => {
@@ -43,20 +37,6 @@ const createUpvoteApi = id => {
 
 const createDownvoteApi = id => {
   return axios.post(`/questions/${id}/downvotes`, { questionId: id });
-};
-
-const createUpvoteAnswerApi = (questionId, answerId) => {
-  return axios.post(`/questions/${questionId}/answers/${answerId}/upvotes`, {
-    questionId,
-    answerId
-  });
-};
-
-const createDownvoteAnswerApi = (questionId, answerId) => {
-  return axios.post(`/questions/${questionId}/answers/${answerId}/downvotes`, {
-    questionId,
-    answerId
-  });
 };
 
 function* getQuestions() {
@@ -107,26 +87,6 @@ function* createDownvote(action) {
   }
 }
 
-function* createUpvoteAnswer(action) {
-  try {
-    const { questionId, answerId } = action.payload;
-    const data = yield call(createUpvoteAnswerApi, questionId, answerId);
-    yield put({ type: CREATE_UPVOTE_ANSWER_SUCCESS, payload: data.data });
-  } catch (error) {
-    yield put({ type: CREATE_UPVOTE_ANSWER_FAILURE, error });
-  }
-}
-
-function* createDownvoteAnswer(action) {
-  try {
-    const { questionId, answerId } = action.payload;
-    const data = yield call(createDownvoteAnswerApi, questionId, answerId);
-    yield put({ type: CREATE_DOWNVOTE_ANSWER_SUCCESS, payload: data.data });
-  } catch (error) {
-    yield put({ type: CREATE_DOWNVOTE_ANSWER_FAILURE, error });
-  }
-}
-
 export function* watchGetQuestions() {
   yield takeLatest(GET_QUESTIONS_REQUEST, getQuestions);
 }
@@ -145,12 +105,4 @@ export function* watchUpvoteQuestion() {
 
 export function* watchDownvoteQuestion() {
   yield takeLatest(CREATE_DOWNVOTE_REQUEST, createDownvote);
-}
-
-export function* watchUpvoteAnswer() {
-  yield takeLatest(CREATE_UPVOTE_ANSWER_REQUEST, createUpvoteAnswer);
-}
-
-export function* watchDownvoteAnswer() {
-  yield takeLatest(CREATE_DOWNVOTE_ANSWER_REQUEST, createDownvoteAnswer);
 }

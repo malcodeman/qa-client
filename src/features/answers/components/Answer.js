@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { distanceInWordsToNow } from "date-fns";
 
-import Votes from "../containers/Votes";
+import Votes from "../../../core/components/Votes";
 
 const StyledAnswer = styled.div`
   border-bottom: 1px solid #e6e6e6;
@@ -40,7 +40,12 @@ const Answer = props => {
   return (
     <StyledAnswer>
       <Main>
-        <Votes answerId={props.id} votes={props.votes} />
+        <Votes
+          answerId={props.id}
+          votes={props.votes}
+          createDownvote={props.createDownvote}
+          createUpvote={props.createUpvote}
+        />
         <Body>{props.body}</Body>
       </Main>
       <Footer>

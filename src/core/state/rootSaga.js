@@ -5,9 +5,7 @@ import {
   watchCreateQuestionRequest,
   watchFindQuestionById,
   watchUpvoteQuestion,
-  watchDownvoteQuestion,
-  watchDownvoteAnswer,
-  watchUpvoteAnswer
+  watchDownvoteQuestion
 } from "../../features/questions/sagas/questions_sagas";
 import {
   watchSignupRequest,
@@ -18,7 +16,11 @@ import {
 
 import { watchGetUsers } from "../../features/users/sagas/users_sagas";
 
-import { watchCreateAnswerRequest } from "../../features/answers/sagas/answers_sagas";
+import {
+  watchCreateAnswerRequest,
+  watchDownvoteAnswer,
+  watchUpvoteAnswer
+} from "../../features/answers/sagas/answers_sagas";
 
 export default function* rootSaga() {
   yield all([

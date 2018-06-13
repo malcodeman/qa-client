@@ -4,11 +4,31 @@ import axios from "../../../core/http";
 import {
   CREATE_ANSWER_FAILURE,
   CREATE_ANSWER_REQUEST,
-  CREATE_ANSWER_SUCCESS
+  CREATE_ANSWER_SUCCESS,
+  CREATE_UPVOTE_ANSWER_REQUEST,
+  CREATE_DOWNVOTE_ANSWER_REQUEST,
+  CREATE_DOWNVOTE_ANSWER_SUCCESS,
+  CREATE_DOWNVOTE_ANSWER_FAILURE,
+  CREATE_UPVOTE_ANSWER_SUCCESS,
+  CREATE_UPVOTE_ANSWER_FAILURE
 } from "../actions/answers_actions";
 
 const createAnswerApi = (questionId, yourAnswer) => {
   return axios.post(`/answers`, { questionId, body: yourAnswer });
+};
+
+const createUpvoteAnswerApi = (questionId, answerId) => {
+  return axios.post(`/questions/${questionId}/answers/${answerId}/upvotes`, {
+    questionId,
+    answerId
+  });
+};
+
+const createDownvoteAnswerApi = (questionId, answerId) => {
+  return axios.post(`/questions/${questionId}/answers/${answerId}/downvotes`, {
+    questionId,
+    answerId
+  });
 };
 
 function* createAnswer(action) {
@@ -21,6 +41,34 @@ function* createAnswer(action) {
   }
 }
 
+function* createUpvoteAnswer(action) {
+  try {
+    const { questionId, answerId } = action.payload;
+    const data = yield call(createUpvoteAnswerApi, questionId, answerId);
+    yield put({ type: CREATE_UPVOTE_ANSWER_SUCCESS, payload: data.data });
+  } catch (error) {
+    yield put({ type: CREATE_UPVOTE_ANSWER_FAILURE, error });
+  }
+}
+
+function* createDownvoteAnswer(action) {
+  try {
+    const { questionId, answerId } = action.payload;
+    const data = yield call(createDownvoteAnswerApi, questionId, answerId);
+    yield put({ type: CREATE_DOWNVOTE_ANSWER_SUCCESS, payload: data.data });
+  } catch (error) {
+    yield put({ type: CREATE_DOWNVOTE_ANSWER_FAILURE, error });
+  }
+}
+
 export function* watchCreateAnswerRequest() {
   yield takeLatest(CREATE_ANSWER_REQUEST, createAnswer);
+}
+
+export function* watchUpvoteAnswer() {
+  yield takeLatest(CREATE_UPVOTE_ANSWER_REQUEST, createUpvoteAnswer);
+}
+
+export function* watchDownvoteAnswer() {
+  yield takeLatest(CREATE_DOWNVOTE_ANSWER_REQUEST, createDownvoteAnswer);
 }

@@ -1,9 +1,9 @@
+import { FIND_QUESTION_BY_ID_SUCCESS } from "../../questions/actions/questions_actions";
 import {
-  FIND_QUESTION_BY_ID_SUCCESS,
+  CREATE_ANSWER_SUCCESS,
   CREATE_DOWNVOTE_ANSWER_SUCCESS,
   CREATE_UPVOTE_ANSWER_SUCCESS
-} from "../../questions/actions/questions_actions";
-import { CREATE_ANSWER_SUCCESS } from "../actions/answers_actions";
+} from "../actions/answers_actions";
 
 const initialState = {
   answers: [],
