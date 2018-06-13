@@ -16,7 +16,6 @@ import { LOGOUT_SUCCESS } from "../../auth/actions/auth_actions";
 const initialState = {
   questions: [],
   question: null,
-  votes: 0,
   loading: true,
   create_question_success: false,
   create_question_failure: false,
@@ -86,12 +85,18 @@ export default (state = initialState, action) => {
     case CREATE_DOWNVOTE_SUCCESS:
       return {
         ...state,
-        votes: state.votes + 1
+        question: {
+          ...state.question,
+          votes: state.question.votes - 1
+        }
       };
     case CREATE_UPVOTE_SUCCESS:
       return {
         ...state,
-        votes: state.votes + 1
+        question: {
+          ...state.question,
+          votes: state.question.votes + 1
+        }
       };
     default:
       return state;

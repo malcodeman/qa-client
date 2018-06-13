@@ -4,12 +4,14 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { distanceInWordsToNow } from "date-fns";
 
-import Votes from "./Votes";
+import Votes from "../../../core/components/Votes";
 import Answers from "../../answers/containers/Answers";
 import Header from "./Header";
 import {
   findQuestionById,
-  findQuestionByIdUnload
+  findQuestionByIdUnload,
+  createDownvote,
+  createUpvote
 } from "../actions/questions_actions";
 
 const Wrapper = styled.div`
@@ -85,7 +87,12 @@ class QuestionDetails extends Component {
             </Link>
           </Title>
           <Main>
-            <Votes votes={this.props.question.votes} />
+            <Votes
+              votes={this.props.question.votes}
+              questionId={this.props.question.id}
+              createUpvote={this.props.createUpvote}
+              createDownvote={this.props.createDownvote}
+            />
             <Body>{this.props.question.body}</Body>
           </Main>
           <Footer>
@@ -125,7 +132,9 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     findQuestionById: id => dispatch(findQuestionById(id)),
-    findQuestionByIdUnload: () => dispatch(findQuestionByIdUnload())
+    findQuestionByIdUnload: () => dispatch(findQuestionByIdUnload()),
+    createUpvote: id => dispatch(createUpvote(id)),
+    createDownvote: id => dispatch(createDownvote(id))
   };
 };
 
