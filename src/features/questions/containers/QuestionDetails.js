@@ -85,13 +85,13 @@ class QuestionDetails extends Component {
             </Link>
           </Title>
           <Main>
-            <Votes />
+            <Votes votes={this.props.question.votes} />
             <Body>{this.props.question.body}</Body>
           </Main>
           <Footer>
             <User>
               <span>asked {distanceInWordsToNow(createdAt)} ago</span>
-              <span>by {this.props.question.user.username}</span>
+              <span>by {this.props.question.author}</span>
             </User>
           </Footer>
         </Question>
@@ -129,4 +129,7 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(QuestionDetails);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(QuestionDetails);

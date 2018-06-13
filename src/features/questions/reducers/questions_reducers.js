@@ -16,8 +16,7 @@ import { LOGOUT_SUCCESS } from "../../auth/actions/auth_actions";
 const initialState = {
   questions: [],
   question: null,
-  upvotes: 0,
-  downvotes: 0,
+  votes: 0,
   loading: true,
   create_question_success: false,
   create_question_failure: false,
@@ -43,12 +42,10 @@ export default (state = initialState, action) => {
         loading: true
       };
     case FIND_QUESTION_BY_ID_SUCCESS:
-      const { upvotes, downvotes } = action.payload;
       return {
         ...state,
         question: action.payload,
-        upvotes: upvotes.length,
-        downvotes: downvotes.length,
+        votes: action.payload.votes,
         loading: false
       };
     case FIND_QUESTION_BY_ID_UNLOAD:
@@ -89,12 +86,12 @@ export default (state = initialState, action) => {
     case CREATE_DOWNVOTE_SUCCESS:
       return {
         ...state,
-        downvotes: state.downvotes + 1
+        votes: state.votes + 1
       };
     case CREATE_UPVOTE_SUCCESS:
       return {
         ...state,
-        upvotes: state.upvotes + 1
+        votes: state.votes + 1
       };
     default:
       return state;

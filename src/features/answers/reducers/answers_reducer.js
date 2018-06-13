@@ -31,7 +31,7 @@ export default (state = initialState, action) => {
           if (answer.id === action.payload.answerId) {
             return {
               ...answer,
-              downvotes: [...answer.downvotes, action.payload]
+              votes: answer.votes - 1
             };
           } else {
             return answer;
@@ -45,7 +45,7 @@ export default (state = initialState, action) => {
           if (answer.id === action.payload.answerId) {
             return {
               ...answer,
-              upvotes: [...answer.upvotes, action.payload]
+              votes: answer.votes + 1
             };
           } else {
             return answer;

@@ -60,7 +60,7 @@ class Votes extends Component {
             color={"#858c93"}
             onClick={() => this.props.createUpvote(id)}
           />
-          <VotesNumber>{votes}</VotesNumber>
+          <VotesNumber>{this.props.votes}</VotesNumber>
           <Triangle
             direction={"down"}
             size={"14px"}

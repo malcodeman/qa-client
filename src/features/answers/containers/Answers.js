@@ -35,9 +35,9 @@ class Answers extends Component {
             key={answer.id}
             id={answer.id}
             body={answer.body}
-            author={answer.user.username}
+            author={answer.author}
             createdAt={answer.createdAt}
-            votes={upvotes.length - downvotes.length}
+            votes={answer.votes}
           />
         );
       });
@@ -71,4 +71,7 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, { createAnswer })(Answers);
+export default connect(
+  mapStateToProps,
+  { createAnswer }
+)(Answers);
