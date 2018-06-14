@@ -1,0 +1,55 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Answer matches snapshot 1`] = `
+<div
+  className="sc-bxivhb iBfkVx"
+>
+  <main
+    className="sc-ifAKCX jPSUiy"
+  >
+    <div
+      className="sc-bdVaJa bxcuYP"
+    >
+      <div
+        className="sc-bwzfXH gfIHP"
+        color="#858c93"
+        direction="up"
+        onClick={[Function]}
+        size="14px"
+      />
+      <span
+        className="sc-htpNat faymHB"
+      />
+      <div
+        className="sc-bwzfXH gqmMyx"
+        color="#858c93"
+        direction="down"
+        onClick={[Function]}
+        size="14px"
+      />
+    </div>
+    <p
+      className="sc-EHOje kxbPyB"
+    >
+      answer body
+    </p>
+  </main>
+  <footer
+    className="sc-bZQynM eatfvr"
+  >
+    <div
+      className="sc-gzVnrw caoKng"
+    >
+      <span>
+        answered 
+        17 minutes
+         ago
+      </span>
+      <span>
+        by 
+        creator
+      </span>
+    </div>
+  </footer>
+</div>
+`;
