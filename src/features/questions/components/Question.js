@@ -25,7 +25,7 @@ const common = `
   }
 `;
 
-const Votes = styled.span`
+const Upvotes = styled.span`
   ${common} margin-right: 0.4rem;
 `;
 
@@ -45,7 +45,7 @@ const Question = props => {
   return (
     <LinkWrapper to={`/questions/${props.id}`}>
       <Title>{props.title}</Title>
-      <Votes>{props.votes} votes</Votes>
+      <Upvotes>{props.upvotes} upvotes</Upvotes>
       <Author>by {props.author}</Author>
       <Time>{distanceInWordsToNow(props.createdAt)} ago</Time>
       <Answers>{props.answers} answers</Answers>
