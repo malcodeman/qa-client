@@ -60,7 +60,7 @@ const Votes = props => {
         <Triangle
           direction={"up"}
           size={"14px"}
-          color={"red"}
+          color={"#f48024"}
           onClick={() => destroyUpvote(upvoted.upvoteId)}
         />
       ) : (

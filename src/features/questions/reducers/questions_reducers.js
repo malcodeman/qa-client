@@ -8,7 +8,8 @@ import {
   CREATE_QUESTION_FAILURE,
   CREATE_QUESTION_SUCCESS,
   CREATE_QUESTION_TRIGGER,
-  CREATE_UPVOTE_SUCCESS
+  CREATE_UPVOTE_SUCCESS,
+  DESTROY_UPVOTE_SUCCESS
 } from "../actions/questions_actions";
 import { LOGOUT_SUCCESS } from "../../auth/actions/auth_actions";
 
@@ -86,7 +87,19 @@ export default (state = initialState, action) => {
         ...state,
         question: {
           ...state.question,
-          votes: state.question.votes + 1
+          upvotesCount: state.question.upvotesCount + 1,
+          upvoted: {
+            upvoteId: action.payload.id
+          }
+        }
+      };
+    case DESTROY_UPVOTE_SUCCESS:
+      return {
+        ...state,
+        question: {
+          ...state.question,
+          upvotesCount: state.question.upvotesCount - 1,
+          upvoted: false
         }
       };
     default:
