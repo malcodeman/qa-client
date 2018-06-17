@@ -13,7 +13,10 @@ import {
   FIND_QUESTION_BY_ID_SUCCESS,
   CREATE_UPVOTE_FAILURE,
   CREATE_UPVOTE_REQUEST,
-  CREATE_UPVOTE_SUCCESS
+  CREATE_UPVOTE_SUCCESS,
+  DESTROY_UPVOTE_FAILURE,
+  DESTROY_UPVOTE_REQUEST,
+  DESTROY_UPVOTE_SUCCESS
 } from "../actions/questions_actions";
 
 const getQuestionsApi = () => {
@@ -29,7 +32,11 @@ const findQuestionByIdApi = id => {
 };
 
 const createUpvoteApi = id => {
-  return axios.post(`/questions/${id}/upvotes`, { questionId: id });
+  return axios.post(`/upvotes`, { questionId: id });
+};
+
+const destroyUpvoteApi = id => {
+  return axios.delete(`/upvotes/${id}`);
 };
 
 function* getQuestions() {
@@ -70,6 +77,15 @@ function* createUpvote(action) {
   }
 }
 
+function* destroyUpvote(action) {
+  try {
+    const data = yield call(destroyUpvoteApi, action.payload);
+    yield put({ type: DESTROY_UPVOTE_SUCCESS, payload: data.data });
+  } catch (error) {
+    yield put({ type: DESTROY_UPVOTE_FAILURE, error });
+  }
+}
+
 export function* watchGetQuestions() {
   yield takeLatest(GET_QUESTIONS_REQUEST, getQuestions);
 }
@@ -84,4 +100,8 @@ export function* watchFindQuestionById() {
 
 export function* watchUpvoteQuestion() {
   yield takeLatest(CREATE_UPVOTE_REQUEST, createUpvote);
+}
+
+export function* watchDestroyUpvote() {
+  yield takeLatest(DESTROY_UPVOTE_REQUEST, destroyUpvote);
 }

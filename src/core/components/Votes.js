@@ -45,7 +45,14 @@ const VotesNumber = styled.span`
 `;
 
 const Votes = props => {
-  const { questionId, answerId, upvotes, createUpvote, upvoted } = props;
+  const {
+    questionId,
+    answerId,
+    upvotes,
+    createUpvote,
+    upvoted,
+    destroyUpvote
+  } = props;
 
   return (
     <Wrapper>
@@ -54,7 +61,7 @@ const Votes = props => {
           direction={"up"}
           size={"14px"}
           color={"red"}
-          onClick={() => createUpvote(questionId)}
+          onClick={() => destroyUpvote(upvoted.upvoteId)}
         />
       ) : (
         <Triangle

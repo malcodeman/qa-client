@@ -10,7 +10,8 @@ import Header from "./Header";
 import {
   findQuestionById,
   findQuestionByIdUnload,
-  createUpvote
+  createUpvote,
+  destroyUpvote
 } from "../actions/questions_actions";
 
 const Wrapper = styled.div`
@@ -88,6 +89,7 @@ class QuestionDetails extends Component {
               upvotes={this.props.question.upvotesCount}
               questionId={this.props.question.id}
               createUpvote={this.props.createUpvote}
+              destroyUpvote={this.props.destroyUpvote}
               upvoted={this.props.question.upvoted}
             />
             <Body>{this.props.question.body}</Body>
@@ -127,15 +129,7 @@ const mapStateToProps = state => {
   };
 };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    findQuestionById: id => dispatch(findQuestionById(id)),
-    findQuestionByIdUnload: () => dispatch(findQuestionByIdUnload()),
-    createUpvote: id => dispatch(createUpvote(id))
-  };
-};
-
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  { findQuestionById, findQuestionByIdUnload, createUpvote, destroyUpvote }
 )(QuestionDetails);

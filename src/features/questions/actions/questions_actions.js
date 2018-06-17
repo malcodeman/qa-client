@@ -11,6 +11,10 @@ export const CREATE_UPVOTE_REQUEST = "CREATE_UPVOTE_REQUEST";
 export const CREATE_UPVOTE_SUCCESS = "CREATE_UPVOTE_SUCCESS";
 export const CREATE_UPVOTE_FAILURE = "CREATE_UPVOTE_FAILURE";
 
+export const DESTROY_UPVOTE_REQUEST = "DESTROY_UPVOTE_REQUEST";
+export const DESTROY_UPVOTE_SUCCESS = "DESTROY_UPVOTE_SUCCESS";
+export const DESTROY_UPVOTE_FAILURE = "DESTROY_UPVOTE_FAILURE";
+
 export const CREATE_QUESTION_REQUEST = "CREATE_QUESTION_REQUEST";
 export const CREATE_QUESTION_SUCCESS = "CREATE_QUESTION_SUCCESS";
 export const CREATE_QUESTION_FAILURE = "CREATE_QUESTION_FAILURE";
@@ -38,6 +42,13 @@ export const createUpvote = id => {
     payload: {
       id
     }
+  };
+};
+
+export const destroyUpvote = id => {
+  return {
+    type: DESTROY_UPVOTE_REQUEST,
+    payload: id
   };
 };
 
