@@ -97,7 +97,7 @@ class QuestionDetails extends Component {
           <Footer>
             <User>
               <span>asked {distanceInWordsToNow(createdAt)} ago</span>
-              <span>by {this.props.question.author}</span>
+              <span>by {this.props.question.user.username}</span>
             </User>
           </Footer>
         </Question>
