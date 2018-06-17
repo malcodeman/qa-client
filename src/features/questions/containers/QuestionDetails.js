@@ -10,7 +10,6 @@ import Header from "./Header";
 import {
   findQuestionById,
   findQuestionByIdUnload,
-  createDownvote,
   createUpvote
 } from "../actions/questions_actions";
 
@@ -73,9 +72,7 @@ class QuestionDetails extends Component {
   componentWillUnmount = () => {
     this.props.findQuestionByIdUnload();
   };
-  renderLoading = () => {
-    return this.props.loading ? <p>Loading ...</p> : null;
-  };
+
   renderQuestion = () => {
     if (this.props.question) {
       const { createdAt } = this.props.question;
@@ -88,10 +85,10 @@ class QuestionDetails extends Component {
           </Title>
           <Main>
             <Votes
-              votes={this.props.question.votes}
+              upvotes={this.props.question.upvotesCount}
               questionId={this.props.question.id}
               createUpvote={this.props.createUpvote}
-              createDownvote={this.props.createDownvote}
+              upvoted={this.props.question.upvoted}
             />
             <Body>{this.props.question.body}</Body>
           </Main>
@@ -103,6 +100,8 @@ class QuestionDetails extends Component {
           </Footer>
         </Question>
       );
+    } else {
+      return <p>Loading ...</p>;
     }
   };
   render() {
@@ -111,7 +110,6 @@ class QuestionDetails extends Component {
         <Header />
         <Content>
           <Container>
-            {this.renderLoading()}
             {this.renderQuestion()}
             <Answers />
           </Container>
@@ -133,8 +131,7 @@ const mapDispatchToProps = dispatch => {
   return {
     findQuestionById: id => dispatch(findQuestionById(id)),
     findQuestionByIdUnload: () => dispatch(findQuestionByIdUnload()),
-    createUpvote: id => dispatch(createUpvote(id)),
-    createDownvote: id => dispatch(createDownvote(id))
+    createUpvote: id => dispatch(createUpvote(id))
   };
 };
 

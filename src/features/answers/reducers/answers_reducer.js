@@ -1,7 +1,6 @@
 import { FIND_QUESTION_BY_ID_SUCCESS } from "../../questions/actions/questions_actions";
 import {
   CREATE_ANSWER_SUCCESS,
-  CREATE_DOWNVOTE_ANSWER_SUCCESS,
   CREATE_UPVOTE_ANSWER_SUCCESS
 } from "../actions/answers_actions";
 
@@ -23,20 +22,6 @@ export default (state = initialState, action) => {
         ...state,
         answers: [...state.answers, action.payload],
         num_answers: state.num_answers + 1
-      };
-    case CREATE_DOWNVOTE_ANSWER_SUCCESS:
-      return {
-        ...state,
-        answers: state.answers.map((answer, index) => {
-          if (answer.id === action.payload.answerId) {
-            return {
-              ...answer,
-              votes: answer.votes - 1
-            };
-          } else {
-            return answer;
-          }
-        })
       };
     case CREATE_UPVOTE_ANSWER_SUCCESS:
       return {

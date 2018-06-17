@@ -13,10 +13,7 @@ import {
   FIND_QUESTION_BY_ID_SUCCESS,
   CREATE_UPVOTE_FAILURE,
   CREATE_UPVOTE_REQUEST,
-  CREATE_UPVOTE_SUCCESS,
-  CREATE_DOWNVOTE_REQUEST,
-  CREATE_DOWNVOTE_SUCCESS,
-  CREATE_DOWNVOTE_FAILURE
+  CREATE_UPVOTE_SUCCESS
 } from "../actions/questions_actions";
 
 const getQuestionsApi = () => {
@@ -33,10 +30,6 @@ const findQuestionByIdApi = id => {
 
 const createUpvoteApi = id => {
   return axios.post(`/questions/${id}/upvotes`, { questionId: id });
-};
-
-const createDownvoteApi = id => {
-  return axios.post(`/questions/${id}/downvotes`, { questionId: id });
 };
 
 function* getQuestions() {
@@ -77,16 +70,6 @@ function* createUpvote(action) {
   }
 }
 
-function* createDownvote(action) {
-  try {
-    const { id } = action.payload;
-    const data = yield call(createDownvoteApi, id);
-    yield put({ type: CREATE_DOWNVOTE_SUCCESS, payload: data.data });
-  } catch (error) {
-    yield put({ type: CREATE_DOWNVOTE_FAILURE, error });
-  }
-}
-
 export function* watchGetQuestions() {
   yield takeLatest(GET_QUESTIONS_REQUEST, getQuestions);
 }
@@ -101,8 +84,4 @@ export function* watchFindQuestionById() {
 
 export function* watchUpvoteQuestion() {
   yield takeLatest(CREATE_UPVOTE_REQUEST, createUpvote);
-}
-
-export function* watchDownvoteQuestion() {
-  yield takeLatest(CREATE_DOWNVOTE_REQUEST, createDownvote);
 }

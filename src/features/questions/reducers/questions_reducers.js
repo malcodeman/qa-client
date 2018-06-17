@@ -8,7 +8,6 @@ import {
   CREATE_QUESTION_FAILURE,
   CREATE_QUESTION_SUCCESS,
   CREATE_QUESTION_TRIGGER,
-  CREATE_DOWNVOTE_SUCCESS,
   CREATE_UPVOTE_SUCCESS
 } from "../actions/questions_actions";
 import { LOGOUT_SUCCESS } from "../../auth/actions/auth_actions";
@@ -81,14 +80,6 @@ export default (state = initialState, action) => {
         create_question_success: false,
         create_question_failure: false,
         create_question_trigger: false
-      };
-    case CREATE_DOWNVOTE_SUCCESS:
-      return {
-        ...state,
-        question: {
-          ...state.question,
-          votes: state.question.votes - 1
-        }
       };
     case CREATE_UPVOTE_SUCCESS:
       return {

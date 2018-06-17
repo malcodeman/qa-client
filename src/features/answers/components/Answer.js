@@ -43,7 +43,6 @@ const Answer = props => {
         <Votes
           answerId={props.id}
           votes={props.votes}
-          createDownvote={props.createDownvote}
           createUpvote={props.createUpvote}
         />
         <Body>{props.body}</Body>

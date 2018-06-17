@@ -4,11 +4,7 @@ import { connect } from "react-redux";
 
 import Answer from "../components/Answer";
 import YourAnswer from "./YourAnswer";
-import {
-  createAnswer,
-  createDownvote,
-  createUpvote
-} from "../actions/answers_actions";
+import { createAnswer, createUpvote } from "../actions/answers_actions";
 
 const Wrapper = styled.div`
   display: flex;
@@ -42,7 +38,6 @@ class Answers extends Component {
             author={answer.author}
             createdAt={answer.createdAt}
             votes={answer.votes}
-            createDownvote={this.props.createDownvote}
             createUpvote={this.props.createUpvote}
           />
         );
@@ -79,5 +74,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { createAnswer, createDownvote, createUpvote }
+  { createAnswer, createUpvote }
 )(Answers);
