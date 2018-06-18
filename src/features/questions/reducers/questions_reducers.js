@@ -85,25 +85,67 @@ export default (state = initialState, action) => {
         create_question_trigger: false
       };
     case CREATE_UPVOTE_SUCCESS:
-      return {
-        ...state,
-        question: {
-          ...state.question,
-          upvotesCount: state.question.upvotesCount + 1,
-          upvoted: {
-            upvoteId: action.payload.id
+      if (action.meta.answer) {
+        return {
+          ...state,
+          question: {
+            ...state.question,
+            answers: state.question.answers.map(answer => {
+              if (answer.id === action.payload.answerId) {
+                return {
+                  ...answer,
+                  upvotesCount: answer.upvotesCount + 1,
+                  upvoted: {
+                    upvoteId: action.payload.id
+                  }
+                };
+              } else {
+                return answer;
+              }
+            })
           }
-        }
-      };
+        };
+      } else {
+        return {
+          ...state,
+          question: {
+            ...state.question,
+            upvotesCount: state.question.upvotesCount + 1,
+            upvoted: {
+              upvoteId: action.payload.id
+            }
+          }
+        };
+      }
     case DESTROY_UPVOTE_SUCCESS:
-      return {
-        ...state,
-        question: {
-          ...state.question,
-          upvotesCount: state.question.upvotesCount - 1,
-          upvoted: false
-        }
-      };
+      if (action.meta.answer) {
+        return {
+          ...state,
+          question: {
+            ...state.question,
+            answers: state.question.answers.map(answer => {
+              if (answer.id === action.payload.answerId) {
+                return {
+                  ...answer,
+                  upvotesCount: answer.upvotesCount - 1,
+                  upvoted: false
+                };
+              } else {
+                return answer;
+              }
+            })
+          }
+        };
+      } else {
+        return {
+          ...state,
+          question: {
+            ...state.question,
+            upvotesCount: state.question.upvotesCount - 1,
+            upvoted: false
+          }
+        };
+      }
     case CREATE_ANSWER_SUCCESS:
       return {
         ...state,

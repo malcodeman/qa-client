@@ -77,10 +77,18 @@ function* createUpvote(action) {
     const { answer } = action.meta;
     if (answer) {
       const data = yield call(createUpvoteAnswerApi, id);
-      yield put({ type: CREATE_UPVOTE_SUCCESS, payload: data.data });
+      yield put({
+        type: CREATE_UPVOTE_SUCCESS,
+        payload: data.data,
+        meta: action.meta
+      });
     } else {
       const data = yield call(createUpvoteApi, id);
-      yield put({ type: CREATE_UPVOTE_SUCCESS, payload: data.data });
+      yield put({
+        type: CREATE_UPVOTE_SUCCESS,
+        payload: data.data,
+        meta: action.meta
+      });
     }
   } catch (error) {
     yield put({ type: CREATE_UPVOTE_FAILURE, error });
@@ -90,7 +98,11 @@ function* createUpvote(action) {
 function* destroyUpvote(action) {
   try {
     const data = yield call(destroyUpvoteApi, action.payload);
-    yield put({ type: DESTROY_UPVOTE_SUCCESS, payload: data.data });
+    yield put({
+      type: DESTROY_UPVOTE_SUCCESS,
+      payload: data.data,
+      meta: action.meta
+    });
   } catch (error) {
     yield put({ type: DESTROY_UPVOTE_FAILURE, error });
   }

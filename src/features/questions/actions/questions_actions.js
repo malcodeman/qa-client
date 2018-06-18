@@ -48,10 +48,13 @@ export const createUpvote = (id, answer) => {
   };
 };
 
-export const destroyUpvote = id => {
+export const destroyUpvote = (id, answer) => {
   return {
     type: DESTROY_UPVOTE_REQUEST,
-    payload: id
+    payload: id,
+    meta: {
+      answer
+    }
   };
 };
 

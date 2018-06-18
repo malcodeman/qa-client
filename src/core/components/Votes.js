@@ -61,7 +61,7 @@ const Votes = props => {
             direction={"up"}
             size={"14px"}
             color={"#f48024"}
-            onClick={() => destroyUpvote(upvoted.upvoteId)}
+            onClick={() => destroyUpvote(upvoted.upvoteId, true)}
           />
         );
       } else {
@@ -81,7 +81,7 @@ const Votes = props => {
             direction={"up"}
             size={"14px"}
             color={"#f48024"}
-            onClick={() => destroyUpvote(upvoted.upvoteId)}
+            onClick={() => destroyUpvote(upvoted.upvoteId, false)}
           />
         );
       } else {
