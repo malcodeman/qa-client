@@ -13,6 +13,8 @@ import {
 } from "../actions/questions_actions";
 import { LOGOUT_SUCCESS } from "../../auth/actions/auth_actions";
 
+import { CREATE_ANSWER_SUCCESS } from "../../answers/actions/answers_actions";
+
 const initialState = {
   questions: [],
   question: null,
@@ -100,6 +102,14 @@ export default (state = initialState, action) => {
           ...state.question,
           upvotesCount: state.question.upvotesCount - 1,
           upvoted: false
+        }
+      };
+    case CREATE_ANSWER_SUCCESS:
+      return {
+        ...state,
+        question: {
+          ...state.question,
+          answers: [...state.question.answers, action.payload]
         }
       };
     default:

@@ -86,7 +86,7 @@ class QuestionDetails extends Component {
           </Title>
           <Main>
             <Votes
-              upvotes={this.props.question.upvotesCount}
+              upvotesCount={this.props.question.upvotesCount}
               questionId={this.props.question.id}
               createUpvote={this.props.createUpvote}
               destroyUpvote={this.props.destroyUpvote}

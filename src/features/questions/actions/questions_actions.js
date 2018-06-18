@@ -36,11 +36,14 @@ export const findQuestionById = id => {
   };
 };
 
-export const createUpvote = id => {
+export const createUpvote = (id, answer) => {
   return {
     type: CREATE_UPVOTE_REQUEST,
     payload: {
       id
+    },
+    meta: {
+      answer
     }
   };
 };

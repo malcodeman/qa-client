@@ -48,31 +48,58 @@ const Votes = props => {
   const {
     questionId,
     answerId,
-    upvotes,
+    upvotesCount,
     createUpvote,
     upvoted,
     destroyUpvote
   } = props;
-
+  const renderUpvote = () => {
+    if (answerId) {
+      if (upvoted) {
+        return (
+          <Triangle
+            direction={"up"}
+            size={"14px"}
+            color={"#f48024"}
+            onClick={() => destroyUpvote(upvoted.upvoteId)}
+          />
+        );
+      } else {
+        return (
+          <Triangle
+            direction={"up"}
+            size={"14px"}
+            color={"#858c93"}
+            onClick={() => createUpvote(answerId, true)}
+          />
+        );
+      }
+    } else {
+      if (upvoted) {
+        return (
+          <Triangle
+            direction={"up"}
+            size={"14px"}
+            color={"#f48024"}
+            onClick={() => destroyUpvote(upvoted.upvoteId)}
+          />
+        );
+      } else {
+        return (
+          <Triangle
+            direction={"up"}
+            size={"14px"}
+            color={"#858c93"}
+            onClick={() => createUpvote(questionId, false)}
+          />
+        );
+      }
+    }
+  };
   return (
     <Wrapper>
-      {upvoted ? (
-        <Triangle
-          direction={"up"}
-          size={"14px"}
-          color={"#f48024"}
-          onClick={() => destroyUpvote(upvoted.upvoteId)}
-        />
-      ) : (
-        <Triangle
-          direction={"up"}
-          size={"14px"}
-          color={"#858c93"}
-          onClick={() => createUpvote(questionId)}
-        />
-      )}
-
-      <VotesNumber>{upvotes}</VotesNumber>
+      {renderUpvote()}
+      <VotesNumber>{upvotesCount}</VotesNumber>
     </Wrapper>
   );
 };

@@ -4,7 +4,11 @@ import { connect } from "react-redux";
 
 import Answer from "../components/Answer";
 import YourAnswer from "./YourAnswer";
-import { createAnswer, createUpvote } from "../actions/answers_actions";
+import { createAnswer } from "../actions/answers_actions";
+import {
+  createUpvote,
+  destroyUpvote
+} from "../../questions/actions/questions_actions";
 
 const Wrapper = styled.div`
   display: flex;
@@ -27,18 +31,20 @@ class Answers extends Component {
     if (num_answers !== 0) return <Header>{num_answers} Answers</Header>;
   };
   renderAnswers = () => {
-    const { answers } = this.props;
-    if (answers) {
-      return answers.map(answer => {
+    const { question } = this.props;
+    if (question) {
+      return question.answers.map(answer => {
         return (
           <Answer
             key={answer.id}
             id={answer.id}
             body={answer.body}
-            author={answer.author}
+            author={answer.user.username}
             createdAt={answer.createdAt}
-            votes={answer.votes}
+            upvotesCount={answer.upvotesCount}
+            upvoted={answer.upvoted}
             createUpvote={this.props.createUpvote}
+            destroyUpvote={this.props.destroyUpvote}
           />
         );
       });
@@ -74,5 +80,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { createAnswer, createUpvote }
+  { createAnswer, createUpvote, destroyUpvote }
 )(Answers);

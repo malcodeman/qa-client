@@ -35,6 +35,10 @@ const createUpvoteApi = id => {
   return axios.post(`/upvotes`, { questionId: id });
 };
 
+const createUpvoteAnswerApi = id => {
+  return axios.post(`/upvotes`, { answerId: id });
+};
+
 const destroyUpvoteApi = id => {
   return axios.delete(`/upvotes/${id}`);
 };
@@ -70,8 +74,14 @@ function* findQuestionById(action) {
 function* createUpvote(action) {
   try {
     const { id } = action.payload;
-    const data = yield call(createUpvoteApi, id);
-    yield put({ type: CREATE_UPVOTE_SUCCESS, payload: data.data });
+    const { answer } = action.meta;
+    if (answer) {
+      const data = yield call(createUpvoteAnswerApi, id);
+      yield put({ type: CREATE_UPVOTE_SUCCESS, payload: data.data });
+    } else {
+      const data = yield call(createUpvoteApi, id);
+      yield put({ type: CREATE_UPVOTE_SUCCESS, payload: data.data });
+    }
   } catch (error) {
     yield put({ type: CREATE_UPVOTE_FAILURE, error });
   }
