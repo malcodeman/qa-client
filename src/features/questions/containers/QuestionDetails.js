@@ -91,6 +91,7 @@ class QuestionDetails extends Component {
               createUpvote={this.props.createUpvote}
               destroyUpvote={this.props.destroyUpvote}
               upvoted={this.props.question.upvoted}
+              owner={this.props.question.owner}
             />
             <Body>{this.props.question.body}</Body>
           </Main>

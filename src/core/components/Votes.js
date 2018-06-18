@@ -1,5 +1,5 @@
 import React from "react";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 const Wrapper = styled.div`
   display: flex;
@@ -7,37 +7,13 @@ const Wrapper = styled.div`
   align-items: center;
 `;
 
-const Triangle = styled.div`
+const Upvote = styled.div`
   width: 0;
   height: 0;
   cursor: pointer;
-  ${props => {
-    if (props.direction === "up") {
-      return css`
-        border-left: ${props.size} solid transparent;
-        border-right: ${props.size} solid transparent;
-        border-bottom: ${props.size} solid ${props.color};
-      `;
-    } else if (props.direction === "right") {
-      return css`
-        border-top: ${props.size} solid transparent;
-        border-bottom: ${props.size} solid transparent;
-        border-left: ${props.size} solid ${props.color};
-      `;
-    } else if (props.direction === "down") {
-      return css`
-        border-left: ${props.size} solid transparent;
-        border-right: ${props.size} solid transparent;
-        border-top: ${props.size} solid ${props.color};
-      `;
-    } else if (props.direction === "left") {
-      return css`
-        border-top: ${props.size} solid transparent;
-        border-bottom: ${props.size} solid transparent;
-        border-right: ${props.size} solid ${props.color};
-      `;
-    }
-  }};
+  border-left: 14px solid transparent;
+  border-right: 14px solid transparent;
+  border-bottom: 14px solid ${props => props.color};
 `;
 
 const VotesNumber = styled.span`
@@ -51,48 +27,50 @@ const Votes = props => {
     upvotesCount,
     createUpvote,
     upvoted,
-    destroyUpvote
+    destroyUpvote,
+    owner
   } = props;
   const renderUpvote = () => {
-    if (answerId) {
-      if (upvoted) {
-        return (
-          <Triangle
-            direction={"up"}
-            size={"14px"}
-            color={"#f48024"}
-            onClick={() => destroyUpvote(upvoted.upvoteId, true)}
-          />
-        );
-      } else {
-        return (
-          <Triangle
-            direction={"up"}
-            size={"14px"}
-            color={"#858c93"}
-            onClick={() => createUpvote(answerId, true)}
-          />
-        );
-      }
+    if (owner) {
+      return (
+        <Upvote
+          color={"#ccc"}
+          onClick={() => destroyUpvote(upvoted.upvoteId, true)}
+        />
+      );
     } else {
-      if (upvoted) {
-        return (
-          <Triangle
-            direction={"up"}
-            size={"14px"}
-            color={"#f48024"}
-            onClick={() => destroyUpvote(upvoted.upvoteId, false)}
-          />
-        );
+      if (answerId) {
+        if (upvoted) {
+          return (
+            <Upvote
+              color={"#f48024"}
+              onClick={() => destroyUpvote(upvoted.upvoteId, true)}
+            />
+          );
+        } else {
+          return (
+            <Upvote
+              color={"#858c93"}
+              onClick={() => createUpvote(answerId, true)}
+            />
+          );
+        }
       } else {
-        return (
-          <Triangle
-            direction={"up"}
-            size={"14px"}
-            color={"#858c93"}
-            onClick={() => createUpvote(questionId, false)}
-          />
-        );
+        if (upvoted) {
+          return (
+            <Upvote
+              color={"#f48024"}
+              onClick={() => destroyUpvote(upvoted.upvoteId, false)}
+            />
+          );
+        } else {
+          return (
+            <Upvote
+              color={"#858c93"}
+              onClick={() => createUpvote(questionId, false)}
+            />
+          );
+        }
       }
     }
   };

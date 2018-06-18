@@ -46,6 +46,7 @@ const Answer = props => {
           createUpvote={props.createUpvote}
           destroyUpvote={props.destroyUpvote}
           upvoted={props.upvoted}
+          owner={props.owner}
         />
         <Body>{props.body}</Body>
       </Main>

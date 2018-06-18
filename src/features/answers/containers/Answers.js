@@ -45,6 +45,7 @@ class Answers extends Component {
             upvoted={answer.upvoted}
             createUpvote={this.props.createUpvote}
             destroyUpvote={this.props.destroyUpvote}
+            owner={answer.owner}
           />
         );
       });
