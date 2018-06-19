@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { distanceInWordsToNow } from "date-fns";
 
+import Comment from "../../comments/components/Comment";
 import Votes from "../../../core/components/Votes";
 import Answers from "../../answers/containers/Answers";
 import Header from "./Header";
@@ -54,6 +55,8 @@ const Body = styled.p`
 const Footer = styled.footer`
   display: flex;
   justify-content: flex-end;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  padding-bottom: 24px;
 `;
 
 const User = styled.div`
@@ -101,6 +104,14 @@ class QuestionDetails extends Component {
               <span>by {this.props.question.user.username}</span>
             </User>
           </Footer>
+          {this.props.question.comments.map(comment => (
+            <Comment
+              key={comment.id}
+              body={comment.body}
+              createdAt={comment.createdAt}
+              author={comment.user.username}
+            />
+          ))}
         </Question>
       );
     } else {
