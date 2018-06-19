@@ -32,12 +32,7 @@ const Votes = props => {
   } = props;
   const renderUpvote = () => {
     if (owner) {
-      return (
-        <Upvote
-          color={"#ccc"}
-          onClick={() => destroyUpvote(upvoted.upvoteId, true)}
-        />
-      );
+      return <Upvote color={"#ccc"} />;
     } else {
       if (answerId) {
         if (upvoted) {
