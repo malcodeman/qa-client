@@ -3,6 +3,8 @@ import styled from "styled-components";
 import { distanceInWordsToNow } from "date-fns";
 
 import Votes from "../../../core/components/Votes";
+import CommentForm from "../../comments/containers/CommentForm";
+import Comment from "../../comments/components/Comment";
 
 const StyledAnswer = styled.div`
   border-bottom: 1px solid #e6e6e6;
@@ -38,25 +40,36 @@ const Info = styled.div`
 
 const Answer = props => {
   return (
-    <StyledAnswer>
-      <Main>
-        <Votes
-          answerId={props.id}
-          upvotesCount={props.upvotesCount}
-          createUpvote={props.createUpvote}
-          destroyUpvote={props.destroyUpvote}
-          upvoted={props.upvoted}
-          owner={props.owner}
+    <React.Fragment>
+      <StyledAnswer>
+        <Main>
+          <Votes
+            answerId={props.id}
+            upvotesCount={props.upvotesCount}
+            createUpvote={props.createUpvote}
+            destroyUpvote={props.destroyUpvote}
+            upvoted={props.upvoted}
+            owner={props.owner}
+          />
+          <Body>{props.body}</Body>
+        </Main>
+        <Footer>
+          <Info>
+            <span>answered {distanceInWordsToNow(props.createdAt)} ago</span>
+            <span>by {props.author}</span>
+          </Info>
+        </Footer>
+      </StyledAnswer>
+      {props.comments.map(comment => (
+        <Comment
+          key={comment.id}
+          body={comment.body}
+          createdAt={comment.createdAt}
+          author={comment.user.username}
         />
-        <Body>{props.body}</Body>
-      </Main>
-      <Footer>
-        <Info>
-          <span>answered {distanceInWordsToNow(props.createdAt)} ago</span>
-          <span>by {props.author}</span>
-        </Info>
-      </Footer>
-    </StyledAnswer>
+      ))}
+      <CommentForm createComment={props.createComment} answerId={props.id} />
+    </React.Fragment>
   );
 };
 

@@ -15,7 +15,7 @@ const Comment = props => {
   return (
     <StyledComment>
       <Body>
-        {props.body} -- {props.author} {distanceInWordsToNow(props.createdAt)}
+        {props.body} -- {props.author} {distanceInWordsToNow(props.createdAt)}{" "}
         ago
       </Body>
     </StyledComment>

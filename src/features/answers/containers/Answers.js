@@ -10,6 +10,8 @@ import {
   destroyUpvote
 } from "../../questions/actions/questions_actions";
 
+import { createComment } from "../../comments/actions";
+
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -43,9 +45,11 @@ class Answers extends Component {
             createdAt={answer.createdAt}
             upvotesCount={answer.upvotesCount}
             upvoted={answer.upvoted}
+            owner={answer.owner}
+            comments={answer.comments}
             createUpvote={this.props.createUpvote}
             destroyUpvote={this.props.destroyUpvote}
-            owner={answer.owner}
+            createComment={this.props.createComment}
           />
         );
       });
@@ -81,5 +85,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { createAnswer, createUpvote, destroyUpvote }
+  { createAnswer, createUpvote, destroyUpvote, createComment }
 )(Answers);

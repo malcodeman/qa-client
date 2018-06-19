@@ -21,6 +21,8 @@ import {
   watchUpvoteAnswer
 } from "../../features/answers/sagas/answers_sagas";
 
+import { watchCreateComment } from "../../features/comments/sagas";
+
 export default function* rootSaga() {
   yield all([
     watchGetQuestions(),
@@ -34,6 +36,7 @@ export default function* rootSaga() {
     watchLoginRequest(),
     watchLogoutRequest(),
     watchGetUsers(),
-    watchFindMeRequest()
+    watchFindMeRequest(),
+    watchCreateComment()
   ]);
 }

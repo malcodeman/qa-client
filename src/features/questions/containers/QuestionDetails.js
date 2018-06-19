@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { distanceInWordsToNow } from "date-fns";
 
+import CommentForm from "../../comments/containers/CommentForm";
 import Comment from "../../comments/components/Comment";
 import Votes from "../../../core/components/Votes";
 import Answers from "../../answers/containers/Answers";
@@ -14,6 +15,8 @@ import {
   createUpvote,
   destroyUpvote
 } from "../actions/questions_actions";
+
+import { createComment } from "../../comments/actions";
 
 const Wrapper = styled.div`
   display: flex;
@@ -112,6 +115,10 @@ class QuestionDetails extends Component {
               author={comment.user.username}
             />
           ))}
+          <CommentForm
+            createComment={this.props.createComment}
+            questionId={this.props.question.id}
+          />
         </Question>
       );
     } else {
@@ -143,5 +150,11 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { findQuestionById, findQuestionByIdUnload, createUpvote, destroyUpvote }
+  {
+    findQuestionById,
+    findQuestionByIdUnload,
+    createUpvote,
+    destroyUpvote,
+    createComment
+  }
 )(QuestionDetails);
