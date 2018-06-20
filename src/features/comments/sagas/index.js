@@ -27,7 +27,6 @@ function* createComment(action) {
         meta: action.meta
       });
     } else {
-      console.log("opet ovdje");
       const data = yield call(createCommentQuestionApi, id, body);
       yield put({
         type: CREATE_COMMENT_SUCCESS,
