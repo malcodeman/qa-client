@@ -1,4 +1,6 @@
 import { call, put, takeLatest } from "redux-saga/effects";
+import { push } from "react-router-redux";
+
 import axios from "../../../core/http";
 
 import {
@@ -56,6 +58,7 @@ function* createQuestion(action) {
   try {
     const data = yield call(createQuestionApi, action.payload);
     yield put({ type: CREATE_QUESTION_SUCCESS, payload: data.data });
+    yield put(push("/"));
   } catch (error) {
     yield put({ type: CREATE_QUESTION_FAILURE, error });
   }

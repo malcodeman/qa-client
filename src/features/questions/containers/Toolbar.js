@@ -4,10 +4,6 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 
 import { logout } from "../../auth/actions/auth_actions";
-import {
-  createQuestionClear,
-  createQuestionTrigger
-} from "../actions/questions_actions";
 
 const Wrapper = styled.div`
   flex-basis: 64px;
@@ -42,16 +38,9 @@ const Button = styled.button`
   cursor: pointer;
 `;
 
-const Text = styled.span`
-  color: #007aff;
-`;
-
 class Toolbar extends Component {
   logoutHandler = () => {
     this.props.logout(this.props.user);
-  };
-  createQuestionHandler = () => {
-    this.props.createQuestionTrigger();
   };
   render() {
     return (
@@ -60,9 +49,6 @@ class Toolbar extends Component {
           <Nav>
             <Link to="/">Q/A internal</Link>
             <div>
-              <Button onClick={this.createQuestionHandler}>
-                <Text>Ask</Text>
-              </Button>
               <Button onClick={this.logoutHandler}>
                 <span>Log Out</span>
               </Button>
@@ -81,12 +67,7 @@ const mapStateToProps = state => {
   };
 };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    logout: user => dispatch(logout(user)),
-    createQuestionClear: () => dispatch(createQuestionClear()),
-    createQuestionTrigger: () => dispatch(createQuestionTrigger())
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Toolbar);
+export default connect(
+  mapStateToProps,
+  { logout }
+)(Toolbar);

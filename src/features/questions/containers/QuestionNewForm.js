@@ -47,16 +47,18 @@ const Error = styled.div`
   align-self: flex-start;
 `;
 
+const Button = styled.button`
+border: 0;
+padding: 0 10px;
+border-radius: 3px;
+color: #fff;
+background-color: #007aff;
+height: 28px;
+cursor: pointer;
+}
+`;
+
 class FormikForm extends Component {
-  componentDidUpdate = prevProps => {
-    if (
-      prevProps.create_question_trigger === false &&
-      prevProps.create_question_trigger !== this.props.create_question_trigger
-    ) {
-      this.props.submitForm();
-      this.props.createQuestionClear();
-    }
-  };
   render() {
     const { errors, touched } = this.props;
     return (
@@ -70,6 +72,7 @@ class FormikForm extends Component {
           <TextArea name="body" component="textarea" />
           {touched.body && errors.body && <Error>{errors.body}</Error>}
         </FormItem>
+        <Button>Post Your Question</Button>
       </StyledForm>
     );
   }

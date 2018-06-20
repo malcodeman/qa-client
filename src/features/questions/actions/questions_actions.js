@@ -18,8 +18,6 @@ export const DESTROY_UPVOTE_FAILURE = "DESTROY_UPVOTE_FAILURE";
 export const CREATE_QUESTION_REQUEST = "CREATE_QUESTION_REQUEST";
 export const CREATE_QUESTION_SUCCESS = "CREATE_QUESTION_SUCCESS";
 export const CREATE_QUESTION_FAILURE = "CREATE_QUESTION_FAILURE";
-export const CREATE_QUESTION_CLEAR = "CREATE_QUESTION_CLEAR";
-export const CREATE_QUESTION_TRIGGER = "CREATE_QUESTION_TRIGGER";
 
 export const getQuestions = () => {
   return {
@@ -68,17 +66,5 @@ export const createQuestion = newQuestion => {
   return {
     type: CREATE_QUESTION_REQUEST,
     payload: newQuestion
-  };
-};
-
-export const createQuestionTrigger = () => {
-  return {
-    type: CREATE_QUESTION_TRIGGER
-  };
-};
-
-export const createQuestionClear = () => {
-  return {
-    type: CREATE_QUESTION_CLEAR
   };
 };
