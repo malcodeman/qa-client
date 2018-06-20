@@ -15,6 +15,8 @@ import { LOGOUT_SUCCESS } from "../../auth/actions/auth_actions";
 
 import { CREATE_ANSWER_SUCCESS } from "../../answers/actions/answers_actions";
 
+import { CREATE_COMMENT_SUCCESS } from "../../comments/actions";
+
 const initialState = {
   questions: [],
   question: null,
@@ -154,6 +156,33 @@ export default (state = initialState, action) => {
           answers: [...state.question.answers, action.payload]
         }
       };
+    case CREATE_COMMENT_SUCCESS:
+      if (action.meta.answer) {
+        return {
+          ...state,
+          question: {
+            ...state.question,
+            answers: state.question.answers.map(answer => {
+              if (answer.id === action.payload.answerId) {
+                return {
+                  ...answer,
+                  comments: [...answer.comments, action.payload]
+                };
+              } else {
+                return answer;
+              }
+            })
+          }
+        };
+      } else {
+        return {
+          ...state,
+          question: {
+            ...state.question,
+            comments: [...state.question.comments, action.payload]
+          }
+        };
+      }
     default:
       return state;
   }
