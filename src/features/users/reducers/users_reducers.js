@@ -1,11 +1,15 @@
 import {
   GET_USERS_REQUEST,
-  GET_USERS_SUCCESS
+  GET_USERS_SUCCESS,
+  FIND_ME_SUCCESS,
+  FIND_USER_BY_USERNAME_SUCCESS
 } from "../actions/users_actions";
 
 const initialState = {
   users: [],
-  loading: true
+  me: null,
+  loading: true,
+  user: null
 };
 
 export default (state = initialState, action) => {
@@ -19,6 +23,16 @@ export default (state = initialState, action) => {
         ...state,
         users: action.payload,
         loading: false
+      };
+    case FIND_ME_SUCCESS:
+      return {
+        ...state,
+        me: action.payload
+      };
+    case FIND_USER_BY_USERNAME_SUCCESS:
+      return {
+        ...state,
+        user: action.payload
       };
     default:
       return state;

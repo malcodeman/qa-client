@@ -1,5 +1,6 @@
 import Questions from "../../features/questions/containers/Questions";
 import Users from "../../features/users/containers/Users";
+import User from "../../features/users/containers/Root";
 import QuestionDetails from "../../features/questions/containers/QuestionDetails";
 import QuestionNew from "../../features/questions/containers/QuestionNew";
 import Login from "../../features/auth/components/Login";
@@ -25,6 +26,12 @@ export default [
   {
     path: "/users",
     component: Users,
+    exact: true,
+    private: true
+  },
+  {
+    path: "/users/:username",
+    component: User,
     private: true
   },
   {

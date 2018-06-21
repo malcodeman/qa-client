@@ -81,7 +81,11 @@ class Toolbar extends Component {
     if (me != null) {
       const { profilePhotoURL, nameFirstLetter } = me;
       if (profilePhotoURL) {
-        return <ProfilePhoto src={profilePhotoURL} />;
+        return (
+          <Link to={`/users/${me.username}`}>
+            <ProfilePhoto src={profilePhotoURL} />
+          </Link>
+        );
       } else {
         return <NameFirstLetter>{nameFirstLetter}</NameFirstLetter>;
       }
