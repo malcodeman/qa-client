@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
+import { distanceInWordsToNow } from "date-fns";
 
 import Header from "../../header/containers";
 
@@ -19,16 +20,73 @@ const Container = styled.div`
   margin: 0 auto;
 `;
 
+const NameFirstLetter = styled.div`
+  height: 64px;
+  width: 64px;
+  border-radius: 50%;
+  background-color: #007aff;
+  color: #fff;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+  cursor: pointer;
+`;
+
+const Span = styled.span`
+  font-size: 0.8rem;
+`;
+
+const About = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+`;
+
+const Col = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const ProfilePhoto = styled.img`
+  height: 64px;
+  width: 64px;
+  border-radius: 50%;
+  object-fit: cover;
+`;
+
 class Users extends Component {
   render() {
-    const { name, username } = this.props.me;
+    const {
+      name,
+      username,
+      profilePhotoURL,
+      nameFirstLetter,
+      createdAt,
+      questions,
+      answers
+    } = this.props.me;
     return (
       <Wrapper>
         <Header />
         <Content>
           <Container>
-            profile {name}
-            {username}
+            <About>
+              {profilePhotoURL ? (
+                <ProfilePhoto src={profilePhotoURL} />
+              ) : (
+                <NameFirstLetter>{nameFirstLetter}</NameFirstLetter>
+              )}
+              <Col>
+                <Span>{name}</Span>
+                <Span>{username}</Span>
+              </Col>
+              <Col>
+                <Span>Member for {distanceInWordsToNow(createdAt)}</Span>
+                <Span>Questions {questions.length}</Span>
+                <Span>Answers {answers.length}</Span>
+              </Col>
+            </About>
           </Container>
         </Content>
       </Wrapper>
