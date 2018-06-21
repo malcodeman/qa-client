@@ -39,14 +39,12 @@ const StyledLink = styled(Link)`
 `;
 
 class Signup extends Component {
-  componentWillUnmount = () => {
-    this.props.signupReset();
-  };
   render() {
+    const { signup } = this.props;
     return (
       <Wrapper>
         <Content>
-          <SignupForm signup={this.props.signup} />
+          <SignupForm signup={signup} />
           <LoginWrapper>
             <Text>
               Have an account? <StyledLink to="/login">Log in</StyledLink>
@@ -58,13 +56,7 @@ class Signup extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    questions: state.questions.question
-  };
-};
-
 export default connect(
-  mapStateToProps,
+  null,
   { signup }
 )(Signup);

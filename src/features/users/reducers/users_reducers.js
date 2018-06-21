@@ -5,6 +5,8 @@ import {
   FIND_USER_BY_USERNAME_SUCCESS
 } from "../actions/users_actions";
 
+import { SIGNUP_SUCCESS, LOGIN_SUCCESS } from "../../auth/actions/auth_actions";
+
 const initialState = {
   users: [],
   me: null,
@@ -14,6 +16,16 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
+    case SIGNUP_SUCCESS:
+      return {
+        ...state,
+        me: action.payload.user
+      };
+    case LOGIN_SUCCESS:
+      return {
+        ...state,
+        me: action.payload.user
+      };
     case GET_USERS_REQUEST:
       return {
         ...state

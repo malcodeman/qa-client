@@ -3,8 +3,8 @@ import Users from "../../features/users/containers/Users";
 import User from "../../features/users/containers/Root";
 import QuestionDetails from "../../features/questions/containers/QuestionDetails";
 import QuestionNew from "../../features/questions/containers/QuestionNew";
-import Login from "../../features/auth/components/Login";
-import Signup from "../../features/auth/components/Signup";
+import Login from "../../features/auth/containers/Login";
+import Signup from "../../features/auth/containers/Signup";
 
 export default [
   {

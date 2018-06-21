@@ -3,7 +3,8 @@ import styled from "styled-components";
 import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 
-import { logout, findMe } from "../../auth/actions/auth_actions";
+import { logout } from "../../auth/actions/auth_actions";
+import { findMe } from "../../users/actions/users_actions";
 
 const Wrapper = styled.div`
   flex-basis: 64px;
@@ -74,7 +75,7 @@ class Toolbar extends Component {
     }
   };
   logoutHandler = () => {
-    this.props.logout(this.props.user);
+    this.props.logout(this.props.me);
   };
   renderMe = () => {
     const { me } = this.props;
@@ -87,7 +88,11 @@ class Toolbar extends Component {
           </Link>
         );
       } else {
-        return <NameFirstLetter>{nameFirstLetter}</NameFirstLetter>;
+        return (
+          <Link to={`/users/${me.username}`}>
+            <NameFirstLetter>{nameFirstLetter}</NameFirstLetter>
+          </Link>
+        );
       }
     }
   };
@@ -116,7 +121,7 @@ class Toolbar extends Component {
 
 const mapStateToProps = state => {
   return {
-    me: state.auth.me
+    me: state.users.me
   };
 };
 

@@ -11,10 +11,7 @@ import {
   LOGIN_FAILURE,
   LOGOUT_REQUEST,
   LOGOUT_SUCCESS,
-  LOGOUT_FAILURE,
-  FIND_ME_FAILURE,
-  FIND_ME_REQUEST,
-  FIND_ME_SUCCESS
+  LOGOUT_FAILURE
 } from "../actions/auth_actions";
 
 const signupApi = newUser => {
@@ -27,10 +24,6 @@ const loginApi = user => {
 
 const logoutApi = user => {
   return axios.post(`/auth/logout`, user);
-};
-
-const findMeApi = () => {
-  return axios.get(`/users/me`);
 };
 
 function* signupUser(action) {
@@ -64,19 +57,6 @@ function* logoutUser(action) {
   } catch (error) {
     yield put({ type: LOGOUT_FAILURE, error });
   }
-}
-
-function* findMe() {
-  try {
-    const data = yield call(findMeApi);
-    yield put({ type: FIND_ME_SUCCESS, payload: data.data });
-  } catch (error) {
-    yield put({ type: FIND_ME_FAILURE, error });
-  }
-}
-
-export function* watchFindMeRequest() {
-  yield takeLatest(FIND_ME_REQUEST, findMe);
 }
 
 export function* watchSignupRequest() {
