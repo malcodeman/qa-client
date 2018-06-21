@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 
 import QuestionLoading from "../components/QuestionLoading";
 import Question from "../components/Question";
-import Header from "./Header";
+import Header from "../../header/containers";
 import { getQuestions } from "../actions/questions_actions";
 
 const Wrapper = styled.div`

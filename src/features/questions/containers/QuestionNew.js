@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { connect } from "react-redux";
 
 import QuestionNewForm from "./QuestionNewForm";
-import Toolbar from "./Toolbar";
+import Header from "../../header/containers";
 import { createQuestion } from "../actions/questions_actions";
 
 const Wrapper = styled.div`
@@ -25,7 +25,7 @@ class QuestionNew extends Component {
   render() {
     return (
       <Wrapper>
-        <Toolbar />
+        <Header />
         <Content>
           <Container>
             <QuestionNewForm createQuestion={this.props.createQuestion} />

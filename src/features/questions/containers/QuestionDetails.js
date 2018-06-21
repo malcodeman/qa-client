@@ -8,7 +8,7 @@ import CommentForm from "../../comments/containers/CommentForm";
 import Comment from "../../comments/components/Comment";
 import Votes from "../../../core/components/Votes";
 import Answers from "../../answers/containers/Answers";
-import Header from "./Header";
+import Header from "../../header/containers";
 import {
   findQuestionById,
   findQuestionByIdUnload,

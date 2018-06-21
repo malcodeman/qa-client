@@ -2,11 +2,10 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { Redirect } from "react-router-dom";
 
 import SignupForm from "./SignupForm";
 
-import { signup, signupReset } from "../actions/auth_actions";
+import { signup } from "../actions/auth_actions";
 
 const Wrapper = styled.div`
   background-color: #fafafa;
@@ -44,9 +43,6 @@ class Signup extends Component {
     this.props.signupReset();
   };
   render() {
-    if (this.props.signup_success) {
-      return <Redirect to="/" />;
-    }
     return (
       <Wrapper>
         <Content>
@@ -64,16 +60,11 @@ class Signup extends Component {
 
 const mapStateToProps = state => {
   return {
-    questions: state.questions.question,
-    signup_success: state.auth.signup_success
+    questions: state.questions.question
   };
 };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    signup: newUser => dispatch(signup(newUser)),
-    signupReset: () => dispatch(signupReset())
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Signup);
+export default connect(
+  mapStateToProps,
+  { signup }
+)(Signup);

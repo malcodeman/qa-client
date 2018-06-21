@@ -1,7 +1,6 @@
 import {
   SIGNUP_SUCCESS,
   SIGNUP_FAILURE,
-  SIGNUP_RESET,
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
   LOGIN_RESET,
@@ -9,11 +8,7 @@ import {
 } from "../actions/auth_actions";
 
 const initialState = {
-  user: null,
-  signup_success: false,
-  signup_failure: false,
-  login_success: false,
-  login_failure: false
+  me: null
 };
 
 export default (state = initialState, action) => {
@@ -21,29 +16,22 @@ export default (state = initialState, action) => {
     case FIND_ME_SUCCESS:
       return {
         ...state,
-        user: action.payload
+        me: action.payload
       };
     case SIGNUP_SUCCESS:
       return {
         ...state,
-        user: action.payload.user,
-        signup_success: true
+        me: action.payload.user
       };
     case SIGNUP_FAILURE:
       return {
         ...state,
         signup_failure: true
       };
-    case SIGNUP_RESET:
-      return {
-        ...state,
-        signup_success: false,
-        signup_failure: false
-      };
     case LOGIN_SUCCESS:
       return {
         ...state,
-        user: action.payload.user,
+        me: action.payload.user,
         login_success: true
       };
     case LOGIN_FAILURE:

@@ -38,6 +38,7 @@ function* signupUser(action) {
     const data = yield call(signupApi, action.payload);
     localStorage.setItem("token", data.data.token);
     yield put({ type: SIGNUP_SUCCESS, payload: data.data });
+    yield put(push("/"));
   } catch (error) {
     yield put({ type: SIGNUP_FAILURE, error });
   }
@@ -48,6 +49,7 @@ function* loginUser(action) {
     const data = yield call(loginApi, action.payload);
     localStorage.setItem("token", data.data.token);
     yield put({ type: LOGIN_SUCCESS, payload: data.data });
+    yield put(push("/"));
   } catch (error) {
     yield put({ type: LOGIN_FAILURE, error });
   }
@@ -64,7 +66,7 @@ function* logoutUser(action) {
   }
 }
 
-function* findMe(action) {
+function* findMe() {
   try {
     const data = yield call(findMeApi);
     yield put({ type: FIND_ME_SUCCESS, payload: data.data });

@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 
 import User from "../components/User";
 import UserLoading from "../components/UserLoading";
-import Header from "../../questions/containers/Header";
+import Header from "../../header/containers";
 import { getUsers } from "../actions/users_actions";
 
 const Wrapper = styled.div`
@@ -67,4 +67,7 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, { getUsers })(Users);
+export default connect(
+  mapStateToProps,
+  { getUsers }
+)(Users);
