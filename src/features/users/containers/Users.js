@@ -20,6 +20,21 @@ const Container = styled.div`
   padding: 40px 20px;
   max-width: 992px;
   margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 10px;
+  @media (min-width: 576px) {
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 6px;
+  }
+  @media (min-width: 768px) {
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 8px;
+  }
+  @media (min-width: 992px) {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-gap: 10px;
+  }
 `;
 
 class Users extends Component {
@@ -38,8 +53,10 @@ class Users extends Component {
           <User
             key={user.id}
             id={user.id}
-            email={user.email}
+            username={user.username}
             createdAt={user.createdAt}
+            profilePhotoURL={user.profilePhotoURL}
+            nameFirstLetter={user.nameFirstLetter}
           />
         );
       });
