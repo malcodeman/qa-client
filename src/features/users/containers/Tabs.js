@@ -4,7 +4,6 @@ import { NavLink } from "react-router-dom";
 
 const Wrapper = styled.div`
   display: flex;
-  margin-bottom: 40px;
   border-bottom: 1px solid #ccc;
 `;
 
@@ -30,9 +29,7 @@ class Tabs extends Component {
         <Tab to={`/users/${username}/`} exact>
           Profile
         </Tab>
-        <Tab to={`/users/${username}/settings/`} exact>
-          Edit Profile & Settings
-        </Tab>
+        <Tab to={`/users/${username}/settings/`}>Edit Profile & Settings</Tab>
       </Wrapper>
     );
   }

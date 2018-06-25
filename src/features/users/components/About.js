@@ -5,7 +5,7 @@ import { distanceInWordsToNow } from "date-fns";
 const Grid = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  margin-bottom: 20px;
+  margin: 40px 0;
 `;
 
 const NameFirstLetter = styled.div`

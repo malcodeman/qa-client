@@ -7,6 +7,7 @@ import About from "../components/About";
 import Posts from "./Posts";
 import Tabs from "./Tabs";
 import Header from "../../header/containers";
+import Settings from "./Settings";
 
 const Wrapper = styled.div`
   display: flex;
@@ -58,14 +59,7 @@ class Users extends Component {
                 </React.Fragment>
               )}
             />
-            <Route
-              path={`/users/${username}/settings`}
-              render={() => (
-                <React.Fragment>
-                  <div>Edit</div>
-                </React.Fragment>
-              )}
-            />
+            <Route path={`/users/${username}/settings`} component={Settings} />
           </Container>
         </Content>
       </Wrapper>
