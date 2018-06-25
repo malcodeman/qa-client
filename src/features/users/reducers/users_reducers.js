@@ -11,7 +11,15 @@ const initialState = {
   users: [],
   me: null,
   loading: true,
-  user: null
+  user: {
+    profilePhotoURL: "",
+    nameFirstLetter: "",
+    name: "",
+    username: "",
+    createdAt: "",
+    questions: [],
+    answers: []
+  }
 };
 
 export default (state = initialState, action) => {

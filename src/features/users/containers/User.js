@@ -2,8 +2,9 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
 
+import About from "../components/About";
+import Posts from "./Posts";
 import Header from "../../header/containers";
-
 import { findMe, findUserByUsername } from "../actions/users_actions";
 
 const Wrapper = styled.div`
@@ -27,17 +28,30 @@ class User extends Component {
     findUserByUsername(username);
   };
   render() {
-    const { user } = this.props;
+    const {
+      profilePhotoURL,
+      nameFirstLetter,
+      name,
+      username,
+      createdAt,
+      questions,
+      answers
+    } = this.props.user;
     return (
       <Wrapper>
         <Header />
         <Content>
           <Container>
-            {user ? (
-              <span>
-                {user.username}, {user.name}
-              </span>
-            ) : null}
+            <About
+              profilePhotoURL={profilePhotoURL}
+              nameFirstLetter={nameFirstLetter}
+              name={name}
+              username={username}
+              createdAt={createdAt}
+              questionsLength={questions.length}
+              answersLength={answers.length}
+            />
+            <Posts questions={questions} />
           </Container>
         </Content>
       </Wrapper>
