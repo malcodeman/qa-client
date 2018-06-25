@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { connect } from "react-redux";
 import { distanceInWordsToNow } from "date-fns";
 
+import Posts from "./Posts";
 import Header from "../../header/containers";
 
 const Wrapper = styled.div`
@@ -41,6 +42,7 @@ const Span = styled.span`
 const About = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
+  margin-bottom: 20px;
 `;
 
 const Col = styled.div`
@@ -87,6 +89,7 @@ class Users extends Component {
                 <Span>Answers {answers.length}</Span>
               </Col>
             </About>
+            <Posts questions={questions} />
           </Container>
         </Content>
       </Wrapper>
