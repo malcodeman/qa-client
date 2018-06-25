@@ -36,25 +36,25 @@ const Details = styled.div`
   flex-direction: column;
 `;
 
-const Text = styled.p`
+const Text = styled.span`
   font-size: 0.8rem;
-  color: rgba(0, 0, 0, 0.8);
+  line-height: 1.2;
+  color: ${props => props.color || "rgba(0, 0, 0, 0.8)"};
 `;
 
 const User = props => {
   return (
     <Wrapper>
-      <Link to={`/users/${props.username}`}>
-        {props.profilePhotoURL ? (
-          <ProfilePhoto src={props.profilePhotoURL} />
-        ) : (
-          <NameFirstLetter>{props.nameFirstLetter}</NameFirstLetter>
-        )}
-      </Link>
+      {props.profilePhotoURL ? (
+        <ProfilePhoto src={props.profilePhotoURL} />
+      ) : (
+        <NameFirstLetter>{props.nameFirstLetter}</NameFirstLetter>
+      )}
       <Details>
         <Link to={`/users/${props.username}`}>
-          <Text>{props.username}</Text>
+          <Text color="#ed1965">{props.name}</Text>
         </Link>
+        <Text>{props.username}</Text>
       </Details>
     </Wrapper>
   );

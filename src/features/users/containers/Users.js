@@ -53,6 +53,7 @@ class Users extends Component {
           <User
             key={user.id}
             id={user.id}
+            name={user.name}
             username={user.username}
             createdAt={user.createdAt}
             profilePhotoURL={user.profilePhotoURL}
