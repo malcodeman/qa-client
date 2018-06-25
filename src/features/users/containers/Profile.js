@@ -1,9 +1,11 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
+import { withRouter, Route } from "react-router-dom";
 
 import About from "../components/About";
 import Posts from "./Posts";
+import Tabs from "./Tabs";
 import Header from "../../header/containers";
 
 const Wrapper = styled.div`
@@ -37,16 +39,33 @@ class Users extends Component {
         <Header />
         <Content>
           <Container>
-            <About
-              profilePhotoURL={profilePhotoURL}
-              nameFirstLetter={nameFirstLetter}
-              name={name}
-              username={username}
-              createdAt={createdAt}
-              questionsLength={questions.length}
-              answersLength={answers.length}
+            <Tabs username={username} />
+            <Route
+              exact
+              path={`/users/${username}`}
+              render={() => (
+                <React.Fragment>
+                  <About
+                    profilePhotoURL={profilePhotoURL}
+                    nameFirstLetter={nameFirstLetter}
+                    name={name}
+                    username={username}
+                    createdAt={createdAt}
+                    questionsLength={questions.length}
+                    answersLength={answers.length}
+                  />
+                  <Posts questions={questions} />
+                </React.Fragment>
+              )}
             />
-            <Posts questions={questions} />
+            <Route
+              path={`/users/${username}/settings`}
+              render={() => (
+                <React.Fragment>
+                  <div>Edit</div>
+                </React.Fragment>
+              )}
+            />
           </Container>
         </Content>
       </Wrapper>
@@ -60,4 +79,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(Users);
+export default withRouter(connect(mapStateToProps)(Users));
