@@ -64,11 +64,23 @@ const Footer = styled.footer`
 
 const User = styled.div`
   display: flex;
-  flex-direction: column;
+  align-items: center;
   padding: 10px;
   background-color: rgba(0, 0, 0, 0.2);
   color: #fff;
   font-size: 0.8rem;
+`;
+
+const ProfilePhoto = styled.img`
+  height: 32px;
+  width: 32px;
+  object-fit: cover;
+  margin-right: 5px;
+`;
+
+const Col = styled.div`
+  display: flex;
+  flex-direction: column;
 `;
 
 class QuestionDetails extends Component {
@@ -103,8 +115,13 @@ class QuestionDetails extends Component {
           </Main>
           <Footer>
             <User>
-              <span>asked {distanceInWordsToNow(createdAt)} ago</span>
-              <span>by {this.props.question.user.username}</span>
+              {this.props.question.user.profilePhotoURL ? (
+                <ProfilePhoto src={this.props.question.user.profilePhotoURL} />
+              ) : null}
+              <Col>
+                <span>asked {distanceInWordsToNow(createdAt)} ago</span>
+                <span>by {this.props.question.user.username}</span>
+              </Col>
             </User>
           </Footer>
           {this.props.question.comments.map(comment => (

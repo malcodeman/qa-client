@@ -29,13 +29,24 @@ const Footer = styled.footer`
   justify-content: flex-end;
 `;
 
-const Info = styled.div`
+const User = styled.div`
   display: flex;
-  flex-direction: column;
   padding: 10px;
   background-color: rgba(0, 0, 0, 0.2);
   color: #fff;
   font-size: 0.8rem;
+`;
+
+const ProfilePhoto = styled.img`
+  height: 32px;
+  width: 32px;
+  object-fit: cover;
+  margin-right: 5px;
+`;
+
+const Col = styled.div`
+  display: flex;
+  flex-direction: column;
 `;
 
 const Answer = props => {
@@ -54,10 +65,15 @@ const Answer = props => {
           <Body>{props.body}</Body>
         </Main>
         <Footer>
-          <Info>
-            <span>answered {distanceInWordsToNow(props.createdAt)} ago</span>
-            <span>by {props.author}</span>
-          </Info>
+          <User>
+            {props.profilePhotoURL ? (
+              <ProfilePhoto src={props.profilePhotoURL} />
+            ) : null}
+            <Col>
+              <span>answered {distanceInWordsToNow(props.createdAt)} ago</span>
+              <span>by {props.author}</span>
+            </Col>
+          </User>
         </Footer>
       </StyledAnswer>
       {props.comments.map(comment => (

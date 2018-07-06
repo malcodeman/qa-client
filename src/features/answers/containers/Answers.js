@@ -33,7 +33,7 @@ class Answers extends Component {
     if (num_answers !== 0) return <Header>{num_answers} Answers</Header>;
   };
   renderAnswers = () => {
-    const { question } = this.props;
+    const { question, createUpvote, destroyUpvote, createComment } = this.props;
     if (question) {
       return question.answers.map(answer => {
         return (
@@ -42,14 +42,15 @@ class Answers extends Component {
             id={answer.id}
             body={answer.body}
             author={answer.user.username}
+            profilePhotoURL={answer.user.profilePhotoURL}
             createdAt={answer.createdAt}
             upvotesCount={answer.upvotesCount}
             upvoted={answer.upvoted}
             owner={answer.owner}
             comments={answer.comments}
-            createUpvote={this.props.createUpvote}
-            destroyUpvote={this.props.destroyUpvote}
-            createComment={this.props.createComment}
+            createUpvote={createUpvote}
+            destroyUpvote={destroyUpvote}
+            createComment={createComment}
           />
         );
       });
