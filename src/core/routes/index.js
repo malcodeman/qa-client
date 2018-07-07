@@ -3,8 +3,13 @@ import User from "../../features/users/containers/Root";
 import QuestionDetails from "../../features/questions/containers/QuestionDetails";
 import QuestionNew from "../../features/questions/containers/QuestionNew";
 import Root from "../../features/Root";
+import Login from "../../features/auth/containers/Login";
 
 export default [
+  {
+    path: "/login",
+    component: Login
+  },
   {
     path: "/",
     component: Root,

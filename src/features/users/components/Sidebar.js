@@ -39,6 +39,7 @@ const StyledLink = styled(NavLink)`
 `;
 
 const Sidebar = props => {
+  const { username } = props;
   return (
     <StyledSidebar>
       <List>
@@ -46,17 +47,17 @@ const Sidebar = props => {
           <Heading>personal information </Heading>
           <List>
             <li>
-              <StyledLink to={`/users/test/settings/`} exact>
+              <StyledLink to={`/users/${username}/settings/`} exact>
                 edit profile
               </StyledLink>
             </li>
             <li>
-              <StyledLink to={`/users/test/settings/story`}>
+              <StyledLink to={`/users/${username}/settings/story`}>
                 developer story
               </StyledLink>
             </li>
             <li>
-              <StyledLink to={`/users/test/settings/job`}>
+              <StyledLink to={`/users/${username}/settings/job`}>
                 job preferences
               </StyledLink>
             </li>
@@ -66,17 +67,17 @@ const Sidebar = props => {
           <Heading>email settings</Heading>
           <List>
             <li>
-              <StyledLink to={`/users/test/settings/email`}>
+              <StyledLink to={`/users/${username}/settings/email`}>
                 edit email settings
               </StyledLink>
             </li>
             <li>
-              <StyledLink to={`/users/test/settings/newsletters`}>
+              <StyledLink to={`/users/${username}/settings/newsletters`}>
                 newsletters
               </StyledLink>
             </li>
             <li>
-              <StyledLink to={`/users/test/settings/alerts`}>
+              <StyledLink to={`/users/${username}/settings/alerts`}>
                 job alerts
               </StyledLink>
             </li>

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import styled from "styled-components";
+import { connect } from "react-redux";
 
 import Sidebar from "../components/Sidebar";
 
@@ -12,13 +13,20 @@ const Grid = styled.div`
 
 class Settings extends Component {
   render() {
+    const { username } = this.props.me;
     return (
       <Grid>
-        <Sidebar />
+        <Sidebar username={username} />
         <div>Settings</div>
       </Grid>
     );
   }
 }
 
-export default Settings;
+const mapStateToProps = state => {
+  return {
+    me: state.users.me
+  };
+};
+
+export default connect(mapStateToProps)(Settings);
