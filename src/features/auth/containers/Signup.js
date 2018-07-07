@@ -7,14 +7,6 @@ import SignupForm from "./SignupForm";
 
 import { signup } from "../actions/auth_actions";
 
-const Wrapper = styled.div`
-  background-color: #fafafa;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
 const Content = styled.div`
   display: flex;
   flex-direction: column;
@@ -34,24 +26,23 @@ const Text = styled.p`
   font-size: 0.8rem;
 `;
 
-const StyledLink = styled(Link)`
+const Span = styled.span`
   color: #007aff;
+  cursor: pointer;
 `;
 
 class Signup extends Component {
   render() {
-    const { signup } = this.props;
+    const { signup, handleShowLogin } = this.props;
     return (
-      <Wrapper>
-        <Content>
-          <SignupForm signup={signup} />
-          <LoginWrapper>
-            <Text>
-              Have an account? <StyledLink to="/login">Log in</StyledLink>
-            </Text>
-          </LoginWrapper>
-        </Content>
-      </Wrapper>
+      <Content>
+        <SignupForm signup={signup} />
+        <LoginWrapper>
+          <Text>
+            Have an account? <Span onClick={handleShowLogin}>Log in</Span>
+          </Text>
+        </LoginWrapper>
+      </Content>
     );
   }
 }

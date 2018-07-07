@@ -6,14 +6,6 @@ import { connect } from "react-redux";
 import LoginForm from "./LoginForm";
 import { login } from "../actions/auth_actions";
 
-const Wrapper = styled.div`
-  background-color: #fafafa;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
 const Content = styled.div`
   display: flex;
   flex-direction: column;
@@ -33,25 +25,24 @@ const Text = styled.p`
   font-size: 0.8rem;
 `;
 
-const StyledLink = styled(Link)`
+const Span = styled.span`
   color: #007aff;
+  cursor: pointer;
 `;
 
 class Login extends Component {
   render() {
-    const { login } = this.props;
+    const { login, handleShowSignup } = this.props;
     return (
-      <Wrapper>
-        <Content>
-          <LoginForm login={login} />
-          <LoginWrapper>
-            <Text>
-              Don't have an account?{" "}
-              <StyledLink to="/signup">Sign up</StyledLink>
-            </Text>
-          </LoginWrapper>
-        </Content>
-      </Wrapper>
+      <Content>
+        <LoginForm login={login} />
+        <LoginWrapper>
+          <Text>
+            Don't have an account?{" "}
+            <Span onClick={handleShowSignup}>Sign up</Span>
+          </Text>
+        </LoginWrapper>
+      </Content>
     );
   }
 }

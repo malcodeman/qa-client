@@ -28,7 +28,7 @@ instance.interceptors.response.use(
     // Returns unauthorized user to login page
     if (error.response.status === 401) {
       localStorage.removeItem("token");
-      store.dispatch(push("/login"));
+      store.dispatch(push("/"));
       return Promise.reject(error);
     }
   }

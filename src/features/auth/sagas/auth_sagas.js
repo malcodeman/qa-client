@@ -53,7 +53,7 @@ function* logoutUser(action) {
     const data = yield call(logoutApi, action.payload);
     localStorage.removeItem("token");
     yield put({ type: LOGOUT_SUCCESS, payload: data.data });
-    yield put(push("/login"));
+    yield put(push("/"));
   } catch (error) {
     yield put({ type: LOGOUT_FAILURE, error });
   }

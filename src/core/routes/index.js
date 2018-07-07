@@ -1,17 +1,14 @@
-import Questions from "../../features/questions/containers/Questions";
 import Users from "../../features/users/containers/Users";
 import User from "../../features/users/containers/Root";
 import QuestionDetails from "../../features/questions/containers/QuestionDetails";
 import QuestionNew from "../../features/questions/containers/QuestionNew";
-import Login from "../../features/auth/containers/Login";
-import Signup from "../../features/auth/containers/Signup";
+import Root from "../../features/Root";
 
 export default [
   {
     path: "/",
-    component: Questions,
-    exact: true,
-    private: true
+    component: Root,
+    exact: true
   },
   {
     path: "/new-question",
@@ -33,13 +30,5 @@ export default [
     path: "/users/:username",
     component: User,
     private: true
-  },
-  {
-    path: "/login",
-    component: Login
-  },
-  {
-    path: "/signup",
-    component: Signup
   }
 ];
