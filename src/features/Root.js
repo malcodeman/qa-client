@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import Landing from "./landing/components/Landing";
+import Landing from "./landing/containers/Landing";
 import Home from "./questions/containers/Questions";
 
 class Root extends Component {
