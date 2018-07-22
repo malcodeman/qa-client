@@ -1,7 +1,10 @@
 import React, { Component } from "react";
 import { withFormik, Form, Field } from "formik";
+import { connect } from "react-redux";
 import Yup from "yup";
 import styled from "styled-components";
+
+import { signup } from "../actions/auth_actions";
 
 const StyledForm = styled(Form)`
   display: flex;
@@ -93,4 +96,7 @@ const SignupForm = withFormik({
   }
 })(FormikForm);
 
-export default SignupForm;
+export default connect(
+  null,
+  { signup }
+)(SignupForm);
