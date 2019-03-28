@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import { withFormik, Form, Field } from "formik";
-import Yup from "yup";
+import * as Yup from "yup";
 import styled from "styled-components";
+import { withFormik, Form, Field } from "formik";
 
 const Input = styled(Field)`
   color: #262626;
