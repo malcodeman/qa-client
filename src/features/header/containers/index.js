@@ -3,7 +3,6 @@ import styled from "styled-components";
 import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 
-import { logout } from "../../auth/actions/auth_actions";
 import { findMe } from "../../users/actions/users_actions";
 
 const Wrapper = styled.div`
@@ -74,9 +73,14 @@ class Toolbar extends Component {
       findMe();
     }
   };
+
   logoutHandler = () => {
-    this.props.logout(this.props.me);
+    const { history } = this.props;
+
+    localStorage.removeItem("token");
+    history.push("/");
   };
+
   renderMe = () => {
     const { me } = this.props;
     if (me != null) {
@@ -128,6 +132,6 @@ const mapStateToProps = state => {
 export default withRouter(
   connect(
     mapStateToProps,
-    { logout, findMe }
+    { findMe }
   )(Toolbar)
 );

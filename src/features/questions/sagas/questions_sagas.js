@@ -1,5 +1,4 @@
 import { call, put, takeLatest } from "redux-saga/effects";
-import { push } from "react-router-redux";
 
 import axios from "../../../core/http";
 
@@ -55,12 +54,17 @@ function* getQuestions() {
 }
 
 function* createQuestion(action) {
+  const { setSubmitting, history } = action.meta;
+
   try {
     const data = yield call(createQuestionApi, action.payload);
+
     yield put({ type: CREATE_QUESTION_SUCCESS, payload: data.data });
-    yield put(push("/"));
+    setSubmitting(false);
+    history.push("/");
   } catch (error) {
     yield put({ type: CREATE_QUESTION_FAILURE, error });
+    setSubmitting(false);
   }
 }
 

@@ -62,9 +62,10 @@ export const findQuestionByIdUnload = () => {
   };
 };
 
-export const createQuestion = newQuestion => {
+export const createQuestion = (payload, meta) => {
   return {
     type: CREATE_QUESTION_REQUEST,
-    payload: newQuestion
+    payload,
+    meta
   };
 };

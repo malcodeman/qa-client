@@ -1,7 +1,8 @@
-import React, { Component } from "react";
-import { withFormik, Form, Field } from "formik";
+import React from "react";
 import Yup from "yup";
 import styled from "styled-components";
+import { withFormik, Form, Field } from "formik";
+import { withRouter } from "react-router-dom";
 
 const StyledForm = styled(Form)`
   background-color: #fff;
@@ -58,9 +59,10 @@ cursor: pointer;
 }
 `;
 
-class FormikForm extends Component {
+class FormikForm extends React.Component {
   render() {
     const { errors, touched } = this.props;
+
     return (
       <StyledForm>
         <FormItem>
@@ -88,10 +90,11 @@ const QuestionNewForm = withFormik({
     body: Yup.string().required("Body is missing")
   }),
   handleSubmit(payload, bag) {
-    bag.setSubmitting(false);
-    bag.props.createQuestion(payload);
-    bag.resetForm();
+    bag.props.createQuestion(payload, {
+      setSubmitting: bag.setSubmitting,
+      history: bag.props.history
+    });
   }
 })(FormikForm);
 
-export default QuestionNewForm;
+export default withRouter(QuestionNewForm);

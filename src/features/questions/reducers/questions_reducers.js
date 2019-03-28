@@ -7,7 +7,6 @@ import {
   CREATE_UPVOTE_SUCCESS,
   DESTROY_UPVOTE_SUCCESS
 } from "../actions/questions_actions";
-import { LOGOUT_SUCCESS } from "../../auth/actions/auth_actions";
 import { CREATE_ANSWER_SUCCESS } from "../../answers/actions/answers_actions";
 import { CREATE_COMMENT_SUCCESS } from "../../comments/actions";
 
@@ -18,7 +17,6 @@ const initialState = {
 };
 
 export default (state = initialState, action) => {
-  console.log(action);
   switch (action.type) {
     case GET_QUESTIONS_REQUEST:
       return {
@@ -46,12 +44,6 @@ export default (state = initialState, action) => {
       return {
         ...state,
         question: null
-      };
-    case LOGOUT_SUCCESS:
-      return {
-        ...state,
-        questions: [],
-        loading: true
       };
     case CREATE_UPVOTE_SUCCESS:
       if (action.meta.answer) {

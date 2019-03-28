@@ -5,7 +5,10 @@ import {
   FIND_USER_BY_USERNAME_SUCCESS
 } from "../actions/users_actions";
 
-import { SIGNUP_SUCCESS, LOGIN_SUCCESS } from "../../auth/actions/auth_actions";
+import {
+  SIGNUP_SUCCESS,
+  LOGIN_SUCCESS
+} from "../../auth/actions/authActionTypes";
 
 const initialState = {
   users: [],

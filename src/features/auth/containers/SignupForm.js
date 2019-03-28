@@ -1,10 +1,11 @@
-import React, { Component } from "react";
-import { withFormik, Form, Field } from "formik";
-import { connect } from "react-redux";
+import React from "react";
+
 import Yup from "yup";
 import styled from "styled-components";
+import { withFormik, Form, Field } from "formik";
+import { connect } from "react-redux";
 
-import { signup } from "../actions/auth_actions";
+import { signup } from "../actions/authActionCreators";
 
 const StyledForm = styled(Form)`
   display: flex;
@@ -45,30 +46,35 @@ const ErrorMessage = styled.span`
   color: #b00e23;
 `;
 
-class FormikForm extends Component {
+class FormikForm extends React.Component {
   render() {
     const { errors, touched, isSubmitting } = this.props;
+
     return (
       <StyledForm>
         <FormItem>
           <Input type="email" name="email" placeholder="Email" />
-          {touched.email &&
-            errors.email && <ErrorMessage>{errors.email}</ErrorMessage>}
+          {touched.email && errors.email && (
+            <ErrorMessage>{errors.email}</ErrorMessage>
+          )}
         </FormItem>
         <FormItem>
           <Input type="text" name="name" placeholder="Full name" />
-          {touched.name &&
-            errors.name && <ErrorMessage>{errors.name}</ErrorMessage>}
+          {touched.name && errors.name && (
+            <ErrorMessage>{errors.name}</ErrorMessage>
+          )}
         </FormItem>
         <FormItem>
           <Input type="text" name="username" placeholder="Username" />
-          {touched.username &&
-            errors.username && <ErrorMessage>{errors.username}</ErrorMessage>}
+          {touched.username && errors.username && (
+            <ErrorMessage>{errors.username}</ErrorMessage>
+          )}
         </FormItem>
         <FormItem>
           <Input type="password" name="password" placeholder="Password" />
-          {touched.password &&
-            errors.password && <ErrorMessage>{errors.password}</ErrorMessage>}
+          {touched.password && errors.password && (
+            <ErrorMessage>{errors.password}</ErrorMessage>
+          )}
         </FormItem>
         <Button disabled={isSubmitting}>Sign up</Button>
       </StyledForm>
