@@ -4,7 +4,7 @@ import styled from "styled-components";
 import LoginForm from "../../auth/containers/LoginForm";
 import SignupForm from "../../auth/containers/SignupForm";
 
-import bg from "../bg.jpg";
+import bg from "../assets/illustration.png";
 
 const Grid = styled.div`
   display: grid;
