@@ -1,9 +1,10 @@
 import { SIGNUP_REQUEST, LOGIN_REQUEST } from "./authActionTypes";
 
-export const signup = newUser => {
+export const signup = (payload, meta) => {
   return {
     type: SIGNUP_REQUEST,
-    payload: newUser
+    payload,
+    meta
   };
 };
 

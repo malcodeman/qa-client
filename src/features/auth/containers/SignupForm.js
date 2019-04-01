@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { withFormik, Form, Field } from "formik";
 import { connect } from "react-redux";
 
+import Loader from "../../loader/components/Loader";
 import { signup } from "../actions/authActionCreators";
 
 const StyledForm = styled(Form)`
@@ -38,6 +39,7 @@ const Button = styled.button`
   border-radius: 2px;
   font-size: 0.8rem;
   padding: 0;
+  margin-bottom: 20px;
 `;
 
 const ErrorMessage = styled.span`
@@ -75,7 +77,10 @@ class FormikForm extends React.Component {
             <ErrorMessage>{errors.password}</ErrorMessage>
           )}
         </FormItem>
-        <Button disabled={isSubmitting}>Sign up</Button>
+        <Button disabled={isSubmitting}>
+          {isSubmitting ? <Loader /> : "Sign up"}
+        </Button>
+        <ErrorMessage>{errors.general}</ErrorMessage>
       </StyledForm>
     );
   }
@@ -92,12 +97,18 @@ const SignupForm = withFormik({
     email: Yup.string().required("Email is required"),
     name: Yup.string().required("Name is required"),
     username: Yup.string().required("Username is required"),
-    password: Yup.string().required("Password is required")
+    password: Yup.string()
+      .required("Password is required")
+      .min(
+        6,
+        "Your password must be at least 6 characters long. Please try another."
+      )
   }),
   handleSubmit(payload, bag) {
-    bag.setSubmitting(false);
-    bag.props.signup(payload);
-    bag.resetForm();
+    bag.props.signup(payload, {
+      setSubmitting: bag.setSubmitting,
+      setFieldError: bag.setFieldError
+    });
   }
 })(FormikForm);
 

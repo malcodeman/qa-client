@@ -18,13 +18,31 @@ const loginApi = user => {
   return axios.post(`/auth/login`, user);
 };
 
-function* signupUser(action) {
+function* signup(action) {
+  const { setSubmitting } = action.meta;
+  const { setFieldError } = action.meta;
+
   try {
     const data = yield call(signupApi, action.payload);
+    const token = data.data.token;
 
-    localStorage.setItem("token", data.data.token);
+    localStorage.setItem("token", token);
+    setSubmitting(false);
     yield put({ type: SIGNUP_SUCCESS, payload: data.data });
   } catch (error) {
+    const exception = error.data.exception;
+
+    switch (exception) {
+      case "EmailExistsException":
+        setFieldError("email", "Email has already been taken.");
+        break;
+      case "UsernameExistsException":
+        setFieldError("username", "Username has already been taken.");
+        break;
+      default:
+        setFieldError("general", "Something went wrong");
+    }
+    setSubmitting(false);
     yield put({ type: SIGNUP_FAILURE, error });
   }
 }
@@ -60,7 +78,7 @@ function* login(action) {
 }
 
 export function* watchSignupRequest() {
-  yield takeLatest(SIGNUP_REQUEST, signupUser);
+  yield takeLatest(SIGNUP_REQUEST, signup);
 }
 
 export function* watchLoginRequest() {
