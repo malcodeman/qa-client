@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { withFormik, Form, Field } from "formik";
 import { connect } from "react-redux";
 
+import Loader from "../../loader/components/Loader";
 import { login } from "../actions/authActionCreators";
 
 const StyledForm = styled(Form)`
@@ -38,6 +39,7 @@ const Button = styled.button`
   border-radius: 2px;
   font-size: 0.8rem;
   padding: 0;
+  margin-bottom: 20px;
 `;
 
 const ErrorMessage = styled.span`
@@ -63,7 +65,10 @@ class FormikForm extends React.Component {
             <ErrorMessage>{errors.password}</ErrorMessage>
           )}
         </FormItem>
-        <Button disabled={isSubmitting}>Log in</Button>
+        <Button disabled={isSubmitting}>
+          {isSubmitting ? <Loader /> : "Log in"}
+        </Button>
+        <ErrorMessage>{errors.general}</ErrorMessage>
       </StyledForm>
     );
   }
@@ -79,9 +84,10 @@ const LoginForm = withFormik({
     password: Yup.string().required("Password is required")
   }),
   handleSubmit(payload, bag) {
-    bag.setSubmitting(false);
-    bag.props.login(payload);
-    bag.resetForm();
+    bag.props.login(payload, {
+      setSubmitting: bag.setSubmitting,
+      setFieldError: bag.setFieldError
+    });
   }
 })(FormikForm);
 

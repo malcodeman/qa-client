@@ -29,13 +29,32 @@ function* signupUser(action) {
   }
 }
 
-function* loginUser(action) {
+function* login(action) {
+  const { setSubmitting } = action.meta;
+  const { setFieldError } = action.meta;
+
   try {
     const data = yield call(loginApi, action.payload);
+    const token = data.data.token;
 
-    localStorage.setItem("token", data.data.token);
+    localStorage.setItem("token", token);
+    setSubmitting(false);
     yield put({ type: LOGIN_SUCCESS, payload: data.data });
   } catch (error) {
+    const exception = error.data.exception;
+
+    switch (exception) {
+      case "UserNotFoundException":
+      case "NotAuthorizedException":
+        setFieldError(
+          "general",
+          "The email and password you entered did not match our records. Please double-check and try again."
+        );
+        break;
+      default:
+        setFieldError("general", "Something went wrong");
+    }
+    setSubmitting(false);
     yield put({ type: LOGIN_FAILURE, error });
   }
 }
@@ -45,5 +64,5 @@ export function* watchSignupRequest() {
 }
 
 export function* watchLoginRequest() {
-  yield takeLatest(LOGIN_REQUEST, loginUser);
+  yield takeLatest(LOGIN_REQUEST, login);
 }

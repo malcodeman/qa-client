@@ -7,9 +7,10 @@ export const signup = newUser => {
   };
 };
 
-export const login = user => {
+export const login = (payload, meta) => {
   return {
     type: LOGIN_REQUEST,
-    payload: user
+    payload,
+    meta
   };
 };
