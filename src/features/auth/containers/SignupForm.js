@@ -6,6 +6,7 @@ import { connect } from "react-redux";
 
 import Loader from "../../loader/components/Loader";
 import { signup } from "../actions/authActionCreators";
+import { findByUsernameApi } from "../sagas/auth_sagas";
 
 const StyledForm = styled(Form)`
   display: flex;
@@ -47,44 +48,47 @@ const ErrorMessage = styled.span`
   color: #b00e23;
 `;
 
-class FormikForm extends React.Component {
-  render() {
-    const { errors, touched, isSubmitting } = this.props;
+const FormikForm = props => {
+  const { errors, touched, isSubmitting } = props;
 
-    return (
-      <StyledForm>
-        <FormItem>
-          <Input type="email" name="email" placeholder="Email" />
-          {touched.email && errors.email && (
-            <ErrorMessage>{errors.email}</ErrorMessage>
-          )}
-        </FormItem>
-        <FormItem>
-          <Input type="text" name="name" placeholder="Full name" />
-          {touched.name && errors.name && (
-            <ErrorMessage>{errors.name}</ErrorMessage>
-          )}
-        </FormItem>
-        <FormItem>
-          <Input type="text" name="username" placeholder="Username" />
-          {touched.username && errors.username && (
-            <ErrorMessage>{errors.username}</ErrorMessage>
-          )}
-        </FormItem>
-        <FormItem>
-          <Input type="password" name="password" placeholder="Password" />
-          {touched.password && errors.password && (
-            <ErrorMessage>{errors.password}</ErrorMessage>
-          )}
-        </FormItem>
-        <Button disabled={isSubmitting}>
-          {isSubmitting ? <Loader /> : "Sign up"}
-        </Button>
-        <ErrorMessage>{errors.general}</ErrorMessage>
-      </StyledForm>
-    );
-  }
-}
+  return (
+    <StyledForm>
+      <FormItem>
+        <Input type="email" name="email" placeholder="Email" />
+        {touched.email && errors.email && (
+          <ErrorMessage>{errors.email}</ErrorMessage>
+        )}
+      </FormItem>
+      <FormItem>
+        <Input type="text" name="name" placeholder="Full name" />
+        {touched.name && errors.name && (
+          <ErrorMessage>{errors.name}</ErrorMessage>
+        )}
+      </FormItem>
+      <FormItem>
+        <Input
+          type="text"
+          name="username"
+          placeholder="Username"
+          validate={findByUsernameApi}
+        />
+        {touched.username && errors.username && (
+          <ErrorMessage>{errors.username}</ErrorMessage>
+        )}
+      </FormItem>
+      <FormItem>
+        <Input type="password" name="password" placeholder="Password" />
+        {touched.password && errors.password && (
+          <ErrorMessage>{errors.password}</ErrorMessage>
+        )}
+      </FormItem>
+      <Button disabled={isSubmitting}>
+        {isSubmitting ? <Loader /> : "Sign up"}
+      </Button>
+      <ErrorMessage>{errors.general}</ErrorMessage>
+    </StyledForm>
+  );
+};
 
 const SignupForm = withFormik({
   mapPropsToValues: props => ({

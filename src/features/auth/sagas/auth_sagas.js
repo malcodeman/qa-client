@@ -18,6 +18,19 @@ const loginApi = user => {
   return axios.post(`/auth/login`, user);
 };
 
+export async function findByUsernameApi(username) {
+  if (username === "") {
+    return null;
+  }
+  try {
+    await axios.get(`/users/${username}`);
+
+    return "Username has already been taken.";
+  } catch (error) {
+    return null;
+  }
+}
+
 function* signup(action) {
   const { setSubmitting } = action.meta;
   const { setFieldError } = action.meta;
