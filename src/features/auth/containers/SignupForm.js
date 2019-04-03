@@ -3,6 +3,7 @@ import * as Yup from "yup";
 import styled from "styled-components";
 import { withFormik, Form, Field } from "formik";
 import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 
 import Loader from "../../loader/components/Loader";
 import { signup } from "../actions/authActionCreators";
@@ -111,12 +112,15 @@ const SignupForm = withFormik({
   handleSubmit(payload, bag) {
     bag.props.signup(payload, {
       setSubmitting: bag.setSubmitting,
-      setFieldError: bag.setFieldError
+      setFieldError: bag.setFieldError,
+      history: bag.props.history
     });
   }
 })(FormikForm);
 
-export default connect(
-  null,
-  { signup }
-)(SignupForm);
+export default withRouter(
+  connect(
+    null,
+    { signup }
+  )(SignupForm)
+);
