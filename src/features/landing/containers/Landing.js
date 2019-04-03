@@ -25,20 +25,6 @@ const ImageContainer = styled.div`
   }
 `;
 
-const Content = styled.div`
-  background-color: rgba(237, 25, 101, 0.1);
-  height: 100%;
-  padding: 24px;
-  display: flex;
-  justify-content: flex-start;
-  align-items: flex-end;
-`;
-
-const Copyright = styled.span`
-  font-size: 0.8rem;
-  color: #fff;
-`;
-
 const Main = styled.main`
   display: flex;
   flex-direction: column;
@@ -70,12 +56,15 @@ class Landing extends Component {
     showLogin: true,
     showSignup: false
   };
+
   handleShowLogin = () => {
     this.setState({ showLogin: true, showSignup: false });
   };
+
   handleShowSignup = () => {
     this.setState({ showSignup: true, showLogin: false });
   };
+
   renderHeader = () => {
     const { showLogin } = this.state;
     if (showLogin) {
@@ -84,6 +73,7 @@ class Landing extends Component {
       return <Heading>Signup</Heading>;
     }
   };
+
   renderForm = () => {
     const { showLogin } = this.state;
     if (showLogin) {
@@ -92,6 +82,7 @@ class Landing extends Component {
       return <SignupForm />;
     }
   };
+
   renderFooter = () => {
     const { showLogin } = this.state;
     const { handleShowLogin, handleShowSignup } = this;
@@ -110,15 +101,13 @@ class Landing extends Component {
       );
     }
   };
+
   render() {
     const { renderHeader, renderForm, renderFooter } = this;
+
     return (
       <Grid>
-        <ImageContainer>
-          <Content>
-            <Copyright>2018 Ministry of Programming</Copyright>
-          </Content>
-        </ImageContainer>
+        <ImageContainer />
         <Main>
           <Header>{renderHeader()}</Header>
           {renderForm()}
