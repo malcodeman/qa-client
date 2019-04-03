@@ -2,11 +2,12 @@ import React from "react";
 import { Route } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
 import { Provider } from "react-redux";
-import { BrowserRouter as Router } from "react-router-dom";
+import { Router } from "react-router-dom";
 
 import defaultTheme from "./styles/themes/default";
 import store from "./state/store";
-import PrivateRoute from "./routes/PrivateRoute";
+import history from "./routing/history";
+import PrivateRoute from "./routing/PrivateRoute";
 import Landing from "../features/landing/containers/Landing";
 import Home from "../features/questions/containers/Questions";
 import Users from "../features/users/containers/Users";
@@ -25,7 +26,7 @@ const App = () => {
   return (
     <Provider store={store}>
       <ThemeProvider theme={defaultTheme}>
-        <Router>
+        <Router history={history}>
           <Route exact path="/" component={Root} />
           <PrivateRoute path="/new-question" component={QuestionNew} />
           <PrivateRoute path="/questions/:id" component={QuestionDetails} />
