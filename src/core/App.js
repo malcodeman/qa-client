@@ -8,7 +8,7 @@ import defaultTheme from "./styles/themes/default";
 import store from "./state/store";
 import history from "./routing/history";
 import PrivateRoute from "./routing/PrivateRoute";
-import Landing from "../features/landing/containers/Landing";
+import Landing from "../features/landing/components/Landing";
 import Home from "../features/questions/containers/Questions";
 import Users from "../features/users/containers/Users";
 import QuestionNew from "../features/questions/containers/QuestionNew";
@@ -28,6 +28,7 @@ const App = () => {
       <ThemeProvider theme={defaultTheme}>
         <Router history={history}>
           <Route exact path="/" component={Root} />
+          <Route path="/login" component={Landing} />
           <PrivateRoute path="/new-question" component={QuestionNew} />
           <PrivateRoute path="/questions/:id" component={QuestionDetails} />
           <PrivateRoute exact path="/users" component={Users} />
