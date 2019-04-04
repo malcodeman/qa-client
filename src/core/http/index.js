@@ -23,7 +23,7 @@ instance.interceptors.response.use(
   error => {
     if (error.response.status === 401) {
       localStorage.removeItem("token");
-      history.push("/");
+      history.push("/login");
     }
     return Promise.reject(error.response);
   }
