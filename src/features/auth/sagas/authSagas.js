@@ -70,11 +70,12 @@ function* login(action) {
   try {
     const data = yield call(loginApi, action.payload);
     const token = data.data.token;
+    const user = data.data.user;
 
     localStorage.setItem("token", token);
     setSubmitting(false);
     history.push("/");
-    yield put({ type: LOGIN_SUCCESS, payload: data.data.user });
+    yield put({ type: LOGIN_SUCCESS, payload: user });
   } catch (error) {
     const exception = error.data.exception;
 

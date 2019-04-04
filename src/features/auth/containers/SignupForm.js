@@ -7,7 +7,7 @@ import { withRouter } from "react-router-dom";
 
 import Loader from "../../loader/components/Loader";
 import { signup } from "../actions/authActionCreators";
-import { findByUsernameApi } from "../sagas/auth_sagas";
+import { findByUsernameApi } from "../sagas/authSagas";
 
 const StyledForm = styled(Form)`
   display: flex;

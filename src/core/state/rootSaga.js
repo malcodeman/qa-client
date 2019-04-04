@@ -10,7 +10,7 @@ import {
 import {
   watchSignupRequest,
   watchLoginRequest
-} from "../../features/auth/sagas/auth_sagas";
+} from "../../features/auth/sagas/authSagas";
 
 import {
   watchGetUsers,

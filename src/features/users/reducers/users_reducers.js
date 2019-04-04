@@ -12,17 +12,26 @@ import {
 
 const initialState = {
   users: [],
-  me: null,
-  loading: true,
-  user: {
-    profilePhotoURL: "",
-    nameFirstLetter: "",
+  me: {
+    email: "",
     name: "",
     username: "",
+    nameFirstLetter: "",
+    profilePhotoURL: null,
     createdAt: "",
     questions: [],
     answers: []
-  }
+  },
+  user: {
+    name: "",
+    username: "",
+    nameFirstLetter: "",
+    profilePhotoURL: null,
+    createdAt: "",
+    questions: [],
+    answers: []
+  },
+  loading: true
 };
 
 export default (state = initialState, action) => {
@@ -35,7 +44,7 @@ export default (state = initialState, action) => {
     case LOGIN_SUCCESS:
       return {
         ...state,
-        me: action.payload.user
+        me: action.payload
       };
     case GET_USERS_REQUEST:
       return {
