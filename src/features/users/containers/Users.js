@@ -4,22 +4,9 @@ import { connect } from "react-redux";
 
 import User from "../components/User";
 import UserLoading from "../components/UserLoading";
-import Header from "../../header/containers";
 import { getUsers } from "../actions/users_actions";
 
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
-const Content = styled.main`
-  flex-grow: 1;
-`;
-
-const Container = styled.div`
-  padding: 40px 20px;
-  max-width: 992px;
-  margin: 0 auto;
+const Grid = styled.div`
   display: grid;
   grid-template-columns: 1fr;
   grid-gap: 10px;
@@ -65,15 +52,10 @@ class Users extends Component {
   };
   render() {
     return (
-      <Wrapper>
-        <Header />
-        <Content>
-          <Container>
-            {this.renderLoading()}
-            {this.renderUsers()}
-          </Container>
-        </Content>
-      </Wrapper>
+      <Grid>
+        {this.renderLoading()}
+        {this.renderUsers()}
+      </Grid>
     );
   }
 }

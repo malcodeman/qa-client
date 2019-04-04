@@ -36,33 +36,28 @@ class Users extends Component {
       answers
     } = this.props.me;
     return (
-      <Wrapper>
-        <Header />
-        <Content>
-          <Container>
-            <Tabs username={username} />
-            <Route
-              exact
-              path={`/users/${username}`}
-              render={() => (
-                <React.Fragment>
-                  <About
-                    profilePhotoURL={profilePhotoURL}
-                    nameFirstLetter={nameFirstLetter}
-                    name={name}
-                    username={username}
-                    createdAt={createdAt}
-                    questionsLength={questions.length}
-                    answersLength={answers.length}
-                  />
-                  <Posts questions={questions} />
-                </React.Fragment>
-              )}
-            />
-            <Route path={`/users/${username}/settings`} component={Settings} />
-          </Container>
-        </Content>
-      </Wrapper>
+      <>
+        <Tabs username={username} />
+        <Route
+          exact
+          path={`/users/${username}`}
+          render={() => (
+            <React.Fragment>
+              <About
+                profilePhotoURL={profilePhotoURL}
+                nameFirstLetter={nameFirstLetter}
+                name={name}
+                username={username}
+                createdAt={createdAt}
+                questionsLength={questions.length}
+                answersLength={answers.length}
+              />
+              <Posts questions={questions} />
+            </React.Fragment>
+          )}
+        />
+        <Route path={`/users/${username}/settings`} component={Settings} />
+      </>
     );
   }
 }

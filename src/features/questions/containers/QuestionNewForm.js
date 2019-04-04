@@ -3,6 +3,9 @@ import * as Yup from "yup";
 import styled from "styled-components";
 import { withFormik, Form, Field } from "formik";
 import { withRouter } from "react-router-dom";
+import { connect } from "react-redux";
+
+import { createQuestion } from "../actions/questions_actions";
 
 const StyledForm = styled(Form)`
   background-color: #fff;
@@ -59,26 +62,24 @@ cursor: pointer;
 }
 `;
 
-class FormikForm extends React.Component {
-  render() {
-    const { errors, touched } = this.props;
+const FormikForm = props => {
+  const { errors, touched } = props;
 
-    return (
-      <StyledForm>
-        <FormItem>
-          <Label>Title</Label>
-          <Input type="text" name="title" />
-          {touched.title && errors.title && <Error>{errors.title}</Error>}
-        </FormItem>
-        <FormItem>
-          <TextArea name="body" component="textarea" />
-          {touched.body && errors.body && <Error>{errors.body}</Error>}
-        </FormItem>
-        <Button>Post Your Question</Button>
-      </StyledForm>
-    );
-  }
-}
+  return (
+    <StyledForm>
+      <FormItem>
+        <Label>Title</Label>
+        <Input type="text" name="title" />
+        {touched.title && errors.title && <Error>{errors.title}</Error>}
+      </FormItem>
+      <FormItem>
+        <TextArea name="body" component="textarea" />
+        {touched.body && errors.body && <Error>{errors.body}</Error>}
+      </FormItem>
+      <Button>Post Your Question</Button>
+    </StyledForm>
+  );
+};
 
 const QuestionNewForm = withFormik({
   mapPropsToValues: props => ({
@@ -97,4 +98,9 @@ const QuestionNewForm = withFormik({
   }
 })(FormikForm);
 
-export default withRouter(QuestionNewForm);
+export default withRouter(
+  connect(
+    null,
+    { createQuestion }
+  )(QuestionNewForm)
+);

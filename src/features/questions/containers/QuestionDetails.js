@@ -8,30 +8,13 @@ import CommentForm from "../../comments/containers/CommentForm";
 import Comment from "../../comments/components/Comment";
 import Votes from "../../../core/components/Votes";
 import Answers from "../../answers/containers/Answers";
-import Header from "../../header/containers";
 import {
   findQuestionById,
   findQuestionByIdUnload,
   createUpvote,
   destroyUpvote
 } from "../actions/questions_actions";
-
 import { createComment } from "../../comments/actions";
-
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
-const Content = styled.main`
-  flex-grow: 1;
-`;
-
-const Container = styled.div`
-  padding: 40px 20px;
-  max-width: 992px;
-  margin: 0 auto;
-`;
 
 const Question = styled.div`
   margin-bottom: 24px;
@@ -144,15 +127,10 @@ class QuestionDetails extends Component {
   };
   render() {
     return (
-      <Wrapper>
-        <Header />
-        <Content>
-          <Container>
-            {this.renderQuestion()}
-            <Answers />
-          </Container>
-        </Content>
-      </Wrapper>
+      <>
+        {this.renderQuestion()}
+        <Answers />
+      </>
     );
   }
 }

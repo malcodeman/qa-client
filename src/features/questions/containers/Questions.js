@@ -1,26 +1,9 @@
 import React, { Component } from "react";
-import styled from "styled-components";
 import { connect } from "react-redux";
 
 import QuestionLoading from "../components/QuestionLoading";
 import Question from "../components/Question";
-import Header from "../../header/containers";
 import { getQuestions } from "../actions/questions_actions";
-
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
-const Content = styled.main`
-  flex-grow: 1;
-`;
-
-const Container = styled.div`
-  padding: 40px 20px;
-  max-width: 992px;
-  margin: 0 auto;
-`;
 
 class Questions extends Component {
   componentDidMount = () => {
@@ -50,16 +33,25 @@ class Questions extends Component {
     }
   };
   render() {
+    const { questions } = this.props;
+
     return (
-      <Wrapper>
-        <Header />
-        <Content>
-          <Container>
-            {this.renderLoading()}
-            {this.renderQuestions()}
-          </Container>
-        </Content>
-      </Wrapper>
+      <>
+        {questions.map(question => {
+          return (
+            <Question
+              key={question.id}
+              id={question.id}
+              title={question.title}
+              body={question.body}
+              upvotes={question.upvotesCount}
+              answers={question.answersCount}
+              author={question.user.username}
+              createdAt={question.createdAt}
+            />
+          );
+        })}
+      </>
     );
   }
 }
