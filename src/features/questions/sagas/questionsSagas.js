@@ -18,7 +18,7 @@ import {
   DESTROY_UPVOTE_FAILURE,
   DESTROY_UPVOTE_REQUEST,
   DESTROY_UPVOTE_SUCCESS
-} from "../actions/questions_actions";
+} from "../actions/questionsActionTypes";
 
 const getQuestionsApi = () => {
   return axios.get(`/questions`);

@@ -1,49 +1,47 @@
 import {
-  GET_QUESTIONS_REQUEST,
   GET_QUESTIONS_SUCCESS,
   FIND_QUESTION_BY_ID_REQUEST,
   FIND_QUESTION_BY_ID_SUCCESS,
-  FIND_QUESTION_BY_ID_UNLOAD,
   CREATE_UPVOTE_SUCCESS,
   DESTROY_UPVOTE_SUCCESS
-} from "../actions/questions_actions";
+} from "../actions/questionsActionTypes";
 import { CREATE_ANSWER_SUCCESS } from "../../answers/actions/answers_actions";
 import { CREATE_COMMENT_SUCCESS } from "../../comments/actions";
 
+const initialQuestionState = {
+  title: "",
+  body: "",
+  createdAt: null,
+  comments: [],
+  user: {
+    username: "",
+    profilePhotoURL: null
+  },
+  answers: []
+};
+
 const initialState = {
   questions: [],
-  question: null,
-  loading: true
+  question: initialQuestionState
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case GET_QUESTIONS_REQUEST:
+    case FIND_QUESTION_BY_ID_REQUEST:
       return {
-        ...state
+        ...state,
+        question: initialQuestionState
       };
     case GET_QUESTIONS_SUCCESS:
       return {
         ...state,
-        questions: action.payload,
-        loading: false
-      };
-    case FIND_QUESTION_BY_ID_REQUEST:
-      return {
-        ...state,
-        loading: true
+        questions: action.payload
       };
     case FIND_QUESTION_BY_ID_SUCCESS:
       return {
         ...state,
         question: action.payload,
-        votes: action.payload.votes,
-        loading: false
-      };
-    case FIND_QUESTION_BY_ID_UNLOAD:
-      return {
-        ...state,
-        question: null
+        votes: action.payload.votes
       };
     case CREATE_UPVOTE_SUCCESS:
       if (action.meta.answer) {

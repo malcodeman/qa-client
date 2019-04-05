@@ -10,10 +10,9 @@ import Votes from "../../../core/components/Votes";
 import Answers from "../../answers/containers/Answers";
 import {
   findQuestionById,
-  findQuestionByIdUnload,
   createUpvote,
   destroyUpvote
-} from "../actions/questions_actions";
+} from "../actions/questionsActionCreators";
 import { createComment } from "../../comments/actions";
 
 const Question = styled.div`
@@ -69,45 +68,54 @@ const Col = styled.div`
 class QuestionDetails extends Component {
   componentDidMount = () => {
     const { id } = this.props.match.params;
-    this.props.findQuestionById(id);
-  };
-  componentWillUnmount = () => {
-    this.props.findQuestionByIdUnload();
+    const { findQuestionById } = this.props;
+
+    findQuestionById(id);
   };
 
-  renderQuestion = () => {
-    if (this.props.question) {
-      const { createdAt } = this.props.question;
-      return (
+  render() {
+    const {
+      location,
+      question,
+      createUpvote,
+      destroyUpvote,
+      createComment
+    } = this.props;
+
+    return (
+      <>
         <Question>
           <Title>
-            <Link to={this.props.location.pathname}>
-              {this.props.question.title}
-            </Link>
+            <Link to={location.pathname}>{question.title}</Link>
           </Title>
           <Main>
             <Votes
-              upvotesCount={this.props.question.upvotesCount}
-              questionId={this.props.question.id}
-              createUpvote={this.props.createUpvote}
-              destroyUpvote={this.props.destroyUpvote}
-              upvoted={this.props.question.upvoted}
-              owner={this.props.question.owner}
+              upvotesCount={question.upvotesCount}
+              questionId={question.id}
+              createUpvote={createUpvote}
+              destroyUpvote={destroyUpvote}
+              upvoted={question.upvoted}
+              owner={question.owner}
             />
-            <Body>{this.props.question.body}</Body>
+            <Body>{question.body}</Body>
           </Main>
           <Footer>
             <User>
-              {this.props.question.user.profilePhotoURL ? (
-                <ProfilePhoto src={this.props.question.user.profilePhotoURL} />
+              {question.user.profilePhotoURL ? (
+                <ProfilePhoto src={question.user.profilePhotoURL} />
               ) : null}
               <Col>
-                <span>asked {distanceInWordsToNow(createdAt)} ago</span>
-                <span>by {this.props.question.user.username}</span>
+                <span>
+                  asked{" "}
+                  {question.createdAt &&
+                    distanceInWordsToNow(question.createdAt)}{" "}
+                  ago
+                </span>
+                <span>by {question.user.username}</span>
               </Col>
             </User>
           </Footer>
-          {this.props.question.comments.map(comment => (
+          {question.comments.map(comment => (
             <Comment
               key={comment.id}
               body={comment.body}
@@ -115,20 +123,8 @@ class QuestionDetails extends Component {
               author={comment.user.username}
             />
           ))}
-          <CommentForm
-            createComment={this.props.createComment}
-            questionId={this.props.question.id}
-          />
+          <CommentForm createComment={createComment} questionId={question.id} />
         </Question>
-      );
-    } else {
-      return <p>Loading ...</p>;
-    }
-  };
-  render() {
-    return (
-      <>
-        {this.renderQuestion()}
         <Answers />
       </>
     );
@@ -137,9 +133,7 @@ class QuestionDetails extends Component {
 
 const mapStateToProps = state => {
   return {
-    question: state.questions.question,
-    num_answers: state.answers.num_answers,
-    loading: state.questions.loading
+    question: state.questions.question
   };
 };
 
@@ -147,7 +141,6 @@ export default connect(
   mapStateToProps,
   {
     findQuestionById,
-    findQuestionByIdUnload,
     createUpvote,
     destroyUpvote,
     createComment

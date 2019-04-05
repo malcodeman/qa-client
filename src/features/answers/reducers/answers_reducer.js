@@ -1,4 +1,4 @@
-import { FIND_QUESTION_BY_ID_SUCCESS } from "../../questions/actions/questions_actions";
+import { FIND_QUESTION_BY_ID_SUCCESS } from "../../questions/actions/questionsActionTypes";
 import {
   CREATE_ANSWER_SUCCESS,
   CREATE_UPVOTE_ANSWER_SUCCESS

@@ -8,7 +8,7 @@ import { createAnswer } from "../actions/answers_actions";
 import {
   createUpvote,
   destroyUpvote
-} from "../../questions/actions/questions_actions";
+} from "../../questions/actions/questionsActionCreators";
 
 import { createComment } from "../../comments/actions";
 

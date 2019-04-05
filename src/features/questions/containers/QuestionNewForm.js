@@ -5,7 +5,7 @@ import { withFormik, Form, Field } from "formik";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 
-import { createQuestion } from "../actions/questions_actions";
+import { createQuestion } from "../actions/questionsActionCreators";
 
 const StyledForm = styled(Form)`
   background-color: #fff;

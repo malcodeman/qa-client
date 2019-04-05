@@ -6,7 +6,7 @@ import {
   watchFindQuestionById,
   watchUpvoteQuestion,
   watchDestroyUpvote
-} from "../../features/questions/sagas/questions_sagas";
+} from "../../features/questions/sagas/questionsSagas";
 import {
   watchSignupRequest,
   watchLoginRequest

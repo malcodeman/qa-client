@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 
 import QuestionLoading from "../components/QuestionLoading";
 import Question from "../components/Question";
-import { getQuestions } from "../actions/questions_actions";
+import { getQuestions } from "../actions/questionsActionCreators";
 
 class Questions extends Component {
   componentDidMount = () => {
