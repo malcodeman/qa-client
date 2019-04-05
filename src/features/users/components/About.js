@@ -39,30 +39,25 @@ const Span = styled.span`
 `;
 
 const About = props => {
-  const {
-    profilePhotoURL,
-    nameFirstLetter,
-    name,
-    username,
-    createdAt,
-    questionsLength,
-    answersLength
-  } = props;
+  const { user } = props;
+
   return (
     <Grid>
-      {profilePhotoURL ? (
-        <ProfilePhoto src={profilePhotoURL} />
+      {user.profilePhotoURL ? (
+        <ProfilePhoto src={user.profilePhotoURL} />
       ) : (
-        <NameFirstLetter>{nameFirstLetter}</NameFirstLetter>
+        <NameFirstLetter>{user.nameFirstLetter}</NameFirstLetter>
       )}
       <Col>
-        <Span>{name}</Span>
-        <Span>{username}</Span>
+        <Span>{user.name}</Span>
+        <Span>{user.username}</Span>
       </Col>
       <Col>
-        <Span>Member for {distanceInWordsToNow(createdAt)}</Span>
-        <Span>Questions {questionsLength}</Span>
-        <Span>Answers {answersLength}</Span>
+        <Span>
+          Member for {user.createdAt && distanceInWordsToNow(user.createdAt)}
+        </Span>
+        <Span>Questions {user.questions.length}</Span>
+        <Span>Answers {user.answers.length}</Span>
       </Col>
     </Grid>
   );

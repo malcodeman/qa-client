@@ -12,6 +12,7 @@ const Wrapper = styled.div`
 const Post = styled.div`
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding: 10px 0;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   font-size: 0.8rem;

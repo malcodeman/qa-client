@@ -3,35 +3,31 @@ import { connect } from "react-redux";
 
 import About from "../components/About";
 import Posts from "./Posts";
-import { findMe, findUserByUsername } from "../actions/users_actions";
+import Profile from "./Profile";
+import { findUserByUsername } from "../actions/users_actions";
 
 class User extends Component {
   componentDidMount = () => {
-    const { username, findUserByUsername } = this.props;
-    findUserByUsername(username);
+    const { me, findUserByUsername } = this.props;
+    const { username } = this.props.match.params;
+
+    if (username !== me.username) {
+      findUserByUsername(username);
+    }
   };
+
   render() {
-    const {
-      profilePhotoURL,
-      nameFirstLetter,
-      name,
-      username,
-      createdAt,
-      questions,
-      answers
-    } = this.props.user;
+    const { user } = this.props;
+    const { username } = this.props.match.params;
+    const { me } = this.props;
+
+    if (username === me.username) {
+      return <Profile />;
+    }
     return (
       <>
-        <About
-          profilePhotoURL={profilePhotoURL}
-          nameFirstLetter={nameFirstLetter}
-          name={name}
-          username={username}
-          createdAt={createdAt}
-          questionsLength={questions.length}
-          answersLength={answers.length}
-        />
-        <Posts questions={questions} />
+        <About user={user} />
+        <Posts questions={user.questions} />
       </>
     );
   }
@@ -39,11 +35,12 @@ class User extends Component {
 
 const mapStateToProps = state => {
   return {
-    user: state.users.user
+    user: state.users.user,
+    me: state.users.me
   };
 };
 
 export default connect(
   mapStateToProps,
-  { findMe, findUserByUsername }
+  { findUserByUsername }
 )(User);

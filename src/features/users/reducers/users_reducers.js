@@ -10,6 +10,16 @@ import {
   LOGIN_SUCCESS
 } from "../../auth/actions/authActionTypes";
 
+const initialUserState = {
+  name: "",
+  username: "",
+  nameFirstLetter: "",
+  profilePhotoURL: null,
+  createdAt: null,
+  questions: [],
+  answers: []
+};
+
 const initialState = {
   users: [],
   me: {
@@ -18,19 +28,11 @@ const initialState = {
     username: "",
     nameFirstLetter: "",
     profilePhotoURL: null,
-    createdAt: "",
+    createdAt: null,
     questions: [],
     answers: []
   },
-  user: {
-    name: "",
-    username: "",
-    nameFirstLetter: "",
-    profilePhotoURL: null,
-    createdAt: "",
-    questions: [],
-    answers: []
-  },
+  user: initialUserState,
   loading: true
 };
 
@@ -48,7 +50,8 @@ export default (state = initialState, action) => {
       };
     case GET_USERS_REQUEST:
       return {
-        ...state
+        ...state,
+        user: initialUserState
       };
     case GET_USERS_SUCCESS:
       return {

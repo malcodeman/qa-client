@@ -1,66 +1,32 @@
-import React, { Component } from "react";
-import styled from "styled-components";
+import React from "react";
 import { connect } from "react-redux";
 import { withRouter, Route } from "react-router-dom";
 
 import About from "../components/About";
 import Posts from "./Posts";
 import Tabs from "./Tabs";
-import Header from "../../header/containers";
 import Settings from "./Settings";
 
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
+const Profile = props => {
+  const { username, questions } = props.me;
 
-const Content = styled.main`
-  flex-grow: 1;
-`;
-
-const Container = styled.div`
-  padding: 40px 20px;
-  max-width: 992px;
-  margin: 0 auto;
-`;
-
-class Users extends Component {
-  render() {
-    const {
-      name,
-      username,
-      profilePhotoURL,
-      nameFirstLetter,
-      createdAt,
-      questions,
-      answers
-    } = this.props.me;
-    return (
-      <>
-        <Tabs username={username} />
-        <Route
-          exact
-          path={`/users/${username}`}
-          render={() => (
-            <React.Fragment>
-              <About
-                profilePhotoURL={profilePhotoURL}
-                nameFirstLetter={nameFirstLetter}
-                name={name}
-                username={username}
-                createdAt={createdAt}
-                questionsLength={questions.length}
-                answersLength={answers.length}
-              />
-              <Posts questions={questions} />
-            </React.Fragment>
-          )}
-        />
-        <Route path={`/users/${username}/settings`} component={Settings} />
-      </>
-    );
-  }
-}
+  return (
+    <>
+      <Tabs username={username} />
+      <Route
+        exact
+        path={`/users/${username}`}
+        render={() => (
+          <>
+            <About user={props.me} />
+            <Posts questions={questions} />
+          </>
+        )}
+      />
+      <Route path={`/users/${username}/settings`} component={Settings} />
+    </>
+  );
+};
 
 const mapStateToProps = state => {
   return {
@@ -68,4 +34,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default withRouter(connect(mapStateToProps)(Users));
+export default withRouter(connect(mapStateToProps)(Profile));
