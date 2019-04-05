@@ -25,6 +25,7 @@ function* createAnswer(action) {
   try {
     const { questionId, yourAnswer } = action.payload;
     const data = yield call(createAnswerApi, questionId, yourAnswer);
+
     yield put({ type: CREATE_ANSWER_SUCCESS, payload: data.data });
   } catch (error) {
     yield put({ type: CREATE_ANSWER_FAILURE, error });
@@ -35,16 +36,16 @@ function* createUpvoteAnswer(action) {
   try {
     const { questionId, answerId } = action.payload;
     const data = yield call(createUpvoteAnswerApi, questionId, answerId);
+
     yield put({ type: CREATE_UPVOTE_ANSWER_SUCCESS, payload: data.data });
   } catch (error) {
     yield put({ type: CREATE_UPVOTE_ANSWER_FAILURE, error });
   }
 }
 
-export function* watchCreateAnswerRequest() {
+const saga = function*() {
   yield takeLatest(CREATE_ANSWER_REQUEST, createAnswer);
-}
-
-export function* watchUpvoteAnswer() {
   yield takeLatest(CREATE_UPVOTE_ANSWER_REQUEST, createUpvoteAnswer);
-}
+};
+
+export default saga;

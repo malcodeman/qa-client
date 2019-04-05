@@ -28,6 +28,7 @@ const findByUsernameApi = username => {
 function* getUsers() {
   try {
     const data = yield call(getUsersApi);
+
     yield put({ type: GET_USERS_SUCCESS, payload: data.data });
   } catch (error) {
     yield put({ type: GET_USERS_FAILURE, error });
@@ -37,6 +38,7 @@ function* getUsers() {
 function* findMe() {
   try {
     const data = yield call(findMeApi);
+
     yield put({ type: FIND_ME_SUCCESS, payload: data.data });
   } catch (error) {
     yield put({ type: FIND_ME_FAILURE, error });
@@ -47,20 +49,17 @@ function* findByUsername(action) {
   try {
     const { username } = action.payload;
     const data = yield call(findByUsernameApi, username);
+
     yield put({ type: FIND_USER_BY_USERNAME_SUCCESS, payload: data.data });
   } catch (error) {
     yield put({ type: FIND_USER_BY_USERNAME_FAILURE, error });
   }
 }
 
-export function* watchGetUsers() {
+const saga = function*() {
   yield takeLatest(GET_USERS_REQUEST, getUsers);
-}
-
-export function* watchFindMeRequest() {
   yield takeLatest(FIND_ME_REQUEST, findMe);
-}
-
-export function* watchFindByUsernameRequest() {
   yield takeLatest(FIND_USER_BY_USERNAME_REQUEST, findByUsername);
-}
+};
+
+export default saga;

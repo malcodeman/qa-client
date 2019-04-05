@@ -47,6 +47,7 @@ const destroyUpvoteApi = id => {
 function* getQuestions() {
   try {
     const data = yield call(getQuestionsApi);
+
     yield put({ type: GET_QUESTIONS_SUCCESS, payload: data.data });
   } catch (error) {
     yield put({ type: GET_QUESTIONS_FAILURE, error });
@@ -72,6 +73,7 @@ function* findQuestionById(action) {
   try {
     const { id } = action.payload;
     const data = yield call(findQuestionByIdApi, id);
+
     yield put({ type: FIND_QUESTION_BY_ID_SUCCESS, payload: data.data });
   } catch (error) {
     yield put({ type: FIND_QUESTION_BY_ID_FAILURE, error });
@@ -82,8 +84,10 @@ function* createUpvote(action) {
   try {
     const { id } = action.payload;
     const { answer } = action.meta;
+
     if (answer) {
       const data = yield call(createUpvoteAnswerApi, id);
+
       yield put({
         type: CREATE_UPVOTE_SUCCESS,
         payload: data.data,
@@ -91,6 +95,7 @@ function* createUpvote(action) {
       });
     } else {
       const data = yield call(createUpvoteApi, id);
+
       yield put({
         type: CREATE_UPVOTE_SUCCESS,
         payload: data.data,
@@ -105,6 +110,7 @@ function* createUpvote(action) {
 function* destroyUpvote(action) {
   try {
     const data = yield call(destroyUpvoteApi, action.payload);
+
     yield put({
       type: DESTROY_UPVOTE_SUCCESS,
       payload: data.data,
@@ -115,22 +121,12 @@ function* destroyUpvote(action) {
   }
 }
 
-export function* watchGetQuestions() {
+const saga = function*() {
   yield takeLatest(GET_QUESTIONS_REQUEST, getQuestions);
-}
-
-export function* watchCreateQuestionRequest() {
   yield takeLatest(CREATE_QUESTION_REQUEST, createQuestion);
-}
-
-export function* watchFindQuestionById() {
   yield takeLatest(FIND_QUESTION_BY_ID_REQUEST, findQuestionById);
-}
-
-export function* watchUpvoteQuestion() {
   yield takeLatest(CREATE_UPVOTE_REQUEST, createUpvote);
-}
-
-export function* watchDestroyUpvote() {
   yield takeLatest(DESTROY_UPVOTE_REQUEST, destroyUpvote);
-}
+};
+
+export default saga;

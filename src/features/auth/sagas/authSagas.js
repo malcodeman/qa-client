@@ -95,10 +95,9 @@ function* login(action) {
   }
 }
 
-export function* watchSignupRequest() {
+const saga = function*() {
   yield takeLatest(SIGNUP_REQUEST, signup);
-}
-
-export function* watchLoginRequest() {
   yield takeLatest(LOGIN_REQUEST, login);
-}
+};
+
+export default saga;

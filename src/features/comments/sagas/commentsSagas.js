@@ -46,10 +46,9 @@ function* createAnswerComment(action) {
   }
 }
 
-export function* watchCreateQuestionComment() {
+const saga = function*() {
   yield takeLatest(CREATE_QUESTION_COMMENT_REQUEST, createQuestionComment);
-}
-
-export function* watchCreateAnswerComment() {
   yield takeLatest(CREATE_ANSWER_COMMENT_REQUEST, createAnswerComment);
-}
+};
+
+export default saga;
