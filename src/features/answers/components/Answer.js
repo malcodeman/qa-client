@@ -84,7 +84,7 @@ const Answer = props => {
           author={comment.user.username}
         />
       ))}
-      <CommentForm createComment={props.createComment} answerId={props.id} />
+      <CommentForm createComment={props.createComment} id={props.id} />
     </React.Fragment>
   );
 };

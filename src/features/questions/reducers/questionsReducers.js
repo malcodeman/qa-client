@@ -6,7 +6,10 @@ import {
   DESTROY_UPVOTE_SUCCESS
 } from "../actions/questionsActionTypes";
 import { CREATE_ANSWER_SUCCESS } from "../../answers/actions/answers_actions";
-import { CREATE_COMMENT_SUCCESS } from "../../comments/actions";
+import {
+  CREATE_QUESTION_COMMENT_SUCCESS,
+  CREATE_ANSWER_COMMENT_SUCCESS
+} from "../../comments/actions/commentsActionTypes";
 
 const initialQuestionState = {
   title: "",
@@ -113,33 +116,30 @@ export default (state = initialState, action) => {
           answers: [...state.question.answers, action.payload]
         }
       };
-    case CREATE_COMMENT_SUCCESS:
-      if (action.meta.answer) {
-        return {
-          ...state,
-          question: {
-            ...state.question,
-            answers: state.question.answers.map(answer => {
-              if (answer.id === action.payload.answerId) {
-                return {
-                  ...answer,
-                  comments: [...answer.comments, action.payload]
-                };
-              } else {
-                return answer;
-              }
-            })
-          }
-        };
-      } else {
-        return {
-          ...state,
-          question: {
-            ...state.question,
-            comments: [...state.question.comments, action.payload]
-          }
-        };
-      }
+    case CREATE_QUESTION_COMMENT_SUCCESS:
+      return {
+        ...state,
+        question: {
+          ...state.question,
+          comments: [...state.question.comments, action.payload]
+        }
+      };
+    case CREATE_ANSWER_COMMENT_SUCCESS:
+      return {
+        ...state,
+        question: {
+          ...state.question,
+          answers: state.question.answers.map(answer => {
+            if (answer.id === action.payload.answerId) {
+              return {
+                ...answer,
+                comments: [...answer.comments, action.payload]
+              };
+            }
+            return answer;
+          })
+        }
+      };
     default:
       return state;
   }

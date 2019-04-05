@@ -1,6 +1,7 @@
-import React, { Component } from "react";
+import React from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 
 import Answer from "../components/Answer";
 import YourAnswer from "./YourAnswer";
@@ -9,33 +10,20 @@ import {
   createUpvote,
   destroyUpvote
 } from "../../questions/actions/questionsActionCreators";
-
-import { createComment } from "../../comments/actions";
-
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
-const Content = styled.main`
-  flex-grow: 1;
-`;
-
-const Container = styled.div``;
+import { createAnswerComment } from "../../comments/actions/commentsActionCreators";
 
 const Header = styled.header`
   font-size: 1rem;
 `;
 
-class Answers extends Component {
-  renderAnswersHeader = () => {
-    const { num_answers } = this.props;
-    if (num_answers !== 0) return <Header>{num_answers} Answers</Header>;
-  };
-  renderAnswers = () => {
-    const { question, createUpvote, destroyUpvote, createComment } = this.props;
-    if (question) {
-      return question.answers.map(answer => {
+const Answers = props => {
+  const { id: questionId } = props.match.params;
+  const { num_answers, question, createAnswerComment, createAnswer } = props;
+
+  return (
+    <>
+      <Header>{num_answers} Answers</Header>
+      {question.answers.map(answer => {
         return (
           <Answer
             key={answer.id}
@@ -50,31 +38,16 @@ class Answers extends Component {
             comments={answer.comments}
             createUpvote={createUpvote}
             destroyUpvote={destroyUpvote}
-            createComment={createComment}
+            createComment={createAnswerComment}
           />
         );
-      });
-    }
-  };
-  render() {
-    return (
-      <Wrapper>
-        <Content>
-          <Container>
-            {this.renderAnswersHeader()}
-            {this.renderAnswers()}
-            {this.props.question ? (
-              <YourAnswer
-                questionId={this.props.question.id}
-                createAnswer={this.props.createAnswer}
-              />
-            ) : null}
-          </Container>
-        </Content>
-      </Wrapper>
-    );
-  }
-}
+      })}
+      {question ? (
+        <YourAnswer questionId={questionId} createAnswer={createAnswer} />
+      ) : null}
+    </>
+  );
+};
 
 const mapStateToProps = state => {
   return {
@@ -84,7 +57,9 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  { createAnswer, createUpvote, destroyUpvote, createComment }
-)(Answers);
+export default withRouter(
+  connect(
+    mapStateToProps,
+    { createAnswer, createUpvote, destroyUpvote, createAnswerComment }
+  )(Answers)
+);

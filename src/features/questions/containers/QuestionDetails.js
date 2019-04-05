@@ -13,7 +13,7 @@ import {
   createUpvote,
   destroyUpvote
 } from "../actions/questionsActionCreators";
-import { createComment } from "../../comments/actions";
+import { createQuestionComment } from "../../comments/actions/commentsActionCreators";
 
 const Question = styled.div`
   margin-bottom: 24px;
@@ -74,12 +74,13 @@ class QuestionDetails extends Component {
   };
 
   render() {
+    const { id: questionId } = this.props.match.params;
     const {
       location,
       question,
       createUpvote,
       destroyUpvote,
-      createComment
+      createQuestionComment
     } = this.props;
 
     return (
@@ -123,7 +124,7 @@ class QuestionDetails extends Component {
               author={comment.user.username}
             />
           ))}
-          <CommentForm createComment={createComment} questionId={question.id} />
+          <CommentForm createComment={createQuestionComment} id={questionId} />
         </Question>
         <Answers />
       </>
@@ -143,6 +144,6 @@ export default connect(
     findQuestionById,
     createUpvote,
     destroyUpvote,
-    createComment
+    createQuestionComment
   }
 )(QuestionDetails);
