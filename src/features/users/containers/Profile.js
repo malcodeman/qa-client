@@ -1,14 +1,13 @@
 import React from "react";
 import { connect } from "react-redux";
-import { withRouter, Route } from "react-router-dom";
+import { Route } from "react-router-dom";
 
 import About from "../components/About";
-import Posts from "./Posts";
 import Tabs from "./Tabs";
 import Settings from "./Settings";
 
 const Profile = props => {
-  const { username, questions } = props.me;
+  const { username } = props.me;
 
   return (
     <>
@@ -16,12 +15,7 @@ const Profile = props => {
       <Route
         exact
         path={`/users/${username}`}
-        render={() => (
-          <>
-            <About user={props.me} />
-            <Posts questions={questions} />
-          </>
-        )}
+        render={() => <About user={props.me} />}
       />
       <Route path={`/users/${username}/settings`} component={Settings} />
     </>
@@ -34,4 +28,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default withRouter(connect(mapStateToProps)(Profile));
+export default connect(mapStateToProps)(Profile);
