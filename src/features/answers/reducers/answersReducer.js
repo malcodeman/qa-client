@@ -2,7 +2,7 @@ import { FIND_QUESTION_BY_ID_SUCCESS } from "../../questions/actions/questionsAc
 import {
   CREATE_ANSWER_SUCCESS,
   CREATE_UPVOTE_ANSWER_SUCCESS
-} from "../actions/answers_actions";
+} from "../actions/answersActionTypes";
 
 const initialState = {
   answers: [],

@@ -9,7 +9,7 @@ import QuestionNewForm from "./QuestionNewForm";
 import QuestionDetails from "./QuestionDetails";
 import Users from "../../users/containers/Users";
 import User from "../../users/containers/User";
-import { findMe } from "../../users/actions/users_actions";
+import { findMe } from "../../users/actions/usersActionCreators";
 
 const Main = styled.main`
   margin-top: 64px;

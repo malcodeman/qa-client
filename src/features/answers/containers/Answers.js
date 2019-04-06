@@ -5,7 +5,7 @@ import { withRouter } from "react-router-dom";
 
 import Answer from "../components/Answer";
 import YourAnswer from "./YourAnswer";
-import { createAnswer } from "../actions/answers_actions";
+import { createAnswer } from "../actions/answersActionCreators";
 import {
   createUpvote,
   destroyUpvote

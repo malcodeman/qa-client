@@ -5,7 +5,7 @@ import {
   CREATE_UPVOTE_SUCCESS,
   DESTROY_UPVOTE_SUCCESS
 } from "../actions/questionsActionTypes";
-import { CREATE_ANSWER_SUCCESS } from "../../answers/actions/answers_actions";
+import { CREATE_ANSWER_SUCCESS } from "../../answers/actions/answersActionTypes";
 import {
   CREATE_QUESTION_COMMENT_SUCCESS,
   CREATE_ANSWER_COMMENT_SUCCESS

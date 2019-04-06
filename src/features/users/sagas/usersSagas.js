@@ -11,7 +11,7 @@ import {
   FIND_USER_BY_USERNAME_FAILURE,
   FIND_USER_BY_USERNAME_REQUEST,
   FIND_USER_BY_USERNAME_SUCCESS
-} from "../actions/users_actions";
+} from "../actions/usersActionTypes";
 
 const getUsersApi = () => {
   return axios.get(`/users`);

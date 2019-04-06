@@ -8,7 +8,7 @@ import {
   CREATE_UPVOTE_ANSWER_REQUEST,
   CREATE_UPVOTE_ANSWER_SUCCESS,
   CREATE_UPVOTE_ANSWER_FAILURE
-} from "../actions/answers_actions";
+} from "../actions/answersActionTypes";
 
 const createAnswerApi = (questionId, yourAnswer) => {
   return axios.post(`/answers`, { questionId, body: yourAnswer });

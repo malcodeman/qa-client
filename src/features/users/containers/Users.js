@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 
 import User from "../components/User";
 import UserLoading from "../components/UserLoading";
-import { getUsers } from "../actions/users_actions";
+import { getUsers } from "../actions/usersActionCreators";
 
 const Grid = styled.div`
   display: grid;

@@ -3,7 +3,7 @@ import {
   GET_USERS_SUCCESS,
   FIND_ME_SUCCESS,
   FIND_USER_BY_USERNAME_SUCCESS
-} from "../actions/users_actions";
+} from "../actions/usersActionTypes";
 
 import {
   SIGNUP_SUCCESS,
