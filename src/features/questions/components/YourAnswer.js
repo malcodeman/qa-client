@@ -1,7 +1,9 @@
-import React, { Component } from "react";
+import React from "react";
 import { withFormik, Form, Field } from "formik";
 import * as Yup from "yup";
 import styled from "styled-components";
+
+import Loader from "../../loader/components/Loader";
 
 const StyledForm = styled(Form)`
   background-color: #fff;
@@ -24,8 +26,8 @@ const TextArea = styled(Field)`
   border: 1px solid rgba(0, 0, 0, 0.1);
   height: 256px;
   font-size: 0.8rem;
-  resize: none;
   font-family: sans-serif;
+  resize: none;
   padding: 4px;
 `;
 
@@ -33,7 +35,6 @@ const Error = styled.div`
   font-size: 0.8rem;
   color: #fff;
   background-color: #b00e23;
-  display: inline-block;
   padding: 4px;
   margin: 4px 0;
   align-self: flex-start;
@@ -45,42 +46,40 @@ const Submit = styled.button`
   border-radius: 3px;
   color: #fff;
   background-color: #007aff;
-  height: 28px;
+  height: 36px;
   cursor: pointer;
 `;
 
-class FormikForm extends Component {
-  render() {
-    const { errors, touched } = this.props;
-    return (
-      <StyledForm>
-        <Heading>Your Answer</Heading>
-        <FormItem>
-          <TextArea name="body" component="textarea" />
-          {touched.body && errors.body && <Error>{errors.body}</Error>}
-        </FormItem>
-        <Submit>Post Your Answer</Submit>
-      </StyledForm>
-    );
-  }
-}
+const FormikForm = props => {
+  const { errors, touched, isSubmitting } = props;
+
+  return (
+    <StyledForm>
+      <Heading>Your Answer</Heading>
+      <FormItem>
+        <TextArea name="body" component="textarea" />
+        {touched.body && errors.body && <Error>{errors.body}</Error>}
+      </FormItem>
+      <Submit disabled={isSubmitting}>
+        {isSubmitting ? <Loader /> : "Post Your Answer"}
+      </Submit>
+    </StyledForm>
+  );
+};
 
 const YourAnswer = withFormik({
+  validationSchema: Yup.object().shape({
+    body: Yup.string().required("Body is missing")
+  }),
   mapPropsToValues: props => ({
     questionId: props.questionId || "",
     body: props.body || ""
   }),
-  validationSchema: Yup.object().shape({
-    body: Yup.string().required("Body is missing")
-  }),
-  mapValuesToPayload: values => ({
-    questionId: values.questionId,
-    body: values.body
-  }),
   handleSubmit(payload, bag) {
-    bag.setSubmitting(false);
-    bag.props.createAnswer(payload);
-    bag.resetForm();
+    bag.props.createAnswer(payload, {
+      setSubmitting: bag.setSubmitting,
+      resetForm: bag.resetForm
+    });
   }
 })(FormikForm);
 

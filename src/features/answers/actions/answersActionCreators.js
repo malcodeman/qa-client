@@ -3,13 +3,11 @@ import {
   CREATE_UPVOTE_ANSWER_REQUEST
 } from "./answersActionTypes";
 
-export const createAnswer = action => {
+export const createAnswer = (payload, meta) => {
   return {
     type: CREATE_ANSWER_REQUEST,
-    payload: {
-      questionId: action.questionId,
-      yourAnswer: action.body
-    }
+    payload,
+    meta
   };
 };
 

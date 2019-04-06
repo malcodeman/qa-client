@@ -10,8 +10,8 @@ import {
   CREATE_UPVOTE_ANSWER_FAILURE
 } from "../actions/answersActionTypes";
 
-const createAnswerApi = (questionId, yourAnswer) => {
-  return axios.post(`/answers`, { questionId, body: yourAnswer });
+const createAnswerApi = (questionId, body) => {
+  return axios.post(`/answers`, { questionId, body });
 };
 
 const createUpvoteAnswerApi = (questionId, answerId) => {
@@ -22,12 +22,19 @@ const createUpvoteAnswerApi = (questionId, answerId) => {
 };
 
 function* createAnswer(action) {
-  try {
-    const { questionId, yourAnswer } = action.payload;
-    const data = yield call(createAnswerApi, questionId, yourAnswer);
+  const { setSubmitting } = action.meta;
+  const { resetForm } = action.meta;
 
+  try {
+    const { questionId, body } = action.payload;
+    const data = yield call(createAnswerApi, questionId, body);
+
+    resetForm();
+    setSubmitting(false);
     yield put({ type: CREATE_ANSWER_SUCCESS, payload: data.data });
   } catch (error) {
+    resetForm();
+    setSubmitting(false);
     yield put({ type: CREATE_ANSWER_FAILURE, error });
   }
 }
