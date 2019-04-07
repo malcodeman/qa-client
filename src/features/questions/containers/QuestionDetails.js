@@ -8,13 +8,13 @@ import YourAnswer from "../components/YourAnswer";
 import {
   findQuestionById,
   createUpvote,
-  destroyUpvote
+  destroyUpvote,
+  createAnswer
 } from "../actions/questionsActionCreators";
 import {
   createQuestionComment,
   createAnswerComment
 } from "../../comments/actions/commentsActionCreators";
-import { createAnswer } from "../../answers/actions/answersActionCreators";
 
 const Question = styled.div`
   margin-bottom: 24px;

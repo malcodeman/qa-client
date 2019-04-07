@@ -3,9 +3,10 @@ import {
   FIND_QUESTION_BY_ID_REQUEST,
   FIND_QUESTION_BY_ID_SUCCESS,
   CREATE_UPVOTE_SUCCESS,
-  DESTROY_UPVOTE_SUCCESS
+  DESTROY_UPVOTE_SUCCESS,
+  CREATE_ANSWER_SUCCESS,
+  CREATE_UPVOTE_ANSWER_SUCCESS
 } from "../actions/questionsActionTypes";
-import { CREATE_ANSWER_SUCCESS } from "../../answers/actions/answersActionTypes";
 import {
   CREATE_QUESTION_COMMENT_SUCCESS,
   CREATE_ANSWER_COMMENT_SUCCESS
@@ -137,6 +138,24 @@ export default (state = initialState, action) => {
               };
             }
             return answer;
+          })
+        }
+      };
+    case CREATE_UPVOTE_ANSWER_SUCCESS:
+      return {
+        ...state,
+        ...state,
+        question: {
+          ...state.question,
+          answers: state.answers.map((answer, index) => {
+            if (answer.id === action.payload.answerId) {
+              return {
+                ...answer,
+                votes: answer.votes + 1
+              };
+            } else {
+              return answer;
+            }
           })
         }
       };
