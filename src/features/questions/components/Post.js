@@ -4,7 +4,7 @@ import { distanceInWordsToNow } from "date-fns";
 
 import CommentForm from "../../comments/containers/CommentForm";
 import Comment from "../../comments/components/Comment";
-import Votes from "../../../core/components/Votes";
+import Votes from "./Votes";
 
 const Main = styled.main`
   display: grid;
@@ -54,7 +54,7 @@ const Post = props => {
       <Main>
         <Votes
           upvotesCount={post.upvotesCount}
-          questionId={post.id}
+          id={id}
           createUpvote={createUpvote}
           destroyUpvote={destroyUpvote}
           upvoted={post.upvoted}

@@ -12,18 +12,21 @@ import {
   FIND_QUESTION_BY_ID_FAILURE,
   FIND_QUESTION_BY_ID_REQUEST,
   FIND_QUESTION_BY_ID_SUCCESS,
-  CREATE_UPVOTE_FAILURE,
-  CREATE_UPVOTE_REQUEST,
-  CREATE_UPVOTE_SUCCESS,
-  DESTROY_UPVOTE_FAILURE,
-  DESTROY_UPVOTE_REQUEST,
-  DESTROY_UPVOTE_SUCCESS,
   CREATE_ANSWER_FAILURE,
   CREATE_ANSWER_REQUEST,
   CREATE_ANSWER_SUCCESS,
-  CREATE_UPVOTE_ANSWER_REQUEST,
-  CREATE_UPVOTE_ANSWER_SUCCESS,
-  CREATE_UPVOTE_ANSWER_FAILURE
+  CREATE_ANSWER_UPVOTE_FAILURE,
+  CREATE_ANSWER_UPVOTE_REQUEST,
+  CREATE_ANSWER_UPVOTE_SUCCESS,
+  CREATE_QUESTION_UPVOTE_FAILURE,
+  CREATE_QUESTION_UPVOTE_REQUEST,
+  CREATE_QUESTION_UPVOTE_SUCCESS,
+  DESTROY_QUESTION_UPVOTE_SUCCESS,
+  DESTROY_QUESTION_UPVOTE_FAILURE,
+  DESTROY_QUESTION_UPVOTE_REQUEST,
+  DESTROY_ANSWER_UPVOTE_REQUEST,
+  DESTROY_ANSWER_UPVOTE_SUCCESS,
+  DESTROY_ANSWER_UPVOTE_FAILURE
 } from "../actions/questionsActionTypes";
 
 const getQuestionsApi = () => {
@@ -38,30 +41,25 @@ const findQuestionByIdApi = id => {
   return axios.get(`/questions/${id}`);
 };
 
-const createUpvoteApi = id => {
-  return axios.post(`/upvotes`, { questionId: id });
-};
-
-const createUpvoteAnswerApi = id => {
-  return axios.post(`/upvotes`, { answerId: id });
-};
-
-const destroyUpvoteApi = id => {
-  return axios.delete(`/upvotes/${id}`);
-};
-
 const createAnswerApi = (questionId, body) => {
   return axios.post(`/answers`, { questionId, body });
 };
 
-/*
-const createUpvoteAnswerApi = (questionId, answerId) => {
-  return axios.post(`/questions/${questionId}/answers/${answerId}/upvotes`, {
-    questionId,
-    answerId
-  });
+const upvoteQuestionApi = questionId => {
+  return axios.post(`/questions/${questionId}/upvotes`);
 };
-*/
+
+const downvoteQuestionApi = upvoteId => {
+  return axios.delete(`/upvotes/${upvoteId}`);
+};
+
+const upvoteAnswerApi = answerId => {
+  return axios.post(`/answers/${answerId}/upvotes`);
+};
+
+const downvoteAnswerApi = upvoteId => {
+  return axios.delete(`/upvotes/${upvoteId}`);
+};
 
 function* getQuestions() {
   try {
@@ -99,47 +97,6 @@ function* findQuestionById(action) {
   }
 }
 
-function* createUpvote(action) {
-  try {
-    const { id } = action.payload;
-    const { answer } = action.meta;
-
-    if (answer) {
-      const data = yield call(createUpvoteAnswerApi, id);
-
-      yield put({
-        type: CREATE_UPVOTE_SUCCESS,
-        payload: data.data,
-        meta: action.meta
-      });
-    } else {
-      const data = yield call(createUpvoteApi, id);
-
-      yield put({
-        type: CREATE_UPVOTE_SUCCESS,
-        payload: data.data,
-        meta: action.meta
-      });
-    }
-  } catch (error) {
-    yield put({ type: CREATE_UPVOTE_FAILURE, error });
-  }
-}
-
-function* destroyUpvote(action) {
-  try {
-    const data = yield call(destroyUpvoteApi, action.payload);
-
-    yield put({
-      type: DESTROY_UPVOTE_SUCCESS,
-      payload: data.data,
-      meta: action.meta
-    });
-  } catch (error) {
-    yield put({ type: DESTROY_UPVOTE_FAILURE, error });
-  }
-}
-
 function* createAnswer(action) {
   const { setSubmitting } = action.meta;
   const { resetForm } = action.meta;
@@ -158,14 +115,43 @@ function* createAnswer(action) {
   }
 }
 
-function* createUpvoteAnswer(action) {
+function* upvoteQuestion(action) {
   try {
-    const { questionId, answerId } = action.payload;
-    //const data = yield call(createUpvoteAnswerApi, questionId, answerId);
+    const data = yield call(upvoteQuestionApi, action.payload);
 
-    yield put({ type: CREATE_UPVOTE_ANSWER_SUCCESS, payload: null });
+    yield put({ type: CREATE_QUESTION_UPVOTE_SUCCESS, payload: data.data });
   } catch (error) {
-    yield put({ type: CREATE_UPVOTE_ANSWER_FAILURE, error });
+    yield put({ type: CREATE_QUESTION_UPVOTE_FAILURE, error });
+  }
+}
+
+function* upvoteAnswer(action) {
+  try {
+    const data = yield call(upvoteAnswerApi, action.payload);
+
+    yield put({ type: CREATE_ANSWER_UPVOTE_SUCCESS, payload: data.data });
+  } catch (error) {
+    yield put({ type: CREATE_ANSWER_UPVOTE_FAILURE, error });
+  }
+}
+
+function* downvoteQuestion(action) {
+  try {
+    const data = yield call(downvoteQuestionApi, action.payload);
+
+    yield put({ type: DESTROY_QUESTION_UPVOTE_SUCCESS, payload: data.data });
+  } catch (error) {
+    yield put({ type: DESTROY_QUESTION_UPVOTE_FAILURE, error });
+  }
+}
+
+function* downvoteAnswer(action) {
+  try {
+    const data = yield call(downvoteAnswerApi, action.payload);
+
+    yield put({ type: DESTROY_ANSWER_UPVOTE_SUCCESS, payload: data.data });
+  } catch (error) {
+    yield put({ type: DESTROY_ANSWER_UPVOTE_FAILURE, error });
   }
 }
 
@@ -173,10 +159,11 @@ const saga = function*() {
   yield takeLatest(GET_QUESTIONS_REQUEST, getQuestions);
   yield takeLatest(CREATE_QUESTION_REQUEST, createQuestion);
   yield takeLatest(FIND_QUESTION_BY_ID_REQUEST, findQuestionById);
-  yield takeLatest(CREATE_UPVOTE_REQUEST, createUpvote);
-  yield takeLatest(DESTROY_UPVOTE_REQUEST, destroyUpvote);
   yield takeLatest(CREATE_ANSWER_REQUEST, createAnswer);
-  yield takeLatest(CREATE_UPVOTE_ANSWER_REQUEST, createUpvoteAnswer);
+  yield takeLatest(CREATE_QUESTION_UPVOTE_REQUEST, upvoteQuestion);
+  yield takeLatest(CREATE_ANSWER_UPVOTE_REQUEST, upvoteAnswer);
+  yield takeLatest(DESTROY_QUESTION_UPVOTE_REQUEST, downvoteQuestion);
+  yield takeLatest(DESTROY_ANSWER_UPVOTE_REQUEST, downvoteAnswer);
 };
 
 export default saga;

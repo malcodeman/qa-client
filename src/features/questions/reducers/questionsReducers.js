@@ -2,10 +2,11 @@ import {
   GET_QUESTIONS_SUCCESS,
   FIND_QUESTION_BY_ID_REQUEST,
   FIND_QUESTION_BY_ID_SUCCESS,
-  CREATE_UPVOTE_SUCCESS,
-  DESTROY_UPVOTE_SUCCESS,
   CREATE_ANSWER_SUCCESS,
-  CREATE_UPVOTE_ANSWER_SUCCESS
+  CREATE_ANSWER_UPVOTE_SUCCESS,
+  CREATE_QUESTION_UPVOTE_SUCCESS,
+  DESTROY_QUESTION_UPVOTE_SUCCESS,
+  DESTROY_ANSWER_UPVOTE_SUCCESS
 } from "../actions/questionsActionTypes";
 import {
   CREATE_QUESTION_COMMENT_SUCCESS,
@@ -21,7 +22,9 @@ const initialQuestionState = {
     username: "",
     profilePhotoURL: null
   },
-  answers: []
+  answers: [],
+  upvotesCount: null,
+  upvoted: null
 };
 
 const initialState = {
@@ -47,68 +50,26 @@ export default (state = initialState, action) => {
         question: action.payload,
         votes: action.payload.votes
       };
-    case CREATE_UPVOTE_SUCCESS:
-      if (action.meta.answer) {
-        return {
-          ...state,
-          question: {
-            ...state.question,
-            answers: state.question.answers.map(answer => {
-              if (answer.id === action.payload.answerId) {
-                return {
-                  ...answer,
-                  upvotesCount: answer.upvotesCount + 1,
-                  upvoted: {
-                    upvoteId: action.payload.id
-                  }
-                };
-              } else {
-                return answer;
-              }
-            })
+    case CREATE_QUESTION_UPVOTE_SUCCESS:
+      return {
+        ...state,
+        question: {
+          ...state.question,
+          upvotesCount: state.question.upvotesCount + 1,
+          upvoted: {
+            upvoteId: action.payload.id
           }
-        };
-      } else {
-        return {
-          ...state,
-          question: {
-            ...state.question,
-            upvotesCount: state.question.upvotesCount + 1,
-            upvoted: {
-              upvoteId: action.payload.id
-            }
-          }
-        };
-      }
-    case DESTROY_UPVOTE_SUCCESS:
-      if (action.meta.answer) {
-        return {
-          ...state,
-          question: {
-            ...state.question,
-            answers: state.question.answers.map(answer => {
-              if (answer.id === action.payload.answerId) {
-                return {
-                  ...answer,
-                  upvotesCount: answer.upvotesCount - 1,
-                  upvoted: false
-                };
-              } else {
-                return answer;
-              }
-            })
-          }
-        };
-      } else {
-        return {
-          ...state,
-          question: {
-            ...state.question,
-            upvotesCount: state.question.upvotesCount - 1,
-            upvoted: false
-          }
-        };
-      }
+        }
+      };
+    case DESTROY_QUESTION_UPVOTE_SUCCESS:
+      return {
+        ...state,
+        question: {
+          ...state.question,
+          upvotesCount: state.question.upvotesCount - 1,
+          upvoted: null
+        }
+      };
     case CREATE_ANSWER_SUCCESS:
       return {
         ...state,
@@ -141,21 +102,40 @@ export default (state = initialState, action) => {
           })
         }
       };
-    case CREATE_UPVOTE_ANSWER_SUCCESS:
+    case CREATE_ANSWER_UPVOTE_SUCCESS:
       return {
         ...state,
         ...state,
         question: {
           ...state.question,
-          answers: state.answers.map((answer, index) => {
+          answers: state.question.answers.map(answer => {
             if (answer.id === action.payload.answerId) {
               return {
                 ...answer,
-                votes: answer.votes + 1
+                upvotesCount: answer.upvotesCount + 1,
+                upvoted: {
+                  upvoteId: action.payload.id
+                }
               };
-            } else {
-              return answer;
             }
+            return answer;
+          })
+        }
+      };
+    case DESTROY_ANSWER_UPVOTE_SUCCESS:
+      return {
+        ...state,
+        question: {
+          ...state.question,
+          answers: state.question.answers.map(answer => {
+            if (answer.id === action.payload.answerId) {
+              return {
+                ...answer,
+                upvotesCount: answer.upvotesCount - 1,
+                upvoted: null
+              };
+            }
+            return answer;
           })
         }
       };

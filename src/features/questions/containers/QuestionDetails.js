@@ -7,9 +7,11 @@ import Post from "../components/Post";
 import YourAnswer from "../components/YourAnswer";
 import {
   findQuestionById,
-  createUpvote,
-  destroyUpvote,
-  createAnswer
+  createAnswer,
+  upvoteQuestion,
+  downvoteQuestion,
+  upvoteAnswer,
+  downvoteAnswer
 } from "../actions/questionsActionCreators";
 import {
   createQuestionComment,
@@ -44,8 +46,10 @@ class QuestionDetails extends Component {
     const {
       location,
       question,
-      createUpvote,
-      destroyUpvote,
+      upvoteQuestion,
+      downvoteQuestion,
+      upvoteAnswer,
+      downvoteAnswer,
       createQuestionComment,
       createAnswerComment,
       createAnswer
@@ -59,8 +63,8 @@ class QuestionDetails extends Component {
           </Title>
           <Post
             post={question}
-            createUpvote={createUpvote}
-            destroyUpvote={destroyUpvote}
+            createUpvote={upvoteQuestion}
+            destroyUpvote={downvoteQuestion}
             createComment={createQuestionComment}
             id={questionId}
           />
@@ -71,8 +75,8 @@ class QuestionDetails extends Component {
             <Post
               key={answer.id}
               post={answer}
-              createUpvote={createUpvote}
-              destroyUpvote={destroyUpvote}
+              createUpvote={upvoteAnswer}
+              destroyUpvote={downvoteAnswer}
               createComment={createAnswerComment}
               id={answer.id}
             />
@@ -94,10 +98,12 @@ export default connect(
   mapStateToProps,
   {
     findQuestionById,
-    createUpvote,
-    destroyUpvote,
     createQuestionComment,
     createAnswerComment,
-    createAnswer
+    createAnswer,
+    upvoteQuestion,
+    downvoteQuestion,
+    upvoteAnswer,
+    downvoteAnswer
   }
 )(QuestionDetails);
