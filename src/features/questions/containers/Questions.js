@@ -9,9 +9,11 @@ class Questions extends Component {
   componentDidMount = () => {
     this.props.getQuestions();
   };
+
   renderLoading = () => {
     return this.props.loading ? <QuestionLoading /> : null;
   };
+
   renderQuestions = () => {
     if (this.props.questions.length === 0 && this.props.loading === false) {
       return <p>No questions</p>;
@@ -32,6 +34,7 @@ class Questions extends Component {
       });
     }
   };
+
   render() {
     const { questions } = this.props;
 

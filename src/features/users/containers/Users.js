@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
 
@@ -24,37 +24,32 @@ const Grid = styled.div`
   }
 `;
 
-class Users extends Component {
+class Users extends React.Component {
   componentDidMount = () => {
-    this.props.getUsers();
+    const { getUsers } = this.props;
+
+    getUsers();
   };
-  renderLoading = () => {
-    return this.props.loading ? <UserLoading /> : null;
-  };
-  renderUsers = () => {
-    if (this.props.users.length === 0 && this.props.loading === false) {
-      return <p>No users</p>;
-    } else {
-      return this.props.users.map(user => {
-        return (
-          <User
-            key={user.id}
-            id={user.id}
-            name={user.name}
-            username={user.username}
-            createdAt={user.createdAt}
-            profilePhotoURL={user.profilePhotoURL}
-            nameFirstLetter={user.nameFirstLetter}
-          />
-        );
-      });
-    }
-  };
+
   render() {
+    const { loading, users } = this.props;
+
     return (
       <Grid>
-        {this.renderLoading()}
-        {this.renderUsers()}
+        {loading ? <UserLoading /> : null}
+        {users.map(user => {
+          return (
+            <User
+              key={user.id}
+              id={user.id}
+              name={user.name}
+              username={user.username}
+              createdAt={user.createdAt}
+              profilePhotoURL={user.profilePhotoURL}
+              nameFirstLetter={user.nameFirstLetter}
+            />
+          );
+        })}
       </Grid>
     );
   }

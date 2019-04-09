@@ -48,32 +48,30 @@ const ErrorMessage = styled.span`
   color: #b00e23;
 `;
 
-class FormikForm extends React.Component {
-  render() {
-    const { errors, touched, isSubmitting } = this.props;
+const FormikForm = props => {
+  const { errors, touched, isSubmitting } = props;
 
-    return (
-      <StyledForm>
-        <FormItem>
-          <Input type="text" name="username" placeholder="Username or email" />
-          {touched.username && errors.username && (
-            <ErrorMessage>{errors.username}</ErrorMessage>
-          )}
-        </FormItem>
-        <FormItem>
-          <Input type="password" name="password" placeholder="Password" />
-          {touched.password && errors.password && (
-            <ErrorMessage>{errors.password}</ErrorMessage>
-          )}
-        </FormItem>
-        <Button disabled={isSubmitting}>
-          {isSubmitting ? <Loader /> : "Log in"}
-        </Button>
-        <ErrorMessage>{errors.general}</ErrorMessage>
-      </StyledForm>
-    );
-  }
-}
+  return (
+    <StyledForm>
+      <FormItem>
+        <Input type="text" name="username" placeholder="Username or email" />
+        {touched.username && errors.username && (
+          <ErrorMessage>{errors.username}</ErrorMessage>
+        )}
+      </FormItem>
+      <FormItem>
+        <Input type="password" name="password" placeholder="Password" />
+        {touched.password && errors.password && (
+          <ErrorMessage>{errors.password}</ErrorMessage>
+        )}
+      </FormItem>
+      <Button disabled={isSubmitting}>
+        {isSubmitting ? <Loader /> : "Log in"}
+      </Button>
+      <ErrorMessage>{errors.general}</ErrorMessage>
+    </StyledForm>
+  );
+};
 
 const LoginForm = withFormik({
   mapPropsToValues: props => ({

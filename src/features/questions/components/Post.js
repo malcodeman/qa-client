@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { distanceInWordsToNow } from "date-fns";
 
-import CommentForm from "../../comments/containers/CommentForm";
+import CommentForm from "../../comments/components/CommentForm";
 import Comment from "../../comments/components/Comment";
 import Votes from "./Votes";
 

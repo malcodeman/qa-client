@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 
@@ -21,18 +21,17 @@ const Tab = styled(NavLink)`
   }
 `;
 
-class Tabs extends Component {
-  render() {
-    const { username } = this.props;
-    return (
-      <Wrapper>
-        <Tab to={`/users/${username}/`} exact>
-          Profile
-        </Tab>
-        <Tab to={`/users/${username}/settings/`}>Edit Profile & Settings</Tab>
-      </Wrapper>
-    );
-  }
-}
+const Tabs = props => {
+  const { username } = props;
+
+  return (
+    <Wrapper>
+      <Tab to={`/users/${username}/`} exact>
+        Profile
+      </Tab>
+      <Tab to={`/users/${username}/settings/`}>Edit Profile & Settings</Tab>
+    </Wrapper>
+  );
+};
 
 export default Tabs;

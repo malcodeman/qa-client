@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 
 import About from "../components/About";
-import Profile from "./Profile";
+import Profile from "../components/Profile";
 import { findUserByUsername } from "../actions/usersActionCreators";
 
 class User extends Component {

@@ -2,8 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import { Route, Link } from "react-router-dom";
 
-import LoginForm from "../../auth/containers/LoginForm";
-import SignupForm from "../../auth/containers/SignupForm";
+import LoginForm from "../../auth/components/LoginForm";
+import SignupForm from "../../auth/components/SignupForm";
 import bg from "../assets/illustration.png";
 
 const Grid = styled.div`

@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 
 import Questions from "./Questions";
 import Header from "../../header/components/Header";
-import QuestionNewForm from "./QuestionNewForm";
+import QuestionNewForm from "../components/QuestionNewForm";
 import QuestionDetails from "./QuestionDetails";
 import Users from "../../users/containers/Users";
 import User from "../../users/containers/User";
@@ -29,6 +29,7 @@ class Home extends React.Component {
       findMe();
     }
   };
+
   render() {
     return (
       <>

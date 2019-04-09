@@ -40,6 +40,7 @@ const StyledLink = styled(NavLink)`
 
 const Sidebar = props => {
   const { username } = props;
+
   return (
     <StyledSidebar>
       <List>

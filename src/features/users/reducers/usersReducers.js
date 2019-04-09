@@ -33,7 +33,7 @@ const initialState = {
     answers: []
   },
   user: initialUserState,
-  loading: true
+  loading: false
 };
 
 export default (state = initialState, action) => {
@@ -51,7 +51,8 @@ export default (state = initialState, action) => {
     case GET_USERS_REQUEST:
       return {
         ...state,
-        user: initialUserState
+        user: initialUserState,
+        loading: true
       };
     case GET_USERS_SUCCESS:
       return {
