@@ -4,20 +4,21 @@ import { NavLink } from "react-router-dom";
 
 const Wrapper = styled.div`
   display: flex;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid ${props => props.theme.borderColor};
 `;
 
 const Tab = styled(NavLink)`
   cursor: pointer;
   padding: 10px;
-  border-bottom: 1px solid #ccc;
   margin-bottom: -1px;
   font-size: 0.8rem;
-  color: rgba(0, 0, 0, 0.8);
   border: 1px solid transparent;
+  color: ${props => props.theme.primary};
   &.active {
-    border: 1px solid #ccc;
-    border-bottom-color: #fff;
+    border-top-left-radius: ${props => props.theme.borderRadius};
+    border-top-right-radius: ${props => props.theme.borderRadius};
+    border: 1px solid ${props => props.theme.borderColor};
+    border-bottom-color: ${props => props.theme.backgroundPrimary};
   }
 `;
 

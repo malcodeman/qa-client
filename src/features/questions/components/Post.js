@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { distanceInWordsToNow } from "date-fns";
+import { Link } from "react-router-dom";
 
 import CommentForm from "../../comments/components/CommentForm";
 import Comment from "../../comments/components/Comment";
@@ -16,34 +17,59 @@ const Main = styled.main`
 const Body = styled.p`
   font-size: 0.8rem;
   line-height: 1.4;
+  color: ${props => props.theme.primary};
 `;
 
 const Footer = styled.footer`
   display: flex;
   justify-content: flex-end;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   padding-bottom: 24px;
+  border-bottom: 1px solid ${props => props.theme.borderColor};
 `;
 
-const User = styled.div`
+const UserInfo = styled.div`
+  display: flex;
+  flex-direction: column
+  padding: 10px;
+  font-size: 0.8rem;
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: ${props => props.theme.borderRadius};
+  color: ${props => props.theme.primary};
+`;
+
+const UserTime = styled.div`
+  margin-bottom: 4px;
+`;
+
+const UserDetails = styled.div`
   display: flex;
   align-items: center;
-  padding: 10px;
-  background-color: rgba(0, 0, 0, 0.2);
-  color: #fff;
-  font-size: 0.8rem;
 `;
 
 const ProfilePhoto = styled.img`
-  height: 32px;
-  width: 32px;
+  height: 24px;
+  width: 24px;
   object-fit: cover;
-  margin-right: 5px;
+  border-radius: 50%;
+  margin-right: 4px;
 `;
 
-const Col = styled.div`
+const NameFirstLetter = styled.div`
+  height: 24px;
+  width: 24px;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 10px;
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+  margin-right: 4px;
+  background-color: ${props => props.theme.brand};
+`;
+
+const Username = styled(Link)`
+  color: ${props => props.theme.link};
 `;
 
 const Post = props => {
@@ -63,17 +89,24 @@ const Post = props => {
         <Body>{post.body}</Body>
       </Main>
       <Footer>
-        <User>
-          {post.user.profilePhotoURL ? (
-            <ProfilePhoto src={post.user.profilePhotoURL} />
-          ) : null}
-          <Col>
-            <span>
-              asked {post.createdAt && distanceInWordsToNow(post.createdAt)} ago
-            </span>
-            <span>by {post.user.username}</span>
-          </Col>
-        </User>
+        <UserInfo>
+          {post.title === "" ? null : (
+            <UserTime>
+              {post.title ? "asked" : "answered"}{" "}
+              {post.createdAt && distanceInWordsToNow(post.createdAt)} ago
+            </UserTime>
+          )}
+          <UserDetails>
+            {post.user.profilePhotoURL ? (
+              <ProfilePhoto src={post.user.profilePhotoURL} />
+            ) : (
+              <NameFirstLetter>{post.user.nameFirstLetter}</NameFirstLetter>
+            )}
+            <Username to={`/users/${post.user.username}`}>
+              {post.user.username}
+            </Username>
+          </UserDetails>
+        </UserInfo>
       </Footer>
       {post.comments.map(comment => (
         <Comment

@@ -7,59 +7,59 @@ import { connect } from "react-redux";
 
 import { createQuestion } from "../actions/questionsActionCreators";
 
-const StyledForm = styled(Form)`
-  background-color: #fff;
-`;
+const StyledForm = styled(Form)``;
 
 const FormItem = styled.div`
   display: flex;
   flex-direction: column;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
 `;
 
 const Label = styled.label`
   font-size: 0.8rem;
+  color: ${props => props.theme.primary};
 `;
 
 const Input = styled(Field)`
-  color: #262626;
   height: 36px;
   font-size: 0.8rem;
-  padding: 0 4px;
   outline: 0;
-  border-radius: 2px;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  margin-bottom: 2px;
+  padding: 0 10px;
+  background-color: ${props => props.theme.backgroundSecondary};
+  border-radius: ${props => props.theme.borderRadius};
+  border: 1px solid ${props => props.theme.borderColor};
+  color: ${props => props.theme.primary};
 `;
 
 const TextArea = styled(Field)`
-  border: 1px solid rgba(0, 0, 0, 0.1);
   height: 256px;
   font-size: 0.8rem;
   resize: none;
   font-family: sans-serif;
-  padding: 4px;
+  padding: 10px;
+  background-color: ${props => props.theme.backgroundSecondary};
+  border: 1px solid ${props => props.theme.borderColor};
+  color: ${props => props.theme.primary};
 `;
 
 const Error = styled.div`
   font-size: 0.8rem;
   color: #fff;
-  background-color: #b00e23;
   display: inline-block;
   padding: 4px;
   margin: 4px 0;
   align-self: flex-start;
+  background-color: ${props => props.theme.error};
 `;
 
 const Button = styled.button`
-border: 0;
-padding: 0 10px;
-border-radius: 3px;
-color: #fff;
-background-color: #007aff;
-height: 28px;
-cursor: pointer;
-}
+  border: 0;
+  padding: 0 10px;
+  color: #fff;
+  height: 36px;
+  cursor: pointer;
+  background-color: ${props => props.theme.brand};
+  border-radius: ${props => props.theme.borderRadius};
 `;
 
 const FormikForm = props => {

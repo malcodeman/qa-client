@@ -22,15 +22,18 @@ const Question = styled.div`
   margin-bottom: 24px;
 `;
 
-const Title = styled.header`
+const Title = styled(Link)`
   font-size: 1rem;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   padding: 10px 0;
+  display: block;
+  border-bottom: 1px solid ${props => props.theme.borderColor};
+  color: ${props => props.theme.primary};
 `;
 
 const Subtitle = styled.h2`
   font-size: 1rem;
   font-weight: normal;
+  color: ${props => props.theme.secondary};
 `;
 
 class QuestionDetails extends Component {
@@ -58,9 +61,7 @@ class QuestionDetails extends Component {
     return (
       <>
         <Question>
-          <Title>
-            <Link to={location.pathname}>{question.title}</Link>
-          </Title>
+          <Title to={location.pathname}>{question.title}</Title>
           <Post
             post={question}
             createUpvote={upvoteQuestion}

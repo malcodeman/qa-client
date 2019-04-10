@@ -14,27 +14,27 @@ const List = styled.ul`
 `;
 
 const Category = styled.li`
-  margin-bottom: 20px;
+  margin-bottom: 24px;
   font-size: 0.8rem;
 `;
 
 const Heading = styled.h2`
   font-size: 1rem;
   font-weight: normal;
-  color: #ed1965;
   font-size: 0.8rem;
   text-transform: uppercase;
+  color: ${props => props.theme.brand};
 `;
 
 const StyledLink = styled(NavLink)`
   font-size: 0.8rem;
   text-transform: capitalize;
-  color: rgba(0, 0, 0, 0.6);
-  padding: 8px 0;
+  padding: 10px 0;
   display: block;
   line-heght: 1;
+  color: ${props => props.theme.secondary};
   &.active {
-    color: rgba(0, 0, 0, 1);
+    color: ${props => props.theme.primary};
   }
 `;
 

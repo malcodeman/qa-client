@@ -13,6 +13,8 @@ import { findMe } from "../../users/actions/usersActionCreators";
 
 const Main = styled.main`
   margin-top: 64px;
+  min-height: calc(100vh - 64px);
+  background-color: ${props => props.theme.backgroundPrimary};
 `;
 
 const Container = styled.div`

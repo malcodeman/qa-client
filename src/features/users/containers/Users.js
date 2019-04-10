@@ -11,16 +11,13 @@ const Grid = styled.div`
   grid-template-columns: 1fr;
   grid-gap: 10px;
   @media (min-width: 576px) {
-    grid-template-columns: 1fr 1fr;
-    grid-gap: 6px;
+    grid-template-columns: repeat(2, 1fr);
   }
   @media (min-width: 768px) {
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-gap: 8px;
+    grid-template-columns: repeat(3, 1fr);
   }
   @media (min-width: 992px) {
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-gap: 10px;
+    grid-template-columns: repeat(4, 1fr);
   }
 `;
 
@@ -36,7 +33,7 @@ class Users extends React.Component {
 
     return (
       <Grid>
-        {loading ? <UserLoading /> : null}
+        {users.length === 0 && loading ? <UserLoading /> : null}
         {users.map(user => {
           return (
             <User

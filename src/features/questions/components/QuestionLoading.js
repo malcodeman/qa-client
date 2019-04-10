@@ -1,33 +1,33 @@
 import React from "react";
 import styled from "styled-components";
 
-const Article = styled.div`
-  border-radius: 3px;
-  border: 1px solid #e6e6e6;
-  background-color: #fff;
-  margin-bottom: 40px;
+const Wrapper = styled.div`
+  margin-bottom: 24px;
   padding: 10px;
+  background-color: ${props => props.theme.backgroundSecondary};
+  border-radius: ${props => props.theme.borderRadius};
+  border: 1px solid ${props => props.theme.borderColor};
 `;
 
-const Text = styled.div`
-  height: 0.8rem;
+const Title = styled.div`
+  height: 1rem;
   background-color: rgba(0, 0, 0, 0.1);
-  width: 25%;
+  width: 50%;
   margin-bottom: 10px;
 `;
 
-const Time = styled.div`
-  height: 0.6rem;
+const Details = styled.div`
+  height: 0.8rem;
   background-color: rgba(0, 0, 0, 0.1);
-  width: 10%;
+  width: 25%;
 `;
 
 const QuestionLoading = () => {
   return (
-    <Article>
-      <Text />
-      <Time />
-    </Article>
+    <Wrapper>
+      <Title />
+      <Details />
+    </Wrapper>
   );
 };
 

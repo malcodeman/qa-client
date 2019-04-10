@@ -30,20 +30,25 @@ const Main = styled.main`
   flex-direction: column;
   justify-content: space-between;
   padding: 24px;
+  background-color: ${props => props.theme.backgroundPrimary};
 `;
 
 const Header = styled.header``;
 
 const Heading = styled.h1`
   font-size: 1rem;
-  color: #3a3133;
+  color: ${props => props.theme.primary};
 `;
 
 const Footer = styled.footer``;
 
 const Text = styled.p`
-  color: #3a3133;
   font-size: 0.8rem;
+  color: ${props => props.theme.secondary};
+`;
+
+const StyledLink = styled(Link)`
+  color: ${props => props.theme.link};
 `;
 
 const Signup = () => {
@@ -55,7 +60,7 @@ const Signup = () => {
       <SignupForm />
       <Footer>
         <Text>
-          Have an account? <Link to="/login">Log in</Link>
+          Have an account? <StyledLink to="/login">Log in</StyledLink>
         </Text>
       </Footer>
     </>
@@ -71,7 +76,7 @@ const Login = () => {
       <LoginForm />
       <Footer>
         <Text>
-          Don't have an account? <Link to="/">Sign up</Link>
+          Don't have an account? <StyledLink to="/">Sign up</StyledLink>
         </Text>
       </Footer>
     </>

@@ -6,7 +6,8 @@ import {
   CREATE_ANSWER_UPVOTE_SUCCESS,
   CREATE_QUESTION_UPVOTE_SUCCESS,
   DESTROY_QUESTION_UPVOTE_SUCCESS,
-  DESTROY_ANSWER_UPVOTE_SUCCESS
+  DESTROY_ANSWER_UPVOTE_SUCCESS,
+  GET_QUESTIONS_REQUEST
 } from "../actions/questionsActionTypes";
 import {
   CREATE_QUESTION_COMMENT_SUCCESS,
@@ -29,11 +30,17 @@ const initialQuestionState = {
 
 const initialState = {
   questions: [],
-  question: initialQuestionState
+  question: initialQuestionState,
+  loading: false
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
+    case GET_QUESTIONS_REQUEST:
+      return {
+        ...state,
+        loading: true
+      };
     case FIND_QUESTION_BY_ID_REQUEST:
       return {
         ...state,
@@ -42,7 +49,8 @@ export default (state = initialState, action) => {
     case GET_QUESTIONS_SUCCESS:
       return {
         ...state,
-        questions: action.payload
+        questions: action.payload,
+        loading: false
       };
     case FIND_QUESTION_BY_ID_SUCCESS:
       return {

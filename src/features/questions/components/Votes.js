@@ -13,11 +13,13 @@ const Upvote = styled.div`
   cursor: pointer;
   border-left: 14px solid transparent;
   border-right: 14px solid transparent;
-  border-bottom: 14px solid ${props => props.color};
+  border-bottom: 14px solid
+    ${props => (props.upvoted ? props.theme.brand : props.theme.secondary)};
 `;
 
 const VotesNumber = styled.span`
   padding: 10px 0;
+  color: ${props => props.theme.primary};
 `;
 
 const Votes = props => {
@@ -27,11 +29,11 @@ const Votes = props => {
     <Wrapper>
       {upvoted ? (
         <Upvote
-          color={"#f48024"}
+          upvoted={"true"}
           onClick={() => destroyUpvote(upvoted.upvoteId)}
         />
       ) : (
-        <Upvote color={"#ccc"} onClick={() => createUpvote(id)} />
+        <Upvote onClick={() => createUpvote(id)} />
       )}
       <VotesNumber>{upvotesCount}</VotesNumber>
     </Wrapper>

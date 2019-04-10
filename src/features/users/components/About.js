@@ -7,14 +7,13 @@ import Post from "./Post";
 const Grid = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  margin: 40px 0;
+  margin: 48px 0;
 `;
 
 const NameFirstLetter = styled.div`
   height: 64px;
   width: 64px;
   border-radius: 50%;
-  background-color: #007aff;
   color: #fff;
   font-size: 1rem;
   display: flex;
@@ -22,6 +21,7 @@ const NameFirstLetter = styled.div`
   justify-content: center;
   text-transform: uppercase;
   cursor: pointer;
+  background-color: ${props => props.theme.brand};
 `;
 
 const Col = styled.div`
@@ -38,6 +38,7 @@ const ProfilePhoto = styled.img`
 
 const Span = styled.span`
   font-size: 0.8rem;
+  color: ${props => props.theme.primary};
 `;
 
 const Posts = styled.div`

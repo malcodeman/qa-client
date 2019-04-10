@@ -4,14 +4,15 @@ import styled from "styled-components";
 import { withFormik, Form, Field } from "formik";
 
 const Input = styled(Field)`
-  color: #262626;
   height: 36px;
   font-size: 0.8rem;
-  padding: 0;
   outline: 0;
   margin: 0;
   border: 0;
   width: 100%;
+  padding: 0 10px;
+  background-color: ${props => props.theme.backgroundSecondary};
+  color: ${props => props.theme.primary};
 `;
 
 const FormikForm = () => {

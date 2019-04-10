@@ -4,7 +4,7 @@ import { ThemeProvider } from "styled-components";
 import { Provider } from "react-redux";
 import { Router } from "react-router-dom";
 
-import defaultTheme from "./styles/themes/default";
+import darkTheme from "./styles/themes/dark";
 import store from "./state/store";
 import history from "./routing/history";
 import PrivateRoute from "./routing/PrivateRoute";
@@ -21,7 +21,7 @@ const Root = () => {
 const App = () => {
   return (
     <Provider store={store}>
-      <ThemeProvider theme={defaultTheme}>
+      <ThemeProvider theme={darkTheme}>
         <Router history={history}>
           <Route exact path="/" component={Root} />
           <Route path="/login" component={Landing} />

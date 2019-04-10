@@ -8,8 +8,8 @@ const StyledPost = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 10px 0;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   font-size: 0.8rem;
+  border-bottom: 1px solid ${props => props.theme.borderColor};
 `;
 
 const Info = styled.div`
@@ -18,19 +18,19 @@ const Info = styled.div`
 `;
 
 const StyledLink = styled(Link)`
-  color: #007aff;
+  color: ${props => props.theme.link};
 `;
 
 const Upvotes = styled.div`
-  color: rgba(0, 0, 0, 0.8);
-  border-radius: 3px;
-  border: 1px solid rgba(0, 0, 0, 0.4);
   padding: 3px 6px;
   margin-right: 10px;
+  color: ${props => props.theme.primary};
+  border-radius: ${props => props.theme.borderRadius};
+  border: 1px solid ${props => props.theme.borderColor};
 `;
 
 const Date = styled.span`
-  color: rgba(0, 0, 0, 0.8);
+  color: ${props => props.theme.secondary};
 `;
 
 const Post = props => {

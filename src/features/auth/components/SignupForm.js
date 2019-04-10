@@ -18,35 +18,36 @@ const StyledForm = styled(Form)`
 const FormItem = styled.div`
   display: flex;
   flex-direction: column;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
 `;
 
 const Input = styled(Field)`
-  color: #3a3133;
   height: 36px;
   font-size: 0.8rem;
   padding: 0 4px;
   outline: 0;
-  border-radius: 2px;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  margin-bottom: 2px;
+  background-color: ${props => props.theme.backgroundSecondary};
+  border-radius: ${props => props.theme.borderRadius};
+  border: 1px solid ${props => props.theme.borderColor};
+  color: ${props => props.theme.primary};
 `;
 
 const Button = styled.button`
-  background: #3a3133;
   color: #fff;
   border: 0;
   cursor: pointer;
   height: 36px;
-  border-radius: 2px;
   font-size: 0.8rem;
   padding: 0;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
+  background-color: ${props => props.theme.brand};
+  border-radius: ${props => props.theme.borderRadius};
 `;
 
 const ErrorMessage = styled.span`
+  margin: 4px 0;
   font-size: 0.8rem;
-  color: #b00e23;
+  color: ${props => props.theme.error};
 `;
 
 const FormikForm = props => {

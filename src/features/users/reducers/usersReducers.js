@@ -51,7 +51,6 @@ export default (state = initialState, action) => {
     case GET_USERS_REQUEST:
       return {
         ...state,
-        user: initialUserState,
         loading: true
       };
     case GET_USERS_SUCCESS:

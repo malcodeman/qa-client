@@ -3,43 +3,48 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 const Wrapper = styled.div`
-  border-radius: 3px;
-  border: 1px solid #e6e6e6;
-  background-color: #fff;
   padding: 10px;
   display: flex;
+  background-color: ${props => props.theme.backgroundSecondary};
+  border-radius: ${props => props.theme.borderRadius};
+  border: 1px solid ${props => props.theme.borderColor};
 `;
 
 const ProfilePhoto = styled.img`
   height: 48px;
   width: 48px;
   object-fit: cover;
-  border-radius: 3px;
+  border-radius: ${props => props.theme.borderRadius};
 `;
 
 const NameFirstLetter = styled.div`
   height: 48px;
   width: 48px;
-  border-radius: 3px;
-  background-color: #007aff;
   color: #fff;
   font-size: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
   text-transform: uppercase;
+  background-color: ${props => props.theme.brand};
+  border-radius: ${props => props.theme.borderRadius};
 `;
 
 const Details = styled.div`
-  margin-left: 5px;
+  margin-left: 4px;
   display: flex;
   flex-direction: column;
 `;
 
-const Text = styled.span`
+const Name = styled.span`
   font-size: 0.8rem;
   line-height: 1.2;
-  color: ${props => props.color || "rgba(0, 0, 0, 0.8)"};
+  color: ${props => props.theme.brand};
+`;
+
+const Username = styled.span`
+  font-size: 0.8rem;
+  color: ${props => props.theme.secondary};
 `;
 
 const User = props => {
@@ -52,9 +57,9 @@ const User = props => {
       )}
       <Details>
         <Link to={`/users/${props.username}`}>
-          <Text color="#ed1965">{props.name}</Text>
+          <Name>{props.name}</Name>
         </Link>
-        <Text>{props.username}</Text>
+        <Username>{props.username}</Username>
       </Details>
     </Wrapper>
   );

@@ -7,39 +7,17 @@ import { getQuestions } from "../actions/questionsActionCreators";
 
 class Questions extends Component {
   componentDidMount = () => {
-    this.props.getQuestions();
-  };
+    const { getQuestions } = this.props;
 
-  renderLoading = () => {
-    return this.props.loading ? <QuestionLoading /> : null;
-  };
-
-  renderQuestions = () => {
-    if (this.props.questions.length === 0 && this.props.loading === false) {
-      return <p>No questions</p>;
-    } else {
-      return this.props.questions.map(question => {
-        return (
-          <Question
-            key={question.id}
-            id={question.id}
-            title={question.title}
-            body={question.body}
-            upvotes={question.upvotesCount}
-            answers={question.answersCount}
-            author={question.user.username}
-            createdAt={question.createdAt}
-          />
-        );
-      });
-    }
+    getQuestions();
   };
 
   render() {
-    const { questions } = this.props;
+    const { loading, questions } = this.props;
 
     return (
       <>
+        {questions.length === 0 && loading ? <QuestionLoading /> : null}
         {questions.map(question => {
           return (
             <Question

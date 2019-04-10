@@ -24,7 +24,7 @@ const StyledLoader = styled.div`
   width: 24px;
   height: 24px;
   animation: ${rotate360} 2s linear infinite;
-  margin: 0 6px;
+  margin: 0 4px;
 `;
 
 const Message = styled.span`

@@ -7,8 +7,8 @@ import Sidebar from "./Sidebar";
 const Grid = styled.div`
   display: grid;
   grid-template-columns: auto 1fr;
-  margin: 40px 0;
-  grid-gap: 20px;
+  margin: 48px 0;
+  grid-gap: 24px;
 `;
 
 const Settings = props => {
