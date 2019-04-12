@@ -49,16 +49,16 @@ const upvoteQuestionApi = questionId => {
   return axios.post(`/questions/${questionId}/upvotes`);
 };
 
-const downvoteQuestionApi = upvoteId => {
-  return axios.delete(`/upvotes/${upvoteId}`);
+const downvoteQuestionApi = questionId => {
+  return axios.delete(`/questions/${questionId}/upvotes`);
 };
 
 const upvoteAnswerApi = answerId => {
   return axios.post(`/answers/${answerId}/upvotes`);
 };
 
-const downvoteAnswerApi = upvoteId => {
-  return axios.delete(`/upvotes/${upvoteId}`);
+const downvoteAnswerApi = answerId => {
+  return axios.delete(`/answers/${answerId}/upvotes`);
 };
 
 function* getQuestions() {

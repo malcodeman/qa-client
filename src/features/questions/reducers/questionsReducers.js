@@ -25,7 +25,7 @@ const initialQuestionState = {
   },
   answers: [],
   upvotesCount: null,
-  upvoted: null
+  upvoted: false
 };
 
 const initialState = {
@@ -64,9 +64,7 @@ export default (state = initialState, action) => {
         question: {
           ...state.question,
           upvotesCount: state.question.upvotesCount + 1,
-          upvoted: {
-            upvoteId: action.payload.id
-          }
+          upvoted: true
         }
       };
     case DESTROY_QUESTION_UPVOTE_SUCCESS:
@@ -75,7 +73,7 @@ export default (state = initialState, action) => {
         question: {
           ...state.question,
           upvotesCount: state.question.upvotesCount - 1,
-          upvoted: null
+          upvoted: false
         }
       };
     case CREATE_ANSWER_SUCCESS:
@@ -121,9 +119,7 @@ export default (state = initialState, action) => {
               return {
                 ...answer,
                 upvotesCount: answer.upvotesCount + 1,
-                upvoted: {
-                  upvoteId: action.payload.id
-                }
+                upvoted: true
               };
             }
             return answer;
@@ -140,7 +136,7 @@ export default (state = initialState, action) => {
               return {
                 ...answer,
                 upvotesCount: answer.upvotesCount - 1,
-                upvoted: null
+                upvoted: false
               };
             }
             return answer;

@@ -27,7 +27,7 @@ class Questions extends Component {
               body={question.body}
               upvotes={question.upvotesCount}
               answers={question.answersCount}
-              author={question.user.username}
+              author={question.author}
               createdAt={question.createdAt}
             />
           );

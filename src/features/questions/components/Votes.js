@@ -28,10 +28,7 @@ const Votes = props => {
   return (
     <Wrapper>
       {upvoted ? (
-        <Upvote
-          upvoted={"true"}
-          onClick={() => destroyUpvote(upvoted.upvoteId)}
-        />
+        <Upvote upvoted={"true"} onClick={() => destroyUpvote(id)} />
       ) : (
         <Upvote onClick={() => createUpvote(id)} />
       )}
