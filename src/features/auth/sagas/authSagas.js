@@ -18,14 +18,39 @@ const loginApi = user => {
   return axios.post(`/auth/login`, user);
 };
 
-export async function findByUsernameApi(username) {
+export async function validateUsername(username) {
   if (username === "") {
     return null;
   }
   try {
-    await axios.get(`/users/${username}`);
+    const data = await axios.post(`/auth/validate/username`, {
+      username: username
+    });
+    const exists = data.data.exists;
 
-    return "Username has already been taken.";
+    if (exists) {
+      return "Username has already been taken.";
+    }
+    return null;
+  } catch (error) {
+    return null;
+  }
+}
+
+export async function validateEmail(email) {
+  if (email === "") {
+    return null;
+  }
+  try {
+    const data = await axios.post(`/auth/validate/email`, {
+      email: email
+    });
+    const exists = data.data.exists;
+
+    if (exists) {
+      return "Email has already been signed up.";
+    }
+    return null;
   } catch (error) {
     return null;
   }

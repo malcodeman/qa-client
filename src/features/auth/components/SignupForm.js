@@ -7,7 +7,7 @@ import { withRouter } from "react-router-dom";
 
 import Loader from "../../loader/components/Loader";
 import { signup } from "../actions/authActionCreators";
-import { findByUsernameApi } from "../sagas/authSagas";
+import { validateEmail, validateUsername } from "../sagas/authSagas";
 
 const StyledForm = styled(Form)`
   display: flex;
@@ -56,7 +56,12 @@ const FormikForm = props => {
   return (
     <StyledForm>
       <FormItem>
-        <Input type="email" name="email" placeholder="Email" />
+        <Input
+          type="email"
+          name="email"
+          placeholder="Email"
+          validate={validateEmail}
+        />
         {touched.email && errors.email && (
           <ErrorMessage>{errors.email}</ErrorMessage>
         )}
@@ -72,7 +77,7 @@ const FormikForm = props => {
           type="text"
           name="username"
           placeholder="Username"
-          validate={findByUsernameApi}
+          validate={validateUsername}
         />
         {touched.username && errors.username && (
           <ErrorMessage>{errors.username}</ErrorMessage>
